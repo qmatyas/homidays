@@ -17,7 +17,7 @@ $form_inscription->add('Text', 'prenom')
 $form_inscription->add('Checkbox', 'sexe')
 		      ->Required(false);
 		      ->Checked(true);
-                 ->label("Sexe :");
+                ->label("Sexe :");
 
 $form_inscription->add('Date', 'date_naissance')
                  ->label("Date de naissance :");
@@ -49,7 +49,7 @@ $form_inscription->add('Text', 'ville')
 $form_inscription->add('Text', 'pays')
                  ->label("Pays :")
 
-$form_inscription->add('Text', 'pseudo')
+$form_inscription->add('Text','pseudo')
                  ->label("Pseudo :");
 
 $form_inscription->add('Password', 'mdp')
@@ -65,11 +65,11 @@ $form_inscription->add('File', 'avatar')
                  ->Required(false);
 
 $form_inscription->add('Number', 'nb_adulte')
-                 ->min(0);
+                 ->min(0)
                  ->label("Adultes :");  
 
-$form_inscription->add('Number', 'nb_enfant')
-                 ->min(0);
+$form_inscription->add('Number','nb_enfant')
+                 ->min(0)
                  ->label("Enfants :"); 
 
 $form_inscription->add('Text', 'interet')
