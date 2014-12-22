@@ -15,3 +15,8 @@ define('CHEMIN_LIB',    'libs/');
 define('AVATAR_LARGEUR_MAXI', 100);
 define('AVATAR_HAUTEUR_MAXI', 100);
 define('DOSSIER_AVATAR', 'images/avatars/');
+
+// Configurations relatives à la carte d'identité
+define('CARTE_ID_LARGEUR_MAXI', 100);
+define('CARTE_ID_HAUTEUR_MAXI', 100);
+define('DOSSIER_CARTE_ID', 'images/carte_ID/');

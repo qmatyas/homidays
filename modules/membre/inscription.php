@@ -168,6 +168,27 @@ if (ctype_digit($id_utilisateurs)) {
 		maj_avatar_membre($id_utilisateur , $avatar_filename);
 
 	}
+        
+        // Redimensionnement et sauvegarde de la carte d'identité (eventuelle) dans le bon dossier
+	if (!empty($carte_ID)) {
+
+		// On souhaite utiliser la librairie Image
+		include CHEMIN_LIB.'image.php';
+	
+		// Redimensionnement et sauvegarde de la carte d'identité
+		$carte_ID = new Image($carte_ID);
+		$carte_ID->resize_to(CARTE_ID_LARGEUR_MAXI, CARTE_ID_HAUTEUR_MAXI);
+		$carte_ID_filename = 'DOSSIER_CARTE_ID'.$id_utilisateur .'.'.strtolower(pathinfo($carte_ID->get_filename(), PATHINFO_EXTENSION));
+		$carte_ID->save_as($carte_ID_filename);
+
+		// On veut utiliser le modele des membres (~/modeles/membres.php)
+		include CHEMIN_MODELE.'membres.php';
+		
+		// Mise à jour de la carte d'identité dans la table
+		// maj_carte_ID_membre() est défini dans ~/modeles/membres.php
+		maj_carte_ID_membre($id_utilisateur , $carte_ID_filename);
+
+	}
 	
 	// Affichage de la confirmation de l'inscription
 	include CHEMIN_VUE.'inscription_effectuee.php';
