@@ -14,3 +14,4 @@ define('CHEMIN_LIB',    'libs/');
 // Configurations relatives à l'avatar
 define('AVATAR_LARGEUR_MAXI', 100);
 define('AVATAR_HAUTEUR_MAXI', 100);
+define('DOSSIER_AVATAR', 'images/avatars/');

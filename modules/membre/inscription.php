@@ -7,7 +7,7 @@ $erreurs_inscription = array();
 // Validation des champs suivant les règles en utilisant les données du tableau $_POST
 if ($form_inscription->is_valid($_POST)) {
     // On vérifie si les 2 mots de passe correspondent
-    if ($form_inscription->get_cleaned_data('mdp') != $form_inscription->get_cleaned_data('mdp_verif')) {
+    if ($form_inscription->get_cleaned_data('pass') != $form_inscription->get_cleaned_data('pass_verif')) {
 
         $erreurs_inscription[] = "Les deux mots de passes entrés sont différents !";
     }
@@ -65,10 +65,10 @@ if ($form_inscription->is_valid($_POST)) {
         $form_inscription->add('Text', 'pseudo')
                 ->label("Pseudo :");
 
-        $form_inscription->add('Password', 'mdp')
+        $form_inscription->add('Password', 'pass')
                 ->label("Mot de passe :");
 
-        $form_inscription->add('Password', 'mdp_verif')
+        $form_inscription->add('Password', 'pass_verif')
                 ->label("Mot de passe (vérification) :");
 
         $form_inscription->add('File', 'avatar')
@@ -117,8 +117,8 @@ $hash_validation = md5(uniqid(rand(), true));
 
 
 // Tentative d'ajout du membre dans la base de donnees
-list($nom_utilisateur, $mot_de_passe, $adresse_email, $avatar) =
-	$form_inscription->get_cleaned_data('nom_utilisateur', 'mdp', 'adresse_email', 'avatar');
+list($nom, $prenom, $sexe, $date_naissance, $profession, $carte_ID, $email, $tel, $rue, $code_postal, $ville, $pays, $pseudo, $pass, $avatar, $nb_adulte, $nb_enfant, $interet) =
+	$form_inscription->get_cleaned_data('nom', 'sexe', 'date_naissance', 'profession', 'carte_ID', 'email', 'tel', 'rue', 'code_postal', 'ville', 'pays', 'pseudo', 'pass', 'avatar', 'nb_adulte', 'nb_enfant', 'interet');
 
 
 // On veut utiliser le modele de l'inscription (~/modeles/inscription.php)
@@ -126,14 +126,14 @@ include CHEMIN_MODELE.'inscription.php';
 
 
 // ajouter_membre_dans_bdd() est défini dans ~/modeles/inscription.php
-$id_utilisateur = ajouter_membre_dans_bdd($nom_utilisateur, sha1($mot_de_passe), $adresse_email, $hash_validation);
+$id_utilisateurs = ajouter_membre_dans_bdd($nom, $prenom, $sexe, $date_naissance, $profession, $carte_ID, $email, $tel, $rue, $code_postal, $ville, $pays, $pseudo, sha1($pass), $hash_validation, $avatar, $nb_adulte, $nb_enfant, $interet);
 
 
 // Si la base de données a bien voulu ajouter l'utilisateur (pas de doublons)
-if (ctype_digit($id_utilisateur)) {
+if (ctype_digit($id_utilisateurs)) {
 
 	// On transforme la chaine en entier
-	$id_utilisateur = (int) $id_utilisateur;
+	$id_utilisateurs = (int) $id_utilisateurs;
 	
 	// Preparation du mail
 	$message_mail = '<html><head></head><body>
@@ -143,10 +143,10 @@ if (ctype_digit($id_utilisateur)) {
 	
 	$headers_mail  = 'MIME-Version: 1.0'                           ."\r\n";
 	$headers_mail .= 'Content-type: text/html; charset=utf-8'      ."\r\n";
-	$headers_mail .= 'From: "Mon site" <contact@monsite.com>'      ."\r\n";
+	$headers_mail .= 'From: "Homidays" <contact@homidays.com>'      ."\r\n";
 	
 	// Envoi du mail
-	mail($form_inscription->get_cleaned_data('adresse_email'), 'Inscription sur <monsite.com>', $message_mail, $headers_mail);
+	mail($form_inscription->get_cleaned_data('email'), 'Inscription sur <homidays.com>', $message_mail, $headers_mail);
 	
 	// Redimensionnement et sauvegarde de l'avatar (eventuel) dans le bon dossier
 	if (!empty($avatar)) {
@@ -156,8 +156,8 @@ if (ctype_digit($id_utilisateur)) {
 	
 		// Redimensionnement et sauvegarde de l'avatar
 		$avatar = new Image($avatar);
-		$avatar->resize_to(100, 100); // Image->resize_to($largeur_maxi, $hauteur_maxi)
-		$avatar_filename = 'images/avatar/'.$id_utilisateur .'.'.strtolower(pathinfo($avatar->get_filename(), PATHINFO_EXTENSION));
+		$avatar->resize_to(AVATAR_LARGEUR_MAXI, AVATAR_HAUTEUR_MAXI);
+		$avatar_filename = 'DOSSIER_AVATAR'.$id_utilisateur .'.'.strtolower(pathinfo($avatar->get_filename(), PATHINFO_EXTENSION));
 		$avatar->save_as($avatar_filename);
 
 		// On veut utiliser le modele des membres (~/modeles/membres.php)
@@ -186,13 +186,13 @@ else {
 		preg_match("`Duplicate entry '(.+)' for key \d+`is", $erreur[2], $valeur_probleme);
 		$valeur_probleme = $valeur_probleme[1];
 		
-		if ($nom_utilisateur == $valeur_probleme) {
+		if ($nom == $valeur_probleme) {
 		
 			$erreurs_inscription[] = "Ce nom d'utilisateur est déjà utilisé.";
 		
 		} 
                 
-                else if ($adresse_email == $valeur_probleme) {
+                else if ($email == $valeur_probleme) {
 		
 			$erreurs_inscription[] = "Cette adresse e-mail est déjà utilisée.";
 		
