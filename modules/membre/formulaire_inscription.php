@@ -15,8 +15,6 @@ $form_inscription->add('Text', 'prenom')
                  ->label("Prénom :");
 
 $form_inscription->add('Checkbox', 'sexe')
-		      ->Required(false)
-		      ->Checked(true)
                 ->label("Sexe :");
 
 $form_inscription->add('Date', 'date_naissance')
@@ -72,7 +70,7 @@ $form_inscription->add('Number','nb_enfant')
                  ->min(0)
                  ->label("Enfants :"); 
 
-$form_inscription->add('Text', 'interet')
+$form_inscription->add('Textarea', 'interet')
                  ->label("Centres d'intérêt :");
 
 $form_inscription->add('Submit', 'submit')
