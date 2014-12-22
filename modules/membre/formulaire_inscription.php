@@ -15,8 +15,8 @@ $form_inscription->add('Text', 'prenom')
                  ->label("Prénom :");
 
 $form_inscription->add('Checkbox', 'sexe')
-		      ->Required(false);
-		      ->Checked(true);
+		      ->Required(false)
+		      ->Checked(true)
                 ->label("Sexe :");
 
 $form_inscription->add('Date', 'date_naissance')
@@ -47,7 +47,7 @@ $form_inscription->add('Text', 'ville')
                  ->label("Ville :");
 
 $form_inscription->add('Text', 'pays')
-                 ->label("Pays :")
+                 ->label("Pays :");
 
 $form_inscription->add('Text','pseudo')
                  ->label("Pseudo :");
@@ -84,3 +84,5 @@ $form_inscription->add('Reset', 'reset')
 
 // Pré-remplissage avec les valeurs précédemment entrées (s'il y en a)
 $form_inscription->bound($_POST);
+
+?>
