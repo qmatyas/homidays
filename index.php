@@ -1,37 +1,45 @@
 <?php
 
-//On démarre la session
-session_start();
+// Initialisation
+include 'global/init.php';
 
-//On se connecte à MySQL
-try{
-	$pdo = new PDO('mysql:host=localhost;dbname=bdd', 'root', '', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+// Début de la tamporisation de sortie
+ob_start();
+
+// Si un module est specifié, on regarde s'il existe
+if (!empty($_GET['module'])) {
+
+	$module = dirname(__FILE__).'/modules/'.$_GET['module'].'/';
+	
+	// Si l'action est specifiée, on l'utilise, sinon, on tente une action par défaut
+	$action = (!empty($_GET['action'])) ? $_GET['action'].'.php' : 'index.php';
+	
+	// Si l'action existe, on l'exécute
+	if (is_file($module.$action)) {
+
+		include $module.$action;
+
+	// Sinon, on affiche la page d'accueil !
+	} else {
+
+		include 'global/accueil.php';
+	}
+
+// Module non specifié ou invalide ? On affiche la page d'accueil !
+} else {
+
+	include 'global/accueil.php';
 }
-catch (Exception $e)
-{
-        die('Erreur : ' . $e->getMessage());
-}
 
-//On inclut le logo du site  et le menu
-include 'vues/logo.php';
-include 'vues/menu.php';
+// Fin de la tamporisation de sortie
+$contenu = ob_get_clean();
 
-//On inclut le contrôleur s'il existe et s'il est spécifié
-if (!empty($_GET['page']) && is_file('controleurs/'.$_GET['page'].'.php'))
-{
-        include 'controleurs/'.$_GET['page'].'.php';
-}
-else
-{
-        include 'controleurs/accueil.php';
-}
+// Début du code HTML
+include 'global/haut.php';
 
-//On inclut le pied de page
-include 'vues/footer.php';
+echo $contenu;
 
-//On ferme la connexion à MySQL
-
-?>
-
+// Fin du code HTML
+include 'global/bas.php';
 
 
