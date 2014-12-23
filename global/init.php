@@ -3,6 +3,9 @@
 // Inclusion du fichier de configuration (qui définit des constantes)
 include 'global/config.php';
 
+// Utilisation et démarrage des sessions
+session_start();
+
 // Désactivation des guillemets magiques
 ini_set('magic_quotes_runtime', 0);
 set_magic_quotes_runtime(0);
@@ -20,4 +23,10 @@ if (1 == get_magic_quotes_gpc())
 
 // Inclusion de Pdo2, potentiellement utile partout
 include CHEMIN_LIB.'pdo2.php';
+
+// Vérifie si l'utilisateur est connecté   
+function utilisateur_est_connecte() {
+ 
+	return !empty($_SESSION['id']);
+}
 

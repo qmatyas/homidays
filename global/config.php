@@ -10,6 +10,7 @@ $module = empty($module) ? !empty($_GET['module']) ? $_GET['module'] : 'index' :
 define('CHEMIN_VUE',    'modules/'.$module.'/vues/');
 define('CHEMIN_MODELE', 'modeles/');
 define('CHEMIN_LIB',    'libs/');
+define('CHEMIN_VUE_GLOBALE', 'vues_globales/');
 
 // Configurations relatives à l'avatar
 define('AVATAR_LARGEUR_MAXI', 100);
@@ -20,3 +21,4 @@ define('DOSSIER_AVATAR', 'images/avatars/');
 define('CARTE_ID_LARGEUR_MAXI', 100);
 define('CARTE_ID_HAUTEUR_MAXI', 100);
 define('DOSSIER_CARTE_ID', 'images/carte_ID/');
+

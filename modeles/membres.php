@@ -46,3 +46,45 @@ function valider_compte_avec_hash($hash_validation) {
 	return ($requete->rowCount() == 1);
 }
 
+function combinaison_connexion_valide($nom_utilisateur, $mot_de_passe) {
+
+	$pdo = PDO2::getInstance();
+
+	$requete = $pdo->prepare("SELECT id FROM utilisateurs
+		WHERE
+		pseudo = :pseudo AND 
+		pass = :pass AND
+		hash_validation = ''");
+
+	$requete->bindValue(':pseudo', $pseudo);
+	$requete->bindValue(':pass', $pass);
+	$requete->execute();
+	
+	if ($result = $requete->fetch(PDO::FETCH_ASSOC)) {
+	
+		$requete->closeCursor();
+		return $result['id'];
+	}
+	return false;
+}
+
+function lire_infos_utilisateur($id_utilisateur) {
+
+	$pdo = PDO2::getInstance();
+
+	$requete = $pdo->prepare("SELECT pseudo, pass, email, avatar, date_inscription, hash_validation
+		FROM utilisateurs
+		WHERE
+		id = :id_utilisateur");
+
+	$requete->bindValue(':id_utilisateur', $id_utilisateur);
+	$requete->execute();
+	
+	if ($result = $requete->fetch(PDO::FETCH_ASSOC)) {
+	
+		$requete->closeCursor();
+		return $result;
+	}
+	return false;
+}
+
