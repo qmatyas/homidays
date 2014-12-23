@@ -1,5 +1,16 @@
 <?php
 
+// Vérification des droits d'accès de la page
+if (utilisateur_est_connecte()) {
+
+	// On affiche la page d'erreur comme quoi l'utilisateur est déjà connecté   
+	include CHEMIN_VUE_GLOBALE.'erreur_deja_connecte.php';
+	
+} 
+
+else {
+
+
 // Ne pas oublier d'inclure la librairie Form
 include CHEMIN_LIB.'form.php';
 
@@ -65,5 +76,7 @@ else {
 
     // On réaffiche le formulaire de connexion
     include CHEMIN_VUE.'formulaire_connexion.php';
+}
+
 }
 
