@@ -22,3 +22,5 @@ define('CARTE_ID_LARGEUR_MAXI', 100);
 define('CARTE_ID_HAUTEUR_MAXI', 100);
 define('DOSSIER_CARTE_ID', 'images/carte_ID/');
 
+?>
+

@@ -87,4 +87,5 @@ function lire_infos_utilisateur($id_utilisateur) {
 	}
 	return false;
 }
+?>
 

@@ -1336,3 +1336,5 @@ if(function_exists("strptime") == false) {
 // END if(function_exists("strptime") == false)
 
 // end of file */
+
+?>

@@ -48,4 +48,5 @@ function ajouter_membre_dans_bdd($nom, $prenom, $sexe, $date_naissance, $profess
 	}
 	return $requete->errorInfo();
 }
+?>
 

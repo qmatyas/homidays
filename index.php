@@ -42,6 +42,8 @@ echo $contenu;
 // Fin du code HTML
 include 'global/bas.php';
 
+?>
+
 
 
 

@@ -35,3 +35,5 @@ class PDO2 extends PDO {
 }
 
 // end of file */
+
+?>
