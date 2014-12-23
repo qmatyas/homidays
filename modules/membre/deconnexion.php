@@ -15,4 +15,4 @@ if (!utilisateur_est_connecte()) {
 
 include CHEMIN_VUE.'deconnexion_ok.php';
 }
-?>
+

@@ -1,6 +1,6 @@
 <?php
 
-function ajouter_membre_dans_bdd($nom, $prenom, $sexe, $date_naissance, $profession, $carte_ID, $email, $tel, $rue, $code_postal, $ville, $pays, $pseudo, $pass, $hash_validation, $avatar, $nb_adulte, $nb_enfant, $interet) {
+function ajouter_membre_dans_bdd($nom, $prenom, $sexe, $date_naissance, $profession, $email, $tel, $rue, $code_postal, $ville, $pays, $pseudo, $pass, $hash_validation, $nb_adulte, $nb_enfant, $interet) {
 
 	$pdo = PDO2::getInstance();
 
@@ -48,5 +48,5 @@ function ajouter_membre_dans_bdd($nom, $prenom, $sexe, $date_naissance, $profess
 	}
 	return $requete->errorInfo();
 }
-?>
+
 

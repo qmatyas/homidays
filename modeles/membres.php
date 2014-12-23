@@ -46,7 +46,7 @@ function valider_compte_avec_hash($hash_validation) {
 	return ($requete->rowCount() == 1);
 }
 
-function combinaison_connexion_valide($nom_utilisateur, $mot_de_passe) {
+function combinaison_connexion_valide($pseudo, $pass) {
 
 	$pdo = PDO2::getInstance();
 
@@ -87,5 +87,5 @@ function lire_infos_utilisateur($id_utilisateur) {
 	}
 	return false;
 }
-?>
+
 

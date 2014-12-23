@@ -15,5 +15,5 @@ function utilisateur_est_connecte() {
 	return !empty($_SESSION['id']);
 }
 
-?>
+
 
