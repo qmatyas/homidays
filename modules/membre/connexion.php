@@ -56,7 +56,7 @@ if ($form_connexion->is_valid($_POST)) {
 		$_SESSION['pseudo'] = $pseudo;
 		$_SESSION['avatar'] = $infos_utilisateur['avatar'];
 		$_SESSION['email']  = $infos_utilisateur['email'];
-		
+                
 		// Affichage de la confirmation de la connexion
 		include CHEMIN_VUE.'connexion_ok.php';
 	

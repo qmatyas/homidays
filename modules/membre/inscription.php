@@ -1,5 +1,15 @@
 <?php
 
+// Vérification des droits d'accès de la page
+if (utilisateur_est_connecte()) {
+
+	// On affiche la page d'erreur comme quoi l'utilisateur est déjà connecté   
+	include CHEMIN_VUE_GLOBALE.'erreur_deja_connecte.php';
+	
+} 
+
+else {
+
 // Création d'un tableau des erreurs
 $erreurs_inscription = array();
 
@@ -233,6 +243,8 @@ else {
 	
 	// On reaffiche le formulaire d'inscription
 	include CHEMIN_VUE.'formulaire_inscription.php';
+}
+
 }
 
 ?>
