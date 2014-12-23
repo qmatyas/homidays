@@ -54,4 +54,12 @@ table, tr, td, th
 	border-collapse: collapse;
 	border: 1px solid black;
 }
+.flottant_droite {
+
+	float: right;
+}
+span.label_profil {
+
+	font-weight: bold;
+}
 

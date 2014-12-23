@@ -18,10 +18,10 @@ function ajouter_membre_dans_bdd($nom, $prenom, $sexe, $date_naissance, $profess
                 pays = :pays,
                 pseudo = :pseudo,
                 pass = :pass,
+                hash_validation = :hash_validation,
                 nb_adulte = :nb_adulte,
                 nb_enfant = :nb_enfant,
                 interet = :interet,
-		hash_validation = :hash_validation,
 		date_inscription = NOW()");
 
 	$requete->bindValue(':nom', $nom);
@@ -37,10 +37,11 @@ function ajouter_membre_dans_bdd($nom, $prenom, $sexe, $date_naissance, $profess
         $requete->bindValue(':pays', $pays);
         $requete->bindValue(':pseudo', $pseudo);
         $requete->bindValue(':pass', $pass);
+        $requete->bindValue(':hash_validation', $hash_validation);
         $requete->bindValue(':nb_adulte', $nb_adulte);
         $requete->bindValue(':nb_enfant', $nb_enfant);
         $requete->bindValue(':interet', $interet);
-	$requete->bindValue(':hash_validation', $hash_validation);
+	
 
 	if ($requete->execute()) {
 	

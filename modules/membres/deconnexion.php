@@ -7,8 +7,7 @@ if (!utilisateur_est_connecte()) {
 	include CHEMIN_VUE_GLOBALE.'erreur_non_connecte.php';
 	
 } else {
-
-
+    
         // Suppression de toutes les variables et destruction de la session
         $_SESSION = array();
         session_destroy();

@@ -20,10 +20,10 @@ $form_connexion = new Form('formulaire_connexion');
 $form_connexion->method('POST');
 
 $form_connexion->add('Text', 'pseudo')
-               ->label("Pseudo :");
+               ->label("Pseudo");
 
 $form_connexion->add('Password', 'pass')
-               ->label("Mot de passe :");
+               ->label("Mot de passe");
 
 $form_connexion->add('Submit', 'submit')
                ->value("Se connecter");

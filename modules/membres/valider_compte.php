@@ -6,10 +6,9 @@ if (utilisateur_est_connecte()) {
 	// On affiche la page d'erreur comme quoi l'utilisateur est déjà connecté   
 	include CHEMIN_VUE_GLOBALE.'erreur_deja_connecte.php';
 	
-}
+} 
 
 else {
-
 
 // On vérifie qu'un hash est présent
 if (!empty($_GET['hash'])) {
