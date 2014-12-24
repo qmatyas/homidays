@@ -1,6 +1,6 @@
 <?php
 
-function ajouter_membre_dans_bdd($nom, $prenom, $sexe, $date_naissance, $profession, $email, $tel, $rue, $code_postal, $ville, $pays, $pseudo, $pass, $hash_validation, $nb_adulte, $nb_enfant, $interet) {
+function ajouter_membre_dans_bdd($nom, $prenom, $sexe, $date_naissance, $profession, $langue, $email, $tel, $rue, $code_postal, $ville, $pays, $pseudo, $pass, $hash_validation, $nb_adulte, $nb_enfant, $interet, $animaux, $fumeur) {
 
 	$pdo = PDO2::getInstance();
 
@@ -10,6 +10,7 @@ function ajouter_membre_dans_bdd($nom, $prenom, $sexe, $date_naissance, $profess
                 sexe = :sexe,
                 date_naissance = :date_naissance,
                 profession = :profession,
+                langue = :langue,
                 email = :email,
                 tel = :tel,
                 rue = :rue,
@@ -22,6 +23,8 @@ function ajouter_membre_dans_bdd($nom, $prenom, $sexe, $date_naissance, $profess
                 nb_adulte = :nb_adulte,
                 nb_enfant = :nb_enfant,
                 interet = :interet,
+                animaux = :animaux;
+                fumeur = :fumeur;
 		date_inscription = NOW()");
 
 	$requete->bindValue(':nom', $nom);
@@ -29,6 +32,7 @@ function ajouter_membre_dans_bdd($nom, $prenom, $sexe, $date_naissance, $profess
         $requete->bindValue(':sexe', $sexe);
         $requete->bindValue(':date_naissance', $date_naissance);
         $requete->bindValue(':profession', $profession);
+        $requete->bindValue(':langue', $langue);
         $requete->bindValue(':email', $email);
         $requete->bindValue(':tel', $tel);
         $requete->bindValue(':rue', $rue);
@@ -41,6 +45,8 @@ function ajouter_membre_dans_bdd($nom, $prenom, $sexe, $date_naissance, $profess
         $requete->bindValue(':nb_adulte', $nb_adulte);
         $requete->bindValue(':nb_enfant', $nb_enfant);
         $requete->bindValue(':interet', $interet);
+        $requete->bindValue(':animaux', $animaux);
+        $requete->bindValue(':fumeur', $fumeur);
 	
 
 	if ($requete->execute()) {

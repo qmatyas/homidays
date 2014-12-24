@@ -34,6 +34,9 @@ $form_inscription->add('Date', 'date_naissance')
 $form_inscription->add('Text', 'profession')
                  ->label("Profession");
 
+$form_inscription->add('Textarea', 'langue')
+                 ->label("Langue(s) parlée(s)");
+
 $form_inscription->add('File', 'carte_ID')
                  ->filter_extensions('jpg', 'png', 'gif')
                  ->max_size(8192) // 8 Kb
@@ -82,11 +85,17 @@ $form_inscription->add('Text', 'nb_enfant')
 $form_inscription->add('Textarea', 'interet')
                  ->label("Centre d'intérêt");
 
+$form_inscription->add('Text', 'animaux')
+                 ->label("Animaux");
+
+$form_inscription->add('Text', 'fumeur')
+                 ->label("Fumeur");
+
 $form_inscription->add('Submit', 'submit')
                  ->value("Je m'inscris !");
 
 //$form_inscription->add('Reset', 'reset')
-                // ->value("Annuler");
+//                ->value("Annuler");
 
 // Pré-remplissage avec les valeurs précédemment entrées (s'il y en a)
 $form_inscription->bound($_POST);
@@ -129,14 +138,14 @@ else {
 $hash_validation = md5(uniqid(rand(), true));
 
 // Tentative d'ajout du membre dans la base de donnees
-list($nom, $prenom, $sexe, $date_naissance, $profession, $carte_ID, $email, $tel, $rue, $code_postal, $ville, $pays, $pseudo, $pass, $avatar, $nb_adulte, $nb_enfant, $interet) =
-	$form_inscription->get_cleaned_data('nom', 'prenom', 'sexe', 'date_naissance', 'profession', 'carte_ID', 'email', 'tel', 'rue', 'code_postal', 'ville', 'pays', 'pseudo', 'pass', 'avatar', 'nb_adulte', 'nb_enfant', 'interet');
+list($nom, $prenom, $sexe, $date_naissance, $profession, $langue, $carte_ID, $email, $tel, $rue, $code_postal, $ville, $pays, $pseudo, $pass, $avatar, $nb_adulte, $nb_enfant, $interet, $animaux, $fumeur) =
+	$form_inscription->get_cleaned_data('nom', 'prenom', 'sexe', 'date_naissance', 'profession', 'langue', 'carte_ID', 'email', 'tel', 'rue', 'code_postal', 'ville', 'pays', 'pseudo', 'pass', 'avatar', 'nb_adulte', 'nb_enfant', 'interet', 'animaux', 'fumeur');
 
 // On veut utiliser le modele de l'inscription (~/modeles/inscription.php)
 include CHEMIN_MODELE.'inscription.php';
 
 // ajouter_membre_dans_bdd() est défini dans ~/modeles/inscription.php
-$id_utilisateur = ajouter_membre_dans_bdd($nom, $prenom, $sexe, $date_naissance, $profession, $email, $tel, $rue, $code_postal, $ville, $pays, $pseudo, sha1($pass), $hash_validation, $nb_adulte, $nb_enfant, $interet);
+$id_utilisateur = ajouter_membre_dans_bdd($nom, $prenom, $sexe, $date_naissance, $profession, $langue, $email, $tel, $rue, $code_postal, $ville, $pays, $pseudo, sha1($pass), $hash_validation, $nb_adulte, $nb_enfant, $interet, $animaux, $fumeur);
 
 // Si la base de données a bien voulu ajouter l'utilisateur (pas de doublons)
 if (ctype_digit($id_utilisateur)) {

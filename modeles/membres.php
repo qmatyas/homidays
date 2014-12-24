@@ -72,7 +72,7 @@ function lire_infos_utilisateur($id_utilisateur) {
 
 	$pdo = PDO2::getInstance();
 
-	$requete = $pdo->prepare("SELECT pseudo, pass, email, avatar, date_inscription, hash_validation
+	$requete = $pdo->prepare("SELECT nom, prenom, sexe, date_naissance, profession, langue, email, tel, rue, code_postal, ville, pays, pseudo, pass, avatar, nb_adulte, nb_enfant, interet, date_inscription, hash_validation
 		FROM utilisateurs
 		WHERE
 		id = :id_utilisateur");
