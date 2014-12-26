@@ -65,7 +65,7 @@ if ($form_connexion->is_valid($_POST)) {
 		if (false != $form_connexion->get_cleaned_data('connexion_auto'))
 		{
 			$navigateur = (!empty($_SERVER['HTTP_USER_AGENT'])) ? $_SERVER['HTTP_USER_AGENT'] : '';
-			$hash_cookie = sha1('aaa'.$pseudo.'bbb'.sha1($pass).'ccc'.$navigateur.'ddd');
+			$hash_cookie = sha1('aaa'.$pseudo.'bbb'.$pass.'ccc'.$navigateur.'ddd');
 			
 			setcookie( 'id',            $_SESSION['id'], strtotime("+1 year"), '/');
 			setcookie('connexion_auto', $hash_cookie,    strtotime("+1 year"), '/');

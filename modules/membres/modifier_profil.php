@@ -15,6 +15,8 @@ else {
 	
 	// "form_modif_infos" est l'ID unique du formulaire
 	$form_modif_infos = new Form("form_modif_infos");
+        
+        $form_modif_infos->method('POST');
 	
 	$form_modif_infos->add('Text', 'profession')
                          ->label("Profession")
@@ -92,10 +94,12 @@ else {
                          ->value($_SESSION['fumeur']);
 	
 	$form_modif_infos->add('Submit', 'submit')
-                         ->initial("Enregistrer les modifications");
+                         ->value("Enregistrer les modifications");
 	
 	// "form_modif_pass" est l'ID unique du formulaire
 	$form_modif_mdp = new Form("form_modif_mdp");
+        
+        $form_modif_mdp->method('POST');
 	
 	$form_modif_mdp->add('Password', 'pass_ancien')
                        ->label("Ancien mot de passe");
@@ -104,10 +108,10 @@ else {
                        ->label("Nouveau mot de passe");
 	
 	$form_modif_mdp->add('Password', 'pass_verif')
-                       ->label("Votre nouveau mot de passe (vérification)");
+                       ->label("Nouveau mot de passe (vérification)");
 	
 	$form_modif_mdp->add('Submit', 'submit')
-                       ->initial("Modifier mon mot de passe");
+                       ->value("Modifier mon mot de passe");
 	
 	// Création des tableaux des erreurs (un par formulaire)
 	$erreurs_form_modif_infos = array();
@@ -211,7 +215,7 @@ else {
                 else {
 			// On veut utiliser le modèle de l'inscription (~/modules/membres.php)
 			include CHEMIN_MODELE.'membres.php';
-			maj_pass_membre($_SESSION['id'], $pass);
+			maj_pass_membre($_SESSION['id'], sha1($pass));
 	
 			$msg_confirm[] = "Votre mot de passe a été modifié avec succès !";
 		}

@@ -26,8 +26,6 @@ if (!empty($erreurs_form_modif_infos)) {
 	echo '</ul>';
 }
 
-$form_modif_infos->fieldsets("Modification de l'e-mail et de l'avatar",array('profession', 'langue', 'email', 'tel', 'rue', 'code_postal', 'ville', 'pays', 'suppr_avatar', 'avatar', 'nb_adulte', 'nb_enfant', 'interet', 'animaux', 'fumeur'));
-
 echo $form_modif_infos;
 
 if (!empty($erreurs_form_modif_mdp)) {
@@ -41,7 +39,5 @@ if (!empty($erreurs_form_modif_mdp)) {
 
 	echo '</ul>';
 }
-
-$form_modif_mdp->fieldsets("Modification du mot de passe", array('pass_ancien', 'pass', 'pass_verif'));
 
 echo $form_modif_mdp;
