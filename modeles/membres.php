@@ -15,6 +15,36 @@ function maj_avatar_membre($id_utilisateur , $avatar) {
 	return $requete->execute();
 }
 
+function maj_email_membre($id_utilisateur , $email) {
+
+	$pdo = PDO2::getInstance();
+
+	$requete = $pdo->prepare("UPDATE utilisateurs SET
+		email = :email
+		WHERE
+		id = :id_utilisateur");
+
+	$requete->bindValue(':id_utilisateur', $id_utilisateur);
+	$requete->bindValue(':email',         $email);
+
+	return $requete->execute();
+}
+
+function maj_pass_membre($id_utilisateur , $pass) {
+
+	$pdo = PDO2::getInstance();
+
+	$requete = $pdo->prepare("UPDATE utilisateurs SET
+		pass = :pass
+		WHERE
+		id = :id_utilisateur");
+
+	$requete->bindValue(':id_utilisateur', $id_utilisateur);
+	$requete->bindValue(':pass',         $pass);
+
+	return $requete->execute();
+}
+
 function maj_carte_ID_membre($id_utilisateur , $carte_ID) {
 
 	$pdo = PDO2::getInstance();

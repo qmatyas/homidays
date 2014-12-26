@@ -99,4 +99,3 @@ class Image {
 		return $this->resource;
 	}
 }
-

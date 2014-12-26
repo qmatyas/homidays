@@ -25,8 +25,9 @@ $form_connexion->add('Text', 'pseudo')
 $form_connexion->add('Password', 'pass')
                ->label("Mot de passe");
 
-//$form_connexion->add('Checkbox', 'connexion_auto')
-//               ->label("Connexion automatique");
+$form_connexion->add('Checkbox', 'connexion_auto')
+               ->label("Connexion automatique")
+               ->Required(false);
 
 $form_connexion->add('Submit', 'submit')
                ->value("Se connecter");
@@ -60,15 +61,15 @@ if ($form_connexion->is_valid($_POST)) {
 		$_SESSION['avatar'] = $infos_utilisateur['avatar'];
 		$_SESSION['email']  = $infos_utilisateur['email'];
                 
-//                // Mise en place des cookies de connexion automatique
-//		if (false != $form_connexion->get_cleaned_data('connexion_auto'))
-//		{
-//			$navigateur = (!empty($_SERVER['HTTP_USER_AGENT'])) ? $_SERVER['HTTP_USER_AGENT'] : '';
-//			$hash_cookie = sha1('aaa'.$pseudo.'bbb'.$pass.'ccc'.$navigateur.'ddd');
-//			
-//			setcookie( 'id',            $_SESSION['id'], strtotime("+1 year"), '/');
-//			setcookie('connexion_auto', $hash_cookie,    strtotime("+1 year"), '/');
-//		}
+                // Mise en place des cookies de connexion automatique
+		if (false != $form_connexion->get_cleaned_data('connexion_auto'))
+		{
+			$navigateur = (!empty($_SERVER['HTTP_USER_AGENT'])) ? $_SERVER['HTTP_USER_AGENT'] : '';
+			$hash_cookie = sha1('aaa'.$pseudo.'bbb'.sha1($pass).'ccc'.$navigateur.'ddd');
+			
+			setcookie( 'id',            $_SESSION['id'], strtotime("+1 year"), '/');
+			setcookie('connexion_auto', $hash_cookie,    strtotime("+1 year"), '/');
+		}
                 
 		// Affichage de la confirmation de la connexion
 		include CHEMIN_VUE.'connexion_ok.php';
@@ -78,13 +79,39 @@ if ($form_connexion->is_valid($_POST)) {
 
 		$erreurs_connexion[] = "Couple pseudo / mot de passe inexistant.";
                 
-//                // Suppression des cookies de connexion automatique
-//		setcookie('id', '');
-//		setcookie('connexion_auto', '');
+                // Suppression des cookies de connexion automatique
+		setcookie('id', '');
+		setcookie('connexion_auto', '');
 		
 		// On réaffiche le formulaire de connexion
 		include CHEMIN_VUE.'formulaire_connexion.php';
 	}	
+        
+        // Vérifications pour la connexion automatique
+
+        // On a besoin du modèle des membres
+        
+
+        // Le mec n'est pas connecté mais les cookies sont là, on y va !
+        if (!utilisateur_est_connecte() && !empty($_COOKIE['id']) && !empty($_COOKIE['connexion_auto']))
+        {
+            $infos_utilisateur = lire_infos_utilisateur($_COOKIE['id']);
+	
+            if (false !== $infos_utilisateur)
+                {
+                    $navigateur = (!empty($_SERVER['HTTP_USER_AGENT'])) ? $_SERVER['HTTP_USER_AGENT'] : '';
+                    $hash = sha1('aaa'.$infos_utilisateur['pseudo'].'bbb'.$infos_utilisateur['pass'].'ccc'.$navigateur.'ddd');
+		
+                    if ($_COOKIE['connexion_auto'] == $hash)
+                    {
+			// On enregistre les informations dans la session
+			$_SESSION['id']     = $_COOKIE['id'];
+			$_SESSION['pseudo'] = $infos_utilisateur['pseudo'];
+			$_SESSION['avatar'] = $infos_utilisateur['avatar'];
+			$_SESSION['email']  = $infos_utilisateur['email'];
+                    }
+                }
+        }
 } 
 
 else {
@@ -92,31 +119,5 @@ else {
     // On réaffiche le formulaire de connexion
     include CHEMIN_VUE.'formulaire_connexion.php';
 }
-
-//// Vérifications pour la connexion automatique
-//
-//// On a besoin du modèle des membres
-//include CHEMIN_MODELE.'membres.php';
-//
-//// Le mec n'est pas connecté mais les cookies sont là, on y va !
-//if (!utilisateur_est_connecte() && !empty($_COOKIE['id']) && !empty($_COOKIE['connexion_auto']))
-//{
-//	$infos_utilisateur = lire_infos_utilisateur($_COOKIE['id']);
-//	
-//	if (false !== $infos_utilisateur)
-//	{
-//		$navigateur = (!empty($_SERVER['HTTP_USER_AGENT'])) ? $_SERVER['HTTP_USER_AGENT'] : '';
-//		$hash = sha1('aaa'.$infos_utilisateur['pseudo'].'bbb'.$infos_utilisateur['pass'].'ccc'.$navigateur.'ddd');
-//		
-//		if ($_COOKIE['connexion_auto'] == $hash)
-//		{
-//			// On enregistre les informations dans la session
-//			$_SESSION['id']     = $_COOKIE['id'];
-//			$_SESSION['pseudo'] = $infos_utilisateur['pseudo'];
-//			$_SESSION['avatar'] = $infos_utilisateur['avatar'];
-//			$_SESSION['email']  = $infos_utilisateur['email'];
-//		}
-//	}
-//}
 
 }

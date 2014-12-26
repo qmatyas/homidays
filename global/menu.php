@@ -16,7 +16,8 @@
                 <?php } else { ?>
                 <p>Bienvenue, <?php echo htmlspecialchars($_SESSION['pseudo']); ?>.</p>
                 <ul>
-                    <li><a href="index.php?module=membres&amp;action=afficher_profil">Mon compte</a></li>
+                    <li><a href="index.php?module=membres&amp;action=afficher_profil;">Mon profil</a></li>
+                    <li><a href="index.php?module=membres&amp;action=modifier_profil;id=$_SESSION['id']">Modifier mon profil</a></li>
                     <li><a href="index.php?module=membres&amp;action=deconnexion">Déconnexion</a></li>
                 </ul>
                 <?php } ?>
