@@ -26,7 +26,7 @@ $form_connexion->add('Password', 'pass')
                ->label("Mot de passe");
 
 //$form_connexion->add('Checkbox', 'connexion_auto')
-              // ->label("Connexion automatique");
+//               ->label("Connexion automatique");
 
 $form_connexion->add('Submit', 'submit')
                ->value("Se connecter");
@@ -78,9 +78,9 @@ if ($form_connexion->is_valid($_POST)) {
 
 		$erreurs_connexion[] = "Couple pseudo / mot de passe inexistant.";
                 
-//                // Suppression des cookies de connexion automatique
-//		setcookie('id', '');
-//		setcookie('connexion_auto', '');
+                // Suppression des cookies de connexion automatique
+		setcookie('id', '');
+		setcookie('connexion_auto', '');
 		
 		// On réaffiche le formulaire de connexion
 		include CHEMIN_VUE.'formulaire_connexion.php';
@@ -91,8 +91,6 @@ else {
 
     // On réaffiche le formulaire de connexion
     include CHEMIN_VUE.'formulaire_connexion.php';
-}
-
 }
 
 //// Vérifications pour la connexion automatique
@@ -121,4 +119,4 @@ else {
 //	}
 //}
 
-
+}
