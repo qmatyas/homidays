@@ -100,9 +100,6 @@ $form_inscription->add('Submit', 'submit')
 // Pré-remplissage avec les valeurs précédemment entrées (s'il y en a)
 $form_inscription->bound($_POST);
 
-// Affichage du formulaire
-include CHEMIN_VUE.'formulaire_inscription.php';
-
 // Création d'un tableau des erreurs
 $erreurs_inscription = array();
 
@@ -222,7 +219,7 @@ else {
 	if (23000 == $erreur[0]) { // Le code d'erreur 23000 siginife "doublon" dans le standard ANSI SQL
 	
 		preg_match("`Duplicate entry '(.+)' for key \d+`is", $erreur[2], $valeur_probleme);
-		$valeur_probleme = $valeur_probleme[1];
+		$valeur_probleme = $erreur[1];
 		
 		if ($pseudo == $valeur_probleme) {
 		
@@ -248,8 +245,6 @@ else {
 		$erreurs_inscription[] = sprintf("Erreur ajout SQL : cas non traité (SQLSTATE = %d).", $erreur[0]);
 	}
 	
-	// On reaffiche le formulaire d'inscription
-	include CHEMIN_VUE.'formulaire_inscription.php';
 }
 
 

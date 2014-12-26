@@ -78,9 +78,9 @@ if ($form_connexion->is_valid($_POST)) {
 
 		$erreurs_connexion[] = "Couple pseudo / mot de passe inexistant.";
                 
-                // Suppression des cookies de connexion automatique
-		setcookie('id', '');
-		setcookie('connexion_auto', '');
+//                // Suppression des cookies de connexion automatique
+//		setcookie('id', '');
+//		setcookie('connexion_auto', '');
 		
 		// On réaffiche le formulaire de connexion
 		include CHEMIN_VUE.'formulaire_connexion.php';
