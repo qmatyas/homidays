@@ -40,7 +40,7 @@ function maj_pass_membre($id_utilisateur , $pass) {
 		id = :id_utilisateur");
 
 	$requete->bindValue(':id_utilisateur', $id_utilisateur);
-	$requete->bindValue(':pass',         $pass);
+	$requete->bindValue(':pass', sha1($pass));
 
 	return $requete->execute();
 }

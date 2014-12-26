@@ -1,7 +1,7 @@
 <?php
 
 // Vérification des droits d'accès de la page
-if (utilisateur_est_connecte()) {
+if (!utilisateur_est_connecte()) {
 
 	// On affiche la page d'erreur comme quoi l'utilisateur doit être connecté pour voir la page
 	include CHEMIN_VUE_GLOBALE.'erreur_non_connecte.php';
