@@ -22,5 +22,8 @@ define('CARTE_ID_LARGEUR_MAXI', 100);
 define('CARTE_ID_HAUTEUR_MAXI', 100);
 define('DOSSIER_CARTE_ID', 'images/carte_ID/');
 
+// Nombre de messages à afficher par page
+ define('MAX_ARTICLES_PAR_PAGE', 15);
+
 
 

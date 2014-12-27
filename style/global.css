@@ -1,6 +1,7 @@
 *
 {
-	font-family: Calibri;
+	font-family: Helvetica;
+/*        background-color: #575864;*/
 }
 body, #menu, #centre
 h1, h2, h3, h4, h5, h6
@@ -37,8 +38,16 @@ h2, h3, h4, h5, h6
 {
 	clear: both;
 	padding: 1em;
-	background-color: #3366ff;
+	background-color: #000;
 }
+    #aide, #contact{
+            color: white;
+            text-decoration: none;
+    }
+    #logos{
+        border: 0px solid #101359;
+        width: 470px;
+    }
 label
 {
 	float: left;

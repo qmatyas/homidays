@@ -203,6 +203,8 @@ else {
 	} 
         
         else if ($form_modif_mdp->is_valid($_POST)) {
+            
+            
 	
 		// On vérifie si les 2 mots de passe correspondent
 		if ($form_modif_mdp->get_cleaned_data('pass') != $form_modif_mdp->get_cleaned_data('pass_verif')) {
@@ -213,6 +215,7 @@ else {
 		} 
                 
                 else {
+                        $pass = $form_modif_mdp->get_cleaned_data('pass');
 			// On veut utiliser le modèle de l'inscription (~/modules/membres.php)
 			include CHEMIN_MODELE.'membres.php';
 			maj_pass_membre($_SESSION['id'], sha1($pass));
