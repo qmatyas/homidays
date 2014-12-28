@@ -11,12 +11,26 @@
 	<meta http-equiv="Content-Language" content="fr" />
 
 	<link rel="stylesheet" href="style/global.css" type="text/css" media="screen" />
+        
+<!--        <link rel="shortcut icon" href="../Header/logo.png" type="image/x-icon"/>-->
 
 </head>
 
 <body>
-
-	<h1>Créez votre site (presque) complet PHP : architecture MVC et bonnes pratiques !</h1>
+        
+        <nav>
+            <a id="pull">Menu</a>
+            <ul>
+<!--		<li><a href="#"><img src="../Header/logo.png" alt="Homidays" title="Homidays" width="100" height="50" class="logo" id='logo'; /></a></li>-->
+		<li><a href="index.php">Accueil</a></li>
+		<li><a href="#">Recherche</a></li>
+		<li><a href="#">Offres</a></li>
+		<li><a href="#">Membres</a></li>
+                <li><a href="#">Forum</a></li>
+            </ul>
+	</nav>
+    
+        <h1>Homidays</h1>
 
 <?php include 'global/menu.php'; ?>
 
