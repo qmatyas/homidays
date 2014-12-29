@@ -122,7 +122,6 @@ if ($form_inscription->is_valid($_POST)) {
 		// On affiche à nouveau le formulaire d'inscription
 		include CHEMIN_VUE.'formulaire_inscription.php';
 	}
-
 }
 
 else {
