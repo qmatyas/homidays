@@ -1,4 +1,7 @@
    </div>
+   
+   <?php include 'global/themes.php'; ?>
+   
 
     <div id="bas">
         <li><a class="aide" id="aide" href="#">Aide</a></li>
