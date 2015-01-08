@@ -24,8 +24,8 @@
 <!--		<li><a href="#"><img src="../Header/logo.png" alt="Homidays" title="Homidays" width="100" height="50" class="logo" id='logo'; /></a></li>-->
 		<li><a href="index.php">Accueil</a></li>
 		<li><a href="#">Recherche</a></li>
-		<li><a href="#">Offres</a></li>
-		<li><a href="index.php?module=resultats_membres&action=liste_membres">Membres</a></li>
+		<li><a href="index.php?module=resultats&action=liste_offres">Offres</a></li>
+		<li><a href="index.php?module=resultats&action=liste_membres">Membres</a></li>
                 <li><a href="forum/indexf.php">Forum</a></li>
             </ul>
 	</nav>
