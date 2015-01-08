@@ -14,7 +14,7 @@ function recup_membre($id) {
     
     $pdo = PDO2::getInstance();
 
-    $requete = $pdo->prepare('SELECT * FROM utilisateurs WHERE id = :id');
+    $requete = $pdo->prepare('SELECT nom, prenom, date_naissance, sexe, date_inscription, pseudo, profession, langue, note_totale, nb_adulte, nb_enfant,interet, animaux, fumeur FROM utilisateurs WHERE id = :id');
     $requete->bindValue(':id', $id);
     $requete->execute();
     
@@ -39,6 +39,18 @@ function recup_liste_offre($depart, $nombre) {
         
         return $requete->fetchAll(PDO::FETCH_ASSOC);
 
+}
+
+function recup_offre($id) {
+    
+    $pdo = PDO2::getInstance();
+
+    $requete = $pdo->prepare('SELECT nom, type, rue, code_postal, ville, pays, superficie, nb_piece, nb_chambre, nb_salle_bain, note_totale, description FROM logements WHERE id = :id');
+    $requete->bindValue(':id', $id);
+    $requete->execute();
+    
+    return $requete->fetch(PDO::FETCH_ASSOC);
+    
 }
 
 function compter_offre() {

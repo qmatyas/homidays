@@ -5,7 +5,7 @@
 foreach ($offres as $offre) {
     echo '<li>';
     if (utilisateur_est_connecte()) {
-        echo '<a href="index.php?module=resultats&action=profil_membre&id=' . $offre['id'] . '">';
+        echo '<a href="index.php?module=resultats&action=profil_offre&id=' . $offre['id'] . '">';
     }
     echo $offre['nom'] . ' </br> Type: ' . $offre['type'] . '</br>  Ville:  ' . $offre['ville'] . ' Pays:  ' . $offre['pays'] . ' </br> Nombre de pièces : ' . $offre['nb_piece'] . '</br> Note : ' . $offre['note_totale'] . '/10';
     if (utilisateur_est_connecte()) {

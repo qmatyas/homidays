@@ -1,8 +1,9 @@
 <?php
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
+if (utilisateur_est_connecte()) {
+    include CHEMIN_MODELE.'resultats.php';
+    $offre = recup_offre($_GET['id']);
+    include CHEMIN_VUE.'afficher_profil_offre.php';
+} else {
+    echo 'Vous ne pouvez pas accéder à cette page, car vous n\êtes pas connecté(e)!';
+}
