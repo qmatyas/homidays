@@ -25,7 +25,7 @@
 		<li><a href="index.php">Accueil</a></li>
 		<li><a href="#">Recherche</a></li>
 		<li><a href="#">Offres</a></li>
-		<li><a href="#">Membres</a></li>
+		<li><a href="index.php?module=resultats_membres&action=liste_membres">Membres</a></li>
                 <li><a href="forum/indexf.php">Forum</a></li>
             </ul>
 	</nav>

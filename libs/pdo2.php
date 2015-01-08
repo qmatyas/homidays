@@ -22,7 +22,9 @@ class PDO2 extends PDO {
 			
 			try {
 			
-				self::$_instance = new PDO(SQL_DSN, SQL_USERNAME, SQL_PASSWORD);
+				self::$_instance = new PDO(SQL_DSN, SQL_USERNAME, SQL_PASSWORD, [
+                                    PDO::MYSQL_ATTR_INIT_COMMAND => 'SET names utf8'
+                                ]);
 			
 			} catch (PDOException $e) {
 			

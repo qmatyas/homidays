@@ -1,8 +1,9 @@
 <?php
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
+if (utilisateur_est_connecte()) {
+    include CHEMIN_MODELE.'resultats.php';
+    $membre = recup_membre($_GET['id']);
+    include CHEMIN_VUE.'afficher_resultats_membres.php';
+} else {
+    echo 'casse-toi connard';
+}
