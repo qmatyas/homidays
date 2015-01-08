@@ -9,7 +9,7 @@ session_start();
 // Vérifie si l'utilisateur est connecté   
 function utilisateur_est_connecte() {
  
-	return !empty($_SESSION['id']);
+	return !empty($_SESSION['Utilisateur']['id']);
 }
 
 // Désactivation des guillemets magiques

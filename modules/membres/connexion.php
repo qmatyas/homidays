@@ -56,10 +56,8 @@ if ($form_connexion->is_valid($_POST)) {
 		$infos_utilisateur = lire_infos_utilisateur($id_utilisateur);
 		
 		// On enregistre les informations dans la session
-		$_SESSION['id']     = $id_utilisateur;
-		$_SESSION['pseudo'] = $pseudo;
-		$_SESSION['avatar'] = $infos_utilisateur['avatar'];
-		$_SESSION['email']  = $infos_utilisateur['email'];
+                $_SESSION['Utilisateur']       = $infos_utilisateur;
+		$_SESSION['Utilisateur']['id'] = $id_utilisateur;
                 
                 // Mise en place des cookies de connexion automatique
 		if (false != $form_connexion->get_cleaned_data('connexion_auto'))
@@ -67,7 +65,7 @@ if ($form_connexion->is_valid($_POST)) {
 			$navigateur = (!empty($_SERVER['HTTP_USER_AGENT'])) ? $_SERVER['HTTP_USER_AGENT'] : '';
 			$hash_cookie = sha1('aaa'.$pseudo.'bbb'.$pass.'ccc'.$navigateur.'ddd');
 			
-			setcookie( 'id',            $_SESSION['id'], strtotime("+1 year"), '/');
+			setcookie( 'id',            $_SESSION['Utilisateur']['id'], strtotime("+1 year"), '/');
 			setcookie('connexion_auto', $hash_cookie,    strtotime("+1 year"), '/');
 		}
                 

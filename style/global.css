@@ -169,15 +169,14 @@ h2, h3, h4, h5, h6
 
 #themes ul
 {
-        padding-left: 150px;
-        padding-top: 75px;
-        
+        padding-left: 40px;
+        padding-top: 100px;
 }
 #themes li 
 {
         float: left;
-        padding: 0px 20px 0px 0px;
-        width: 250px;
+        padding: 0px 10px 0px 0px;
+        width: 220px;
         height: 400px;
         text-align: center;
         list-style: none;

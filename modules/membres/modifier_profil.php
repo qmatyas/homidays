@@ -21,42 +21,42 @@ else {
 	$form_modif_infos->add('Text', 'profession')
                          ->label("Profession")
                          ->Required(false)
-                         ->value($_SESSION['profession']);
+                         ->value($_SESSION['Utilisateur']['profession']);
         
         $form_modif_infos->add('Textarea', 'langue')
                          ->label("Langue(s) parlée(s)")
                          ->Required(false)
-                         ->value($_SESSION['langue']);
+                         ->value($_SESSION['Utilisateur']['langue']);
         
         $form_modif_infos->add('Email', 'email')
                          ->label("Adresse email")
                          ->Required(false)
-                         ->value($_SESSION['email']);
+                         ->value($_SESSION['Utilisateur']['email']);
         
         $form_modif_infos->add('Text', 'tel')
                         ->label("Numéro de téléphone")
                         ->Required(false)
-                        ->value($_SESSION['tel']);
+                        ->value($_SESSION['Utilisateur']['tel']);
 
         $form_modif_infos->add('Text', 'rue')
                          ->label("Rue")
                          ->Required(false)
-                         ->value($_SESSION['rue']);
+                         ->value($_SESSION['Utilisateur']['rue']);
 
         $form_modif_infos->add('Text', 'code_postal')
                          ->label("Code postal")
                          ->Required(false)
-                         ->value($_SESSION['code_postal']);
+                         ->value($_SESSION['Utilisateur']['code_postal']);
 
         $form_modif_infos->add('Text', 'ville')
                          ->label("Ville")
                          ->Required(false)
-                         ->value($_SESSION['ville']);
+                         ->value($_SESSION['Utilisateur']['ville']);
 
         $form_modif_infos->add('Text', 'pays')
                         ->label("Pays")
                         ->Required(false)
-                        ->value($_SESSION['pays']);
+                        ->value($_SESSION['Utilisateur']['pays']);
 	
 	$form_modif_infos->add('Checkbox', 'suppr_avatar')
                          ->label("Je veux supprimer mon avatar")
@@ -71,27 +71,27 @@ else {
         $form_modif_infos->add('Text', 'nb_adulte')
                         ->label("Nombre d'adulte")
                         ->Required(false)
-                        ->value($_SESSION['nb_adulte']);
+                        ->value($_SESSION['Utilisateur']['nb_adulte']);
 
         $form_modif_infos->add('Text', 'nb_enfant')
                         ->label("Nombre d'enfant")
                         ->Required(false)
-                        ->value($_SESSION['nb_enfant']);
+                        ->value($_SESSION['Utilisateur']['nb_enfant']);
 
         $form_modif_infos->add('Textarea', 'interet')
                          ->label("Centre d'intérêt")
                          ->Required(false)
-                         ->value($_SESSION['interet']);
+                         ->value($_SESSION['Utilisateur']['interet']);
 
         $form_modif_infos->add('Text', 'animaux')
                          ->label("Animaux")
                          ->Required(false)
-                         ->value($_SESSION['animaux']);
+                         ->value($_SESSION['Utilisateur']['animaux']);
 
-        $form_modif_infos->add('Text', 'fumeur')
+        $form_modif_infos->add('Checkbox', 'fumeur')
                          ->label("Fumeur")
                          ->Required(false)
-                         ->value($_SESSION['fumeur']);
+                         ->value($_SESSION['Utilisateur']['fumeur']);
 	
 	$form_modif_infos->add('Submit', 'submit')
                          ->value("Enregistrer les modifications");
@@ -131,7 +131,7 @@ else {
 		// Si l'utilisateur veut modifier son adresse e-mail
 		if (!empty($email)) {
 	
-			$test = maj_email_membre($_SESSION['id'], $email);
+			$test = maj_email_membre($_SESSION['Utilisateur']['id'], $email);
 	
 			if (true === $test) {
 	
@@ -170,8 +170,8 @@ else {
 		// Si l'utilisateur veut supprimer son avatar...
 		if (!empty($suppr_avatar)) {
 	
-			maj_avatar_membre($_SESSION['id'], '');
-			$_SESSION['avatar'] = '';
+			maj_avatar_membre($_SESSION['Utilisateur']['id'], '');
+			$_SESSION['Utilisateur']['avatar'] = '';
 	
 			$msg_confirm[] = "Avatar supprimé avec succès !";
 	
@@ -194,8 +194,8 @@ else {
 	
 			// Mise à jour de l'avatar dans la table
 			// maj_avatar_membre() est définit dans ~/modules/membres.php
-			maj_avatar_membre($_SESSION['id'] , $avatar_filename);
-			$_SESSION['avatar'] = $avatar_filename;
+			maj_avatar_membre($_SESSION['Utilisateur']['id'] , $avatar_filename);
+			$_SESSION['Utilisateur']['avatar'] = $avatar_filename;
 	
 			$msg_confirm[] = "Avatar modifié avec succès !";
 		}
@@ -218,14 +218,13 @@ else {
                         $pass = $form_modif_mdp->get_cleaned_data('pass');
 			// On veut utiliser le modèle de l'inscription (~/modules/membres.php)
 			include CHEMIN_MODELE.'membres.php';
-			maj_pass_membre($_SESSION['id'], sha1($pass));
+			maj_pass_membre($_SESSION['Utilisateur']['id'], sha1($pass));
 	
 			$msg_confirm[] = "Votre mot de passe a été modifié avec succès !";
 		}
 	
 	}
         
+        // Affichage des formulaires de modification du profil
+        include CHEMIN_VUE.'formulaire_modifier_profil.php';
 }
-
-// Affichage des formulaires de modification du profil
-include CHEMIN_VUE.'formulaire_modifier_profil.php';

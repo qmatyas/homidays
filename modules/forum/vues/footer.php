@@ -1,0 +1,1 @@
+<div id="footer"><h2>Qui est en ligne ?</h2>

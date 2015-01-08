@@ -34,6 +34,12 @@ define('DOSSIER_PHOTO', 'images/photos/');
 
 // Nombre de messages à afficher par page
  define('MAX_ARTICLES_PAR_PAGE', 15);
+ 
+ //Forum
+define('VISITEUR',1);
+define('INSCRIT',2);
+define('MODO',3);
+define('ADMIN',4);
 
 
 

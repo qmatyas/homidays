@@ -11,7 +11,7 @@ if (!utilisateur_est_connecte()) {
 else {
 
 // Si le paramètre id est manquant ou invalide
-if (empty($_POST['id']) or !is_numeric($_POST['id'])) {
+if (empty($_GET['id']) or !is_numeric($_GET['id'])) {
 
 	include CHEMIN_VUE.'erreur_parametre_profil.php';} 
         
@@ -21,12 +21,11 @@ else {
 	include CHEMIN_MODELE.'membres.php';
 	
 	// lire_infos_utilisateur() est défini dans ~/modèles/membres.php
-	$infos_utilisateur = lire_infos_utilisateur($_POST['id']);
+	$infos_utilisateur = lire_infos_utilisateur($_GET['id']);
 	
 	// Si le profil existe et que le compte est validé
 	if (false !== $infos_utilisateur && $infos_utilisateur['hash_validation'] == '') {
-
-		list($nom, $prenom, $sexe, $date_naissance, $profession, $langue, $email, $tel, $rue, $code_postal, $ville, $pays, $pseudo, $pass, $avatar, $nb_adulte, $nb_enfant, $interet, $date_inscription ) = $infos_utilisateur;
+                
 		include CHEMIN_VUE.'profil_infos_utilisateur.php';
 
 	} 

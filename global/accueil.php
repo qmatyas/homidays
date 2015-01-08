@@ -1,6 +1,9 @@
 <!--Carrousel Background-->
 <p> Hello </p>
 
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>		
+<script type="text/javascript" src="style/supersized.3.2.7.min.js"></script>
+
 <script type="text/javascript">
 			
     jQuery(function($){
@@ -37,3 +40,5 @@
     });
 		    
 </script>
+
+<?php include 'global/themes.php'; ?>

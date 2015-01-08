@@ -1,6 +1,6 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr">
+<html lang="fr">
 
 <head>
 
@@ -26,7 +26,7 @@
 		<li><a href="#">Recherche</a></li>
 		<li><a href="#">Offres</a></li>
 		<li><a href="#">Membres</a></li>
-                <li><a href="#">Forum</a></li>
+                <li><a href="forum/indexf.php">Forum</a></li>
             </ul>
 	</nav>
     
