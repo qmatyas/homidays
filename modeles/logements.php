@@ -2,7 +2,7 @@
 
 function maj_just_log_logement($id_logement , $just_log) {
 
-	$pdo = PDO2::getInstance();
+	$pdo = DB::Connect();
 
 	$requete = $pdo->prepare("UPDATE logements SET
 		just_log = :just_log
@@ -17,7 +17,7 @@ function maj_just_log_logement($id_logement , $just_log) {
 
 function maj_photo_logement($id_logement , $photo) {
 
-	$pdo = PDO2::getInstance();
+	$pdo = DB::Connect();
 
 	$requete = $pdo->prepare("UPDATE logements SET
 		photo = :photo

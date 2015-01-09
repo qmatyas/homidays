@@ -28,6 +28,6 @@ if (1 == get_magic_quotes_gpc())
 }
 
 // Inclusion de Pdo2, potentiellement utile partout
-include CHEMIN_LIB.'pdo2.php';
+include CHEMIN_LIB.'db.php';
 
 

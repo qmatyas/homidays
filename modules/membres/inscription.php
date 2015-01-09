@@ -2,249 +2,88 @@
 
 // Vérification des droits d'accès de la page
 if (utilisateur_est_connecte()) {
-
 	// On affiche la page d'erreur comme quoi l'utilisateur est déjà connecté   
 	include CHEMIN_VUE_GLOBALE.'erreur_deja_connecte.php';
-	
-}
-
-else {
-
-// Ne pas oublier d'inclure la librarie Form
-include CHEMIN_LIB.'form.php';
-
-// "formulaire_inscription" est l'ID unique du formulaire
-$form_inscription = new Form('formulaire_inscription');
-
-$form_inscription->method('POST');
-
-$form_inscription->add('Text', 'nom')
-                 ->label("Nom");
-
-$form_inscription->add('Text', 'prenom')
-                 ->label("Prénom");
-
-$form_inscription->add('Text', 'sexe')
-                ->label("Sexe");
-
-$form_inscription->add('Date', 'date_naissance')
-                 ->format('dd/mm/yyyy')
-                 ->label("Date de naissance");
-
-$form_inscription->add('Text', 'profession')
-                 ->label("Profession");
-
-$form_inscription->add('Textarea', 'langue')
-                 ->label("Langue(s) parlée(s)");
-
-$form_inscription->add('File', 'carte_ID')
-                 ->filter_extensions('jpg', 'png', 'gif')
-                 ->max_size(8192) // 8 Kb
-                 ->label("Copie de carte d'identité")
-                 ->Required(false);
-
-$form_inscription->add('Email', 'email')
-                 ->label("Adresse email");
-
-$form_inscription->add('Text', 'tel')
-                 ->label("Numéro de téléphone");
-
-$form_inscription->add('Text', 'rue')
-                 ->label("Rue");
-
-$form_inscription->add('Text', 'code_postal')
-                 ->label("Code postal");
-
-$form_inscription->add('Text', 'ville')
-                 ->label("Ville");
-
-$form_inscription->add('Text', 'pays')
-                 ->label("Pays");
-
-$form_inscription->add('Text', 'pseudo')
-                 ->label("Pseudo");
-
-$form_inscription->add('Password', 'pass')
-                 ->label("Mot de passe");
-
-$form_inscription->add('Password', 'pass_verif')
-                 ->label("Mot de passe (vérification)");
-
-$form_inscription->add('File', 'avatar')
-                 ->filter_extensions('jpg', 'png', 'gif')
-                 //->max_size(8192) // 8 Kb
-                 ->label("Avatar (facultatif)")
-                 ->Required(false);
-
-$form_inscription->add('Text', 'nb_adulte')
-                 ->label("Nombre d'adulte");
-
-$form_inscription->add('Text', 'nb_enfant')
-                 ->label("Nombre d'enfant");
-
-$form_inscription->add('Textarea', 'interet')
-                 ->label("Centre d'intérêt");
-
-$form_inscription->add('Text', 'animaux')
-                 ->label("Animaux");
-
-$form_inscription->add('Text', 'fumeur')
-                 ->label("Fumeur");
-
-$form_inscription->add('Submit', 'submit')
-                 ->value("Je m'inscris !");
-
-//$form_inscription->add('Reset', 'reset')
-//                ->value("Annuler");
-
-// Pré-remplissage avec les valeurs précédemment entrées (s'il y en a)
-$form_inscription->bound($_POST);
-
-// Création d'un tableau des erreurs
-$erreurs_inscription = array();
-
-// Validation des champs suivant les règles en utilisant les données du tableau $_POST
-if ($form_inscription->is_valid($_POST)) {
-
-	// On vérifie si les 2 mots de passe correspondent
-	if ($form_inscription->get_cleaned_data('pass') != $form_inscription->get_cleaned_data('pass_verif')) {
-
-		$erreurs_inscription[] = "Les deux mots de passes entrés sont différents !";
-	}
-
-	// Si d'autres erreurs ne sont pas survenues
-	if (empty($erreurs_inscription)) {
-
-		// Traitement du formulaire à faire ici
-
-	} else {
-
-		// On affiche à nouveau le formulaire d'inscription
+} else {
+	if (empty($_POST)) {
 		include CHEMIN_VUE.'formulaire_inscription.php';
-	}
-}
+	} else {
+		$valid = true;
+		$erreur = array();
+		$form = array();
 
-else {
-
-	// On affiche à nouveau le formulaire d'inscription
-	include CHEMIN_VUE.'formulaire_inscription.php';
-}
-
-// Tire de la documentation PHP sur <http://fr.php.net/uniqid>
-$hash_validation = md5(uniqid(rand(), true));
-
-// Tentative d'ajout du membre dans la base de donnees
-list($nom, $prenom, $sexe, $date_naissance, $profession, $langue, $carte_ID, $email, $tel, $rue, $code_postal, $ville, $pays, $pseudo, $pass, $avatar, $nb_adulte, $nb_enfant, $interet, $animaux, $fumeur) =
-	$form_inscription->get_cleaned_data('nom', 'prenom', 'sexe', 'date_naissance', 'profession', 'langue', 'carte_ID', 'email', 'tel', 'rue', 'code_postal', 'ville', 'pays', 'pseudo', 'pass', 'avatar', 'nb_adulte', 'nb_enfant', 'interet', 'animaux', 'fumeur');
-
-// On veut utiliser le modele de l'inscription (~/modeles/inscription.php)
-include CHEMIN_MODELE.'inscription.php';
-
-// ajouter_membre_dans_bdd() est défini dans ~/modeles/inscription.php
-$id_utilisateur = ajouter_membre_dans_bdd($nom, $prenom, $sexe, $date_naissance, $profession, $langue, $email, $tel, $rue, $code_postal, $ville, $pays, $pseudo, sha1($pass), $hash_validation, $nb_adulte, $nb_enfant, $interet, $animaux, $fumeur);
-
-// Si la base de données a bien voulu ajouter l'utilisateur (pas de doublons)
-if (ctype_digit($id_utilisateur)) {
-
-	// On transforme la chaine en entier
-	$id_utilisateur = (int) $id_utilisateur;
-	
-	// Preparation du mail
-	$message_mail = '<html><head></head><body>
-	<p>Merci de vous être inscrit sur "mon site" !</p>
-	<p>Veuillez cliquer sur <a href="'.$_SERVER['PHP_SELF'].'?module=membres&amp;action=valider_compte&amp;hash='.$hash_validation.'">ce lien</a> pour activer votre compte !</p>
-	</body></html>';
-	
-	$headers_mail  = 'MIME-Version: 1.0'                           ."\r\n";
-	$headers_mail .= 'Content-type: text/html; charset=utf-8'      ."\r\n";
-	$headers_mail .= 'From: "Homidays" <contact@homidays.com>'      ."\r\n";
-	
-	// Envoi du mail
-	mail($form_inscription->get_cleaned_data('email'), 'Inscription sur <homidays.com>', $message_mail, $headers_mail);
-	
-	// Redimensionnement et sauvegarde de l'avatar (eventuel) dans le bon dossier
-	if (!empty($avatar)) {
-
-		// On souhaite utiliser la librairie Image
-		include CHEMIN_LIB.'image.php';
-	
-		// Redimensionnement et sauvegarde de l'avatar
-		$avatar = new Image($avatar);
-		$avatar->resize_to('AVATAR_LARGEUR_MAXI', 'AVATAR_HAUTEUR_MAXI'); 
-		$avatar_filename = 'DOSSIER_AVATAR'.$id_utilisateur .'.'.strtolower(pathinfo($avatar->get_filename(), PATHINFO_EXTENSION));
-		$avatar->save_as($avatar_filename);
-
-		// On veut utiliser le modele des membres (~/modeles/membres.php)
-		include CHEMIN_MODELE.'membres.php';
-		
-		// Mise à jour de l'avatar dans la table
-		// maj_avatar_membre() est défini dans ~/modeles/membres.php
-                maj_avatar_membre($id_utilisateur , $avatar_filename);
-        }
-
-	// Redimensionnement et sauvegarde de la carte d'identité dans le bon dossier
-	if (!empty($carte_ID)) {
-
-		// On souhaite utiliser la librairie Image
-		include CHEMIN_LIB.'image.php';
-	
-		// Redimensionnement et sauvegarde de la carte d'identité
-		$carte_ID = new Image($carte_ID);
-		$carte_ID->resize_to('CARTE_ID_LARGEUR_MAXI', 'CARTE_ID_HAUTEUR_MAXI'); 
-		$carte_ID_filename = 'DOSSIER_CARTE_ID'.$id_utilisateur .'.'.strtolower(pathinfo($carte_ID->get_filename(), PATHINFO_EXTENSION));
-		$carte_ID->save_as($carte_ID_filename);
-
-		// On veut utiliser le modele des membres (~/modeles/membres.php)
-		include CHEMIN_MODELE.'membres.php';
-		
-		// Mise à jour de l'carte_ID dans la table
-		// maj_carte_ID_membre() est défini dans ~/modeles/membres.php
-		maj_carte_ID_membre($id_utilisateur , $carte_ID_filename);  
-                
-        }
-        
-        // Affichage de la confirmation de l'inscription
-	include CHEMIN_VUE.'inscription_effectuee.php';
-
-}
-
-// Gestion des doublons
-else {
-
-	// Changement de nom de variable (plus lisible)
-	$erreur =& $id_utilisateur;
-	
-	// On vérifie que l'erreur concerne bien un doublon
-	if (23000 == $erreur[0]) { // Le code d'erreur 23000 siginife "doublon" dans le standard ANSI SQL
-	
-		preg_match("`Duplicate entry '(.+)' for key \d+`is", $erreur[2], $valeur_probleme);
-		$valeur_probleme = $erreur[1];
-		
-		if ($pseudo == $valeur_probleme) {
-		
-			$erreurs_inscription[] = "Ce pseudo est déjà utilisé.";
-		
-		} 
-                
-                else if ($email == $valeur_probleme) {
-		
-			$erreurs_inscription[] = "Cette adresse e-mail est déjà utilisée.";
-		
-		} 
-                
-                else {
-		
-			$erreurs_inscription[] = "Erreur ajout SQL : doublon non identifié présent dans la base de données.";
+		function valid($nom, $titre){
+			global $erreur, $form, $valid;
+			if (empty($_POST[$nom])) {
+				$valid = false;
+				$erreur[$nom] = 'Vous n\'avez pas rempli le champs ' . $titre . '.';
+			} else {
+				$form[$nom] = $_POST[$nom];
+			}
 		}
-	
+
+		valid('nom', 'nom');
+		valid('prenom', 'prénom');
+		valid('date_naissance', 'date de naissance');
+		valid('profession', 'profession');
+		valid('langue', 'langue');
+		valid('email', 'email');
+		if(!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
+			$valid = false;
+			$erreur['email'] = 'Email invalide.';
+		}
+		valid('tel', 'télephone');
+		valid('rue', 'rue');
+		valid('code_postal', 'postal');
+		valid('ville', 'ville');
+		valid('pays', 'pays');
+		valid('pseudo', 'pseudo');
+		valid('pass', 'mot de passe');
+		if($_POST['pass'] !== $_POST['pass2']) {
+			$valid = false;
+		}
+		valid('nb_adulte', 'adultes');
+		valid('nb_enfant', 'enfants');
+		valid('interet', 'intérêt');
+		$form['animaux'] = isset($_POST['animaux']) && $_POST['animaux'] === 'on';
+		$form['fumeur'] = isset($_POST['fumeur']) && $_POST['fumeur'] === 'on';
+		$form['sexe'] = $_POST['sexe'] === 'femme';
+
+		if ($valid) {
+			$form['pass'] = sha1($form['pass']);
+			$form['hash_validation'] = md5(uniqid(rand(), true));
+			include CHEMIN_MODELE.'inscription.php';
+			try {
+				$result = ajouter_membre_dans_bdd($form);
+			} catch (PDOException $e) {
+				if ($e->getCode == 23000) {
+					$erreur['pseudo'] = 'Utilisateur déjà existant.';
+				} else {
+					echo "Echec de la connexion à la base de données.\nErreur : " . $e->getMessage();
+				}
+				include CHEMIN_VUE.'formulaire_inscription.php';
+				die();
+			}
+			if ($result) {
+				// Preparation du mail
+				$message_mail = '<html><head></head><body>
+				<p>Merci de vous être inscrit sur "mon site" !</p>
+				<p>Veuillez cliquer sur <a href="'.$_SERVER['PHP_SELF'].'?module=membres&amp;action=valider_compte&amp;hash='.$form['hash_validation'].'">ce lien</a> pour activer votre compte !</p>
+				</body></html>';
+				
+				$headers_mail  = 'MIME-Version: 1.0'                           ."\r\n";
+				$headers_mail .= 'Content-type: text/html; charset=utf-8'      ."\r\n";
+				$headers_mail .= 'From: "Homidays" <contact@homidays.com>'     ."\r\n";
+				
+				// Envoi du mail
+				mail($form['email'], 'Inscription sur <homidays.com>', $message_mail, $headers_mail);
+				include CHEMIN_VUE.'inscription_effectuee.php';
+			} else {
+				echo 'Un problème';
+				include CHEMIN_VUE.'formulaire_inscription.php';
+			}
+		} else {
+			include CHEMIN_VUE.'formulaire_inscription.php';
+		}
 	}
-        
-        else {
-	
-		$erreurs_inscription[] = sprintf("Erreur ajout SQL : cas non traité (SQLSTATE = %d).", $erreur[0]);
-	}
-	
 }
-
-
-}	

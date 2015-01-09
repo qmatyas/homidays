@@ -1,7 +1,8 @@
 <?php
 
 // Identifiants pour la base de données. Nécessaires a PDO2.
-define('SQL_DSN',      'mysql:dbname=bdd;host=localhost');
+define('SQL_HOST', 'localhost');
+define('SQL_DBNAME', 'bdd');
 define('SQL_USERNAME', 'root');
 define('SQL_PASSWORD', '');
 

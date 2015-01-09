@@ -2,7 +2,7 @@
 
 function maj_avatar_membre($id_utilisateur , $avatar) {
 
-	$pdo = PDO2::getInstance();
+	$pdo = DB::Connect();
 
 	$requete = $pdo->prepare("UPDATE utilisateurs SET
 		avatar = :avatar
@@ -17,7 +17,7 @@ function maj_avatar_membre($id_utilisateur , $avatar) {
 
 function maj_email_membre($id_utilisateur , $email) {
 
-	$pdo = PDO2::getInstance();
+	$pdo = DB::Connect();
 
 	$requete = $pdo->prepare("UPDATE utilisateurs SET
 		email = :email
@@ -32,7 +32,7 @@ function maj_email_membre($id_utilisateur , $email) {
 
 function maj_pass_membre($id_utilisateur , $pass) {
 
-	$pdo = PDO2::getInstance();
+	$pdo = DB::Connect();
 
 	$requete = $pdo->prepare("UPDATE utilisateurs SET
 		pass = :pass
@@ -47,7 +47,7 @@ function maj_pass_membre($id_utilisateur , $pass) {
 
 function maj_carte_ID_membre($id_utilisateur , $carte_ID) {
 
-	$pdo = PDO2::getInstance();
+	$pdo = DB::Connect();
 
 	$requete = $pdo->prepare("UPDATE utilisateurs SET
 		carte_ID = :carte_ID
@@ -62,7 +62,7 @@ function maj_carte_ID_membre($id_utilisateur , $carte_ID) {
 
 function valider_compte_avec_hash($hash_validation) {
 
-	$pdo = PDO2::getInstance();
+	$pdo = DB::Connect();
 
 	$requete = $pdo->prepare("UPDATE utilisateurs SET
 		hash_validation = ''
@@ -78,7 +78,7 @@ function valider_compte_avec_hash($hash_validation) {
 
 function combinaison_connexion_valide($pseudo, $pass) {
 
-	$pdo = PDO2::getInstance();
+	$pdo = DB::Connect();
 
 	$requete = $pdo->prepare("SELECT id FROM utilisateurs
 		WHERE
@@ -100,7 +100,7 @@ function combinaison_connexion_valide($pseudo, $pass) {
 
 function lire_infos_utilisateur($id_utilisateur) {
 
-	$pdo = PDO2::getInstance();
+	$pdo = DB::Connect();
 
 	$requete = $pdo->prepare("SELECT nom, prenom, sexe, date_naissance, profession, animaux, fumeur, langue, email, tel, rue, code_postal, ville, pays, pseudo, pass, avatar, nb_adulte, nb_enfant, interet, date_inscription, hash_validation
 		FROM utilisateurs

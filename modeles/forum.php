@@ -2,7 +2,7 @@
 
 function tout_obtenir_forum($lvl) {
 
-	$pdo = PDO2::getInstance();
+	$pdo = DB::Connect();
 
 	$requete = $pdo->prepare('SELECT cat_id, cat_nom, 
         forum.forum_id, forum_nom, forum_description, forum_message, forum_sujet, auth_vue, sujets.sujet_id,  sujets.sujet_message, message_id, message_date, message_createur, pseudo, 
@@ -21,7 +21,7 @@ function tout_obtenir_forum($lvl) {
 
 function total_membres($lvl) {
 
-	$pdo = PDO2::getInstance();
+	$pdo = DB::Connect();
 
 	$requete = $pdo->prepare('SELECT COUNT(*) 
         FROM utilisateurs');
