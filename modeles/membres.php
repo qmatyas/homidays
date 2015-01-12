@@ -38,9 +38,8 @@ function maj_pass_membre($id_utilisateur , $pass) {
 		pass = :pass
 		WHERE
 		id = :id_utilisateur");
-
 	$requete->bindValue(':id_utilisateur', $id_utilisateur);
-	$requete->bindValue(':pass', sha1($pass));
+	$requete->bindValue(':pass',$pass);
 
 	return $requete->execute();
 }
@@ -76,26 +75,17 @@ function valider_compte_avec_hash($hash_validation) {
 	return ($requete->rowCount() == 1);
 }
 
-function combinaison_connexion_valide($pseudo, $pass) {
+function utilisateur_connexion($pseudo) {
 
 	$pdo = DB::Connect();
 
-	$requete = $pdo->prepare("SELECT id FROM utilisateurs
-		WHERE
-		pseudo = :pseudo AND 
-		pass = :pass AND
-		hash_validation = ''");
-
-	$requete->bindValue(':pseudo', $pseudo);
-	$requete->bindValue(':pass', $pass);
-	$requete->execute();
-	
-	if ($result = $requete->fetch(PDO::FETCH_ASSOC)) {
-	
-		$requete->closeCursor();
-		return $result['id'];
-	}
-	return false;
+	$requete = $pdo->prepare("SELECT * FROM utilisateurs
+		WHERE pseudo=?
+		AND hash_validation=''
+                LIMIT 1");
+        
+        $requete->execute([$pseudo]);
+        return $requete->fetch();	
 }
 
 function lire_infos_utilisateur($id_utilisateur) {
@@ -110,12 +100,32 @@ function lire_infos_utilisateur($id_utilisateur) {
 	$requete->bindValue(':id_utilisateur', $id_utilisateur);
 	$requete->execute();
 	
-	if ($result = $requete->fetch(PDO::FETCH_ASSOC)) {
+	if ($result = $requete->fetch()) {
 	
 		$requete->closeCursor();
 		return $result;
 	}
 	return false;
 }
+
+function recuperer_pass($id_utilisateur) {
+
+	$pdo = DB::Connect();
+
+	$requete = $pdo->prepare("SELECT pass
+            FROM utilisateurs
+            WHERE
+            id=:id_utilisateur");
+
+	$requete->bindValue(':id_utilisateur', $id_utilisateur);
+	$requete->execute();
+	
+	if ($result = $requete->fetch()['pass']) {
+		$requete->closeCursor();
+		return $result;
+	}
+	return false;
+}
+
 
 

@@ -8,26 +8,10 @@ session_start();
 
 // Vérifie si l'utilisateur est connecté   
 function utilisateur_est_connecte() {
- 
 	return !empty($_SESSION['Utilisateur']['id']);
 }
 
-// Désactivation des guillemets magiques
-ini_set('magic_quotes_runtime', 0);
-
-
-if (1 == get_magic_quotes_gpc())
-{
-	function remove_magic_quotes_gpc(&$value) {
-	
-		$value = stripslashes($value);
-	}
-	array_walk_recursive($_GET, 'remove_magic_quotes_gpc');
-	array_walk_recursive($_POST, 'remove_magic_quotes_gpc');
-	array_walk_recursive($_COOKIE, 'remove_magic_quotes_gpc');
-}
-
-// Inclusion de Pdo2, potentiellement utile partout
+// Inclusion du gestionnaire de connexion à la SGBD
 include CHEMIN_LIB.'db.php';
 
 

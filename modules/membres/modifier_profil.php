@@ -2,229 +2,75 @@
 
 // Vérification des droits d'accès de la page
 if (!utilisateur_est_connecte()) {
-
-	// On affiche la page d'erreur comme quoi l'utilisateur doit être connecté pour voir la page
+	// On affiche la page d'erreur comme quoi l'utilisateur est déjà connecté   
 	include CHEMIN_VUE_GLOBALE.'erreur_non_connecte.php';
-	
-} 
+} else {
+	if (!empty($_POST)) {
+            if (isset($_POST['pass'], $_POST['pass0'], $_POST['pass2'])) {
+                if ($_POST['pass'] === $_POST['pass2']) {
+                    include CHEMIN_MODELE.'membres.php';
+                    $pass = sha1($_POST['pass0']);
+                    if ($pass === recuperer_pass($_SESSION['Utilisateur']['id'])){
+                        maj_pass_membre($_SESSION['Utilisateur']['id'], $pass);
+                    } else {
+                        $erreur['pass'] = 'Mauvais mot de passe.';
+                    }
+                } else {
+                    $erreur['pass'] = 'Vous avez spécifié deux mots de passe différents.';
+                }
+            } else {
+		$valid = true;
+		$erreur = array();
+		$form = array();
 
-else {
-	
-	// Ne pas oublier d'inclure la librairie Form
-	include CHEMIN_LIB.'form.php';
-	
-	// "form_modif_infos" est l'ID unique du formulaire
-	$form_modif_infos = new Form("form_modif_infos");
-        
-        $form_modif_infos->method('POST');
-	
-	$form_modif_infos->add('Text', 'profession')
-                         ->label("Profession")
-                         ->Required(false)
-                         ->value($_SESSION['Utilisateur']['profession']);
-        
-        $form_modif_infos->add('Textarea', 'langue')
-                         ->label("Langue(s) parlée(s)")
-                         ->Required(false)
-                         ->value($_SESSION['Utilisateur']['langue']);
-        
-        $form_modif_infos->add('Email', 'email')
-                         ->label("Adresse email")
-                         ->Required(false)
-                         ->value($_SESSION['Utilisateur']['email']);
-        
-        $form_modif_infos->add('Text', 'tel')
-                        ->label("Numéro de téléphone")
-                        ->Required(false)
-                        ->value($_SESSION['Utilisateur']['tel']);
-
-        $form_modif_infos->add('Text', 'rue')
-                         ->label("Rue")
-                         ->Required(false)
-                         ->value($_SESSION['Utilisateur']['rue']);
-
-        $form_modif_infos->add('Text', 'code_postal')
-                         ->label("Code postal")
-                         ->Required(false)
-                         ->value($_SESSION['Utilisateur']['code_postal']);
-
-        $form_modif_infos->add('Text', 'ville')
-                         ->label("Ville")
-                         ->Required(false)
-                         ->value($_SESSION['Utilisateur']['ville']);
-
-        $form_modif_infos->add('Text', 'pays')
-                        ->label("Pays")
-                        ->Required(false)
-                        ->value($_SESSION['Utilisateur']['pays']);
-	
-	$form_modif_infos->add('Checkbox', 'suppr_avatar')
-                         ->label("Je veux supprimer mon avatar")
-                         ->Required(false);
-	
-	$form_modif_infos->add('File', 'avatar')
-                         ->filter_extensions('jpg', 'png', 'gif')
-                         ->max_size(8192) // 8 Kb
-                         ->label("Avatar")
-                         ->Required(false);
-        
-        $form_modif_infos->add('Text', 'nb_adulte')
-                        ->label("Nombre d'adulte")
-                        ->Required(false)
-                        ->value($_SESSION['Utilisateur']['nb_adulte']);
-
-        $form_modif_infos->add('Text', 'nb_enfant')
-                        ->label("Nombre d'enfant")
-                        ->Required(false)
-                        ->value($_SESSION['Utilisateur']['nb_enfant']);
-
-        $form_modif_infos->add('Textarea', 'interet')
-                         ->label("Centre d'intérêt")
-                         ->Required(false)
-                         ->value($_SESSION['Utilisateur']['interet']);
-
-        $form_modif_infos->add('Text', 'animaux')
-                         ->label("Animaux")
-                         ->Required(false)
-                         ->value($_SESSION['Utilisateur']['animaux']);
-
-        $form_modif_infos->add('Checkbox', 'fumeur')
-                         ->label("Fumeur")
-                         ->Required(false)
-                         ->value($_SESSION['Utilisateur']['fumeur']);
-	
-	$form_modif_infos->add('Submit', 'submit')
-                         ->value("Enregistrer les modifications");
-	
-	// "form_modif_pass" est l'ID unique du formulaire
-	$form_modif_mdp = new Form("form_modif_mdp");
-        
-        $form_modif_mdp->method('POST');
-	
-	$form_modif_mdp->add('Password', 'pass_ancien')
-                       ->label("Ancien mot de passe");
-	
-	$form_modif_mdp->add('Password', 'pass')
-                       ->label("Nouveau mot de passe");
-	
-	$form_modif_mdp->add('Password', 'pass_verif')
-                       ->label("Nouveau mot de passe (vérification)");
-	
-	$form_modif_mdp->add('Submit', 'submit')
-                       ->value("Modifier mon mot de passe");
-	
-	// Création des tableaux des erreurs (un par formulaire)
-	$erreurs_form_modif_infos = array();
-	$erreurs_form_modif_mdp   = array();
-	
-	// et d'un tableau des messages de confirmation
-	$msg_confirm = array();
-	
-	// Validation des champs suivant les règles en utilisant les données du tableau $_POST
-	if ($form_modif_infos->is_valid($_POST)) {
-	
-		list($profession, $langue, $email, $tel, $rue, $code_postal, $ville, $pays, $suppr_avatar, $avatar, $nb_adulte, $nb_enfant, $interet, $animaux, $fumeur) = $form_modif_infos->get_cleaned_data('profession', 'langue', 'email', 'tel', 'rue', 'code_postal', 'ville', 'pays', 'suppr_avatar', 'avatar', 'nb_adulte', 'nb_enfant', 'interet', 'animaux', 'fumeur');
-	
-		// On veut utiliser le modèle de l'inscription(~/modules/membres.php)
-		include CHEMIN_MODELE.'membres.php';
-	
-		// Si l'utilisateur veut modifier son adresse e-mail
-		if (!empty($email)) {
-	
-			$test = maj_email_membre($_SESSION['Utilisateur']['id'], $email);
-	
-			if (true === $test) {
-	
-				// Ça a marché, trop cool !
-				$msg_confirm[] = "Adresse e-mail mise à jour avec succès !";
-	
-			// Gestion des doublons
+		function valid($nom, $titre){
+			global $erreur, $form, $valid;
+			if (empty($_POST[$nom])) {
+				$valid = false;
+				$erreur[$nom] = 'Vous n\'avez pas rempli le champs ' . $titre . '.';
 			} else {
-	
-				// Changement de nom de variable (plus lisible)
-				$erreur =& $test;
-	
-				// On vérifie que l'erreur concerne bien un doublon
-				if (23000 == $erreur[0]) { // Le code d'erreur 23000 signifie "doublon" dans le standard ANSI SQL
-	
-					preg_match("`Duplicate entry '(.+)' for key \d+`is", $erreur[2], $valeur_probleme);
-					$valeur_probleme = $valeur_probleme[1];
-	
-					if ($email == $valeur_probleme) {
-	
-						$erreurs_form_modif_infos[] = "Cette adresse e-mail est déjà utilisée.";
-	
-					} else {
-	
-						$erreurs_form_modif_infos[] = "Erreur ajout SQL : doublon non identifié présent dans la base de données.";
-					}
-	
-				} else {
-	
-					$erreurs_form_modif_infos[] = sprintf("Erreur ajout SQL : cas non traité (SQLSTATE = %d).", $erreur[0]);
-				}
-	
+				$form[$nom] = $_POST[$nom];
 			}
 		}
-	
-		// Si l'utilisateur veut supprimer son avatar...
-		if (!empty($suppr_avatar)) {
-	
-			maj_avatar_membre($_SESSION['Utilisateur']['id'], '');
-			$_SESSION['Utilisateur']['avatar'] = '';
-	
-			$msg_confirm[] = "Avatar supprimé avec succès !";
-	
-		// ... ou le modifier !
-		} 
-                
-                else if (!empty($avatar)) {
-	
-			// On souhaite utiliser la librairie Image
-			include CHEMIN_LIB.'image.php';
-	
-			// Redimensionnement et sauvegarde de l'avatar
-			$avatar = new Image($avatar);
-			$avatar->resize_to(100, 100); // Image->resize_to($largeur_maxi, $hauteur_maxi)
-			$avatar_filename = DOSSIER_AVATAR.$id_utilisateur .'.'.strtolower(pathinfo($avatar->get_filename(), PATHINFO_EXTENSION));
-			$avatar->save_as($avatar_filename);
-	
-			// On veut utiliser le modèle des membres (~/modules/membres.php)
-			include CHEMIN_MODELE.'membres.php';
-	
-			// Mise à jour de l'avatar dans la table
-			// maj_avatar_membre() est définit dans ~/modules/membres.php
-			maj_avatar_membre($_SESSION['Utilisateur']['id'] , $avatar_filename);
-			$_SESSION['Utilisateur']['avatar'] = $avatar_filename;
-	
-			$msg_confirm[] = "Avatar modifié avec succès !";
+
+		valid('nom', 'nom');
+		valid('prenom', 'prénom');
+		valid('date_naissance', 'date de naissance');
+		valid('profession', 'profession');
+		valid('langue', 'langue');
+		valid('email', 'email');
+		if(!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
+			$valid = false;
+			$erreur['email'] = 'Email invalide.';
 		}
-	
-	} 
-        
-        else if ($form_modif_mdp->is_valid($_POST)) {
-            
-            
-	
-		// On vérifie si les 2 mots de passe correspondent
-		if ($form_modif_mdp->get_cleaned_data('pass') != $form_modif_mdp->get_cleaned_data('pass_verif')) {
-	
-			$erreurs_form_modif_mdp[] = "Les deux mots de passes entrés sont différents !";
-	
-		// C'est bon, on peut modifier la valeur dans la BDD
-		} 
-                
-                else {
-                        $pass = $form_modif_mdp->get_cleaned_data('pass');
-			// On veut utiliser le modèle de l'inscription (~/modules/membres.php)
-			include CHEMIN_MODELE.'membres.php';
-			maj_pass_membre($_SESSION['Utilisateur']['id'], sha1($pass));
-	
-			$msg_confirm[] = "Votre mot de passe a été modifié avec succès !";
+		valid('tel', 'télephone');
+		valid('rue', 'rue');
+		valid('code_postal', 'postal');
+		valid('ville', 'ville');
+		valid('pays', 'pays');
+		valid('pseudo', 'pseudo');
+		valid('nb_adulte', 'adultes');
+		valid('nb_enfant', 'enfants');
+		valid('interet', 'intérêt');
+		$form['animaux'] = isset($_POST['animaux']) && $_POST['animaux'] === 'on';
+		$form['fumeur'] = isset($_POST['fumeur']) && $_POST['fumeur'] === 'on';
+		$form['sexe'] = $_POST['sexe'] === 'femme';
+
+		if ($valid) {
+			include CHEMIN_MODELE.'inscription.php';
+			try {
+                                $form['id'] = $_SESSION['Utilisateur']['id'];
+				$result = modifier_membre($form);
+			} catch (PDOException $e) {
+                                echo "Echec de la connexion à la base de données.\nErreur : " . $e->getMessage();
+				include CHEMIN_VUE.'formulaire_modifier_profil.php';
+				die();
+			}
+                        foreach ($form as $key => $value) {
+                            $_SESSION['Utilisateur'][$key] = $value;
+                        }
 		}
-	
+            }
 	}
-        
-        // Affichage des formulaires de modification du profil
         include CHEMIN_VUE.'formulaire_modifier_profil.php';
 }

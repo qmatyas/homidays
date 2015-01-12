@@ -1,22 +1,6 @@
 <h2>Inscription au site</h2>
 
-<?php
-
-if (!empty($erreurs_inscription)) {
-
-	echo '<ul>'."\n";
-	
-	foreach($erreurs_inscription as $e) {
-	
-		echo '	<li>'.$e.'</li>'."\n";
-	}
-	
-	echo '</ul>';
-}
-
-?>
-<form method="post" action="" id="form" name="form"> <!--Définir le formulaire PHP-->
-<!--<img id="close" src="images/3.png" onclick ="div_hide()">-->
+<form method="post" action="" id="form" name="form"> 
 	<fieldset>
 	<legend><b>Votre Identité</b></legend>
 	<p>

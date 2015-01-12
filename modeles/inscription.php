@@ -23,11 +23,43 @@ function ajouter_membre_dans_bdd($data) {
                 nb_adulte = :nb_adulte,
                 nb_enfant = :nb_enfant,
                 interet = :interet,
-                animaux = :animaux;
-                fumeur = :fumeur;
-		date_inscription = " . date('Y-m-d'));
+                animaux = :animaux,
+                fumeur = :fumeur,
+		date_inscription=NOW();");
+        
 	if ($requete->execute($data)) {
 	       return $pdo->lastInsertId();
+	}
+	return $requete->errorInfo();
+}
+
+function modifier_membre($data) {
+
+	$pdo = DB::Connect();
+
+	$requete = $pdo->prepare("UPDATE utilisateurs SET
+		nom = :nom,
+                prenom = :prenom,
+                sexe = :sexe,
+                date_naissance = :date_naissance,
+                profession = :profession,
+                langue = :langue,
+                email = :email,
+                tel = :tel,
+                rue = :rue,
+                code_postal = :code_postal,
+                ville = :ville,
+                pays = :pays,
+                pseudo = :pseudo,
+                nb_adulte = :nb_adulte,
+                nb_enfant = :nb_enfant,
+                interet = :interet,
+                animaux = :animaux,
+                fumeur = :fumeur
+                WHERE id=:id;");
+        
+	if ($requete->execute($data)) {
+	    return $pdo->lastInsertId();
 	}
 	return $requete->errorInfo();
 }
