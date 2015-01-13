@@ -5,8 +5,8 @@
 	<legend><b>Votre Identité</b></legend>
 	<p>
 		<label for="nom">Nom :</label>
-		<input type="text" name="nom" id="nom" value="<?php if(isset($_POST['nom'])) echo $_POST['nom']; ?>"required /> <!--Ici, le PHP sert à conserver les champs où il n'y a pas d'erreur-->
-		<span class="error_message"> <?php if(isset($erreur['nom'])) echo $erreur['nom']; ?> </span> <!--Ici, le PHP sert à afficher un message d'erreur si la case est vide-->
+		<input type="text" name="nom" id="nom" value="<?php if(isset($_POST['nom'])) echo $_POST['nom']; ?>"required /> 
+		<span class="error_message"> <?php if(isset($erreur['nom'])) echo $erreur['nom']; ?> </span> 
 	</p>
 	<p>
 		<label for="prenom">Prénom :</label>
@@ -37,7 +37,7 @@
 	</p>
 	<p>
 		<label for="copie">Copie Carte Identité :</label>
-		<input type="file" name="copieID" id="copieID"/> <!--Ici il reste à trouver comment conserver le fichier s'il y a une erreur dans un autre champs-->
+		<input type="file" name="copieID" id="copieID"/> 
 		<span class="error_message"> <?php if(isset($erreur['copieID'])) echo $erreur['copieID']; ?> </span>
 	</p>
 	</fieldset>
@@ -57,7 +57,7 @@
 	<p>
 		<label for="adresse">Adresse principale: </label>
 		
-		<div id="bloc"> <!--Alignement des blocs pour l'adresse-->
+		<div id="bloc"> 
 		
 			<input type="text" name="rue" id="rue" placeholder="Rue" size="30" maxlength="45" value="<?php if(isset($_POST['rue'])) echo $_POST['rue']; ?>"required />
 			<span class="error_message"> <?php if(isset($erreur['rue'])) echo $erreur['rue']; ?> </span></br>
@@ -100,12 +100,12 @@
 	</p>
 	<p>
 		<label for="voyageurs">Nombre de voyageurs:</label>
-             <div id='align'><!--permet d'aligner les cases adultes et enfants-->
-                Adulte <input type="number" min="0" size="10" name="nb_adulte" id="nb_adulte" value="<?php if(isset($_POST['nb_adulte'])) echo $_POST['nb_adulte']; ?>" required/>
-				Enfant <input type="number" min="0" size="10" name="nb_enfant" id="nb_enfant" value="<?php if(isset($_POST['nb_enfant'])) echo $_POST['nb_enfant']; ?>" required/>
-				<span class="error_message"> <?php if(isset($erreur['nb_adulte'])) echo $erreur['nb_adulte']; ?> </span>
-				<span class="error_message"> <?php if(isset($erreur['nb_enfant'])) echo $erreur['nb_enfant']; ?> </span>
-             </div>
+                <div id='align'>
+                   Adulte <input type="number" min="0" size="10" name="nb_adulte" id="nb_adulte" value="<?php if(isset($_POST['nb_adulte'])) echo $_POST['nb_adulte']; ?>" required/>
+                   Enfant <input type="number" min="0" size="10" name="nb_enfant" id="nb_enfant" value="<?php if(isset($_POST['nb_enfant'])) echo $_POST['nb_enfant']; ?>" required/>
+                   <span class="error_message"> <?php if(isset($erreur['nb_adulte'])) echo $erreur['nb_adulte']; ?> </span>
+                   <span class="error_message"> <?php if(isset($erreur['nb_enfant'])) echo $erreur['nb_enfant']; ?> </span>
+                </div>
 	</p>
 	<p>
 		<label for="id_animaux">Animaux :</label>
@@ -119,7 +119,7 @@
 	</p>
 	<p>
 		<label for="interet"> Centres d'intérêt: </label><br />	
-		<textarea name="interet" id="interet" rows="10" cols="50" placeholder="Voyages, Lecture, Musique, Films, Promenade ..."> <?php if(isset($_POST['interet'])) echo $_POST['interet']; ?>  </textarea> 
+		<textarea name="interet" id="interet" rows="10" cols="50" placeholder="Voyages, Lecture, Musique, Films, Promenade ..."><?php if(isset($_POST['interet'])) echo $_POST['interet']; ?></textarea> 
 		<span class="error_message"> <?php if(isset($erreur['interet'])) echo $erreur['interet']; ?> </span>      
 	</p>
 		<input type="submit" id="submit" value="Suivant"/>
