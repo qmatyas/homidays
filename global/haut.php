@@ -18,6 +18,8 @@
 
 <body>
     
+    <h1>Homidays</h1>
+    
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>		
     <script type="text/javascript" src="style/supersized.3.2.7.min.js"></script>
 
@@ -42,15 +44,14 @@
                 slide_links:'blank',
                 // Slideshow Images
                 slides:[			
-                            {image : 'http://www.fond-ecran-hd.net/pc-driver/1509.jpg', thumb : 'http://www.fond-ecran-hd.net/pc-driver/1509.jpg'},
-                            {image : 'http://www.fond-ecran-hd.net/pc-driver/1524.jpg', thumb : 'http://www.fond-ecran-hd.net/pc-driver/1524.jpg'},  
-                            {image : 'http://iwallpapers.free.fr/upload/2012/09/23/20120923103912-b4915353.jpg', thumb : 'http://iwallpapers.free.fr/upload/2012/09/23/20120923103912-b4915353.jpg'},  
-                            {image : 'http://www.fond-ecran-hd.net/pc-driver/1552.jpg', thumb : 'http://www.fond-ecran-hd.net/pc-driver/1552.jpg'},  
-                            {image : 'http://www.fond-ecran-hd.net/pc-driver/1316.jpg', thumb : 'http://www.fond-ecran-hd.net/pc-driver/1316.jpg'},  
-                            {image : 'http://www.fond-ecran-hd.net/pc-driver/1391.jpg', thumb : 'http://www.fond-ecran-hd.net/pc-driver/1391.jpg'},  
-                            {image : 'http://iwallpapers.free.fr/upload/2012/10/21/20121021141531-852cc670.jpg', thumb : 'http://iwallpapers.free.fr/upload/2012/10/21/20121021141531-852cc670.jpg'},  
-                            {image : 'http://iwallpapers.free.fr/upload/2013/08/25/20130825101727-8f46b878.jpg', thumb : 'http://iwallpapers.free.fr/upload/2013/08/25/20130825101727-8f46b878.jpg'},  
-                            {image : 'http://iwallpapers.free.fr/upload/2012/01/18/20120118144450-1e2f1894.jpg', thumb : 'http://iwallpapers.free.fr/upload/2012/01/18/20120118144450-1e2f1894.jpg'}  
+                            {image : 'images/site/supersized/supersized1.jpg', thumb : 'images/site/supersized/supersized1.jpg'},
+                            {image : 'images/site/supersized/supersized2.jpg', thumb : 'images/site/supersized/supersized2.jpg'},  
+                            {image : 'images/site/supersized/supersized3.png', thumb : 'images/site/supersized/supersized3.png'},  
+                            {image : 'images/site/supersized/supersized4.jpg', thumb : 'images/site/supersized/supersized4.jpg'},  
+                            {image : 'images/site/supersized/supersized5.jpg', thumb : 'images/site/supersized/supersized5.jpg'},  
+                            {image : 'images/site/supersized/supersized6.jpg', thumb : 'images/site/supersized/supersized6.jpg'},  
+                            {image : 'images/site/supersized/supersized7.jpg', thumb : 'images/site/supersized/supersized7.jpg'},  
+                            {image : 'images/site/supersized/supersized8.jpg', thumb : 'images/site/supersized/supersized8.jpg'}    
                         ]
 
             });
@@ -70,8 +71,6 @@
             </ul>
 	</nav>
     
-        <h1>Homidays</h1>
-
 <?php include 'global/menu.php'; ?>
 
-	<div id="centre">
+	<div class="centre">

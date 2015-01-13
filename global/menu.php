@@ -1,4 +1,4 @@
-<div id="connexion">
+<div class="connexion">
 	
                 <h2>Espace membre</h2>
                 

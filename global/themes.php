@@ -1,25 +1,25 @@
-<section id="themes">
+<section class="themes">
         <div>
             <a href="">
-                <img alt="Montagne" src="http://www.tinquiete.net/modsp13/resources/neige.jpg"></img>
+                <img alt="Montagne" src="images/site/themes/Montagne.jpg"></img>
                 <h3>Montagne</h3>
             </a>
         </div>
         <div>
             <a href="">
-                <img alt="Campagne" src="http://www.photo-paysage.com/albums/userpics/10001/142/Arbres_en_fleurs_et_touche_printaniere_-2.jpg"></img>
+                <img alt="Campagne" src="images/site/themes/Campagne.jpg"></img>
                  <h3>Campagne</h3>
             </a>
         </div>
         <div>
              <a href="">
-                <img   alt="Mer" src="http://www.wmag-voyage.fr/wp-content/uploads/2011/11/Activit%C3%A9-en-mer-1.jpg"></img>
+                <img   alt="Mer" src="images/site/themes/Mer.jpg"></img>
                 <h3>Mer</h3>
             </a>
         </div>
         <div>
             <a href="">
-                <img  alt="Ville" src="http://upload.wikimedia.org/wikipedia/commons/5/5f/La_ville_de_Sydney_vue_du_port.JPG"></img>
+                <img  alt="Ville" src="images/site/themes/Ville.JPG"></img>
                 <h3>Ville</h3>
             </a>
         </div>
