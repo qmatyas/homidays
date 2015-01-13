@@ -64,7 +64,6 @@ function modifier_membre($data) {
 	return $requete->errorInfo();
 }
 
-
 function ajouter_logement_dans_bdd($nom, $rue, $code_postal, $ville, $pays, $type, $superficie, $nb_piece, $nb_chambre, $nb_salle_bain, $description, $point_fort, $activites, $restauration, $transports, $environnements, $contraintes, $services, $options) {
 
 	$pdo = DB::Connect();
