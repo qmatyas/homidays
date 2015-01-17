@@ -1,46 +1,38 @@
 <h2>Profil de <?= htmlspecialchars($logement['nom']); ?></h2>
 
-<div id="carrousel">
-<?php
-    foreach ($images as $image) {
-        echo '<img src="' . $image['nom'] . '" alt="photo" title="Photo' . $image['id'] . '" class="photo_mini" height="180" width="240">';
-    }
-?>
-</div>
+<section class="">
+    <div id="carrousel">
+<?php foreach ($images as $image) : ?>
+        <img src="<?= $image['nom']; ?>" alt="photo" title="Photo<?= $image['id']; ?>" class="">';
+<?php endforeach; ?>
+    </div>
+    <p class="label_profil"><b>Note :</b> <?= $logement['note_totale']; ?></p>
+    <div>
+        <h3>Adresse</h3>
+        <p class="label_profil"><b>Nom :</b> <?= $logement['nom']; ?></p>
+        <p class="label_profil"><b>Enregistrée le :</b> <?= $logement['date_inscription']; ?></p>
+        <p class="label_profil"><b>Type :</b> <?= $logement['type_logement']; ?></p>
+        <p class="label_profil"><b>Rue :</b> <?= $logement['rue']; ?></p>
+        <p class="label_profil"><b>Code postal :</b> <?= $logement['code_postal']; ?></p>
+        <p class="label_profil"><b>Ville :</b> <?= $logement['ville']; ?></p>
+        <p class="label_profil"><b>Pays :</b> <?= $logement['pays']; ?></p>
+    </div>
 
-<div><span class="label_profil">Note</span> : <?= $logement['note_totale']; ?></div>
-
-<section>
-    
-    <fieldset>
-    <legend><b>Adresse</b></legend>
-      <p>
-        <div><span class="label_profil">Nom</span> : <?= $logement['nom']; ?></div>
-        <div><span class="label_profil">Enregistrée le</span> : <?= $logement['date_inscription']; ?></div>
-        <div><span class="label_profil">Type</span> : <?= $logement['type_logement']; ?></div>
-        <div><span class="label_profil">Rue</span> : <?= $logement['rue']; ?></div>
-        <div><span class="label_profil">Code postal</span> : <?= $logement['code_postal']; ?></div>
-        <div><span class="label_profil">Ville</span> : <?= $logement['ville']; ?></div>
-        <div><span class="label_profil">Pays</span> : <?= $logement['pays']; ?></div>
-       </p>
-    </fieldset>
-
-  <fieldset>
-    <legend><b>Logement</b></legend>
-      <p>
-        <div><span class="label_profil">Superficie (en m²)</span> : <?= $logement['superficie']; ?></div>
-        <div><span class="label_profil">Nombre de pièces</span> : <?= $logement['nb_piece']; ?></div>
-        <div><span class="label_profil">Nombre de chambres</span> : <?= $logement['nb_chambre']; ?></div>
-        <div><span class="label_profil">Nombre de salles de bain</span> : <?= $logement['nb_salle_bain']; ?></div>
-        <div><span class="label_profil">Description</span> :<br> <?= nl2br($logement['description']); ?></div>
-      </p>
-    </fieldset>
+    <div class="">
+        <h3>Logement</h3>
+        <p class="label_profil"><b>Superficie (en m²) :</b> <?= $logement['superficie']; ?></p>
+        <p class="label_profil">Nombre de pièces</span> : <?= $logement['nb_piece']; ?></p>
+        <p class="label_profil">Nombre de chambres</span> : <?= $logement['nb_chambre']; ?></p>
+        <p class="label_profil">Nombre de salles de bain</span> : <?= $logement['nb_salle_bain']; ?></p>
+        <p class="label_profil">Description</span> :<br> <?= nl2br($logement['description']); ?></p>
+    </div>
 
     <div class="">
         <h3>Quartier</h3>
         <div>
-        <div><span class="label_profil">Points forts</span> :<br> <?= nl2br($quartier['points_forts']); ?></div>
-
+            <h6 class="label_profil">Points forts</h6>
+            <?= nl2br($quartier['points_forts']); ?>
+        </div>
         <div>
             <h6 class="label_profil">Activité</h6>
             <?= $quartier['musee'] ? '<span>Musée</span>' : ''; ?>
@@ -49,24 +41,26 @@
             <?= $quartier['shopping'] ? '<span>Shopping</span>' : ''; ?>
             <?= $quartier['autre'] ? '<span>Autre</span>' : ''; ?>
         </div>
-
-        <div><span class="label_profil">Restauration</span> :<br> <?= nl2br($quartier['restauration']); ?></div>
-
-        <div><span class="label_profil">Transport</span> :
-        <?= $quartier['metro'] ? 'Métro' : ''; ?>
-        <?= $quartier['velib'] ? 'Vélib' : ''; ?>
-        <?= $quartier['bus'] ? 'Bus' : ''; ?>
-        <?= $quartier['tramway'] ? 'Tramway' : ''; ?>
-        <?= $quartier['autre'] ? 'Autre' : ''; ?>
+        <div>
+            <h6 class="label_profil">Restauration</h6>
+            <?= nl2br($quartier['restauration']); ?>
         </div>
-
-        <div><span class="label_profil">Environnement</span> : 
-        <?= $quartier['lac'] ? 'Lac' : ''; ?>
-        <?= $quartier['foret'] ? 'Forêt' : ''; ?>
-        <?= $quartier['campagne'] ? 'Campagne' : ''; ?>
-        <?= $quartier['mer'] ? 'Mer' : ''; ?>
-        <?= $quartier['ville_env'] ? 'Ville' : ''; ?>
-         <?= $quartier['autre'] ? 'Autre' : ''; ?>
+        <div>
+            <h6 class="label_profil">Transport</h6>
+            <?= $quartier['metro'] ? '<span>Métro</span>' : ''; ?>
+            <?= $quartier['velib'] ? '<span>Vélib</span>' : ''; ?>
+            <?= $quartier['bus'] ? '<span>Bus</span>' : ''; ?>
+            <?= $quartier['tramway'] ? '<span>Tramway</span>' : ''; ?>
+            <?= $quartier['autre'] ? '<span>Autre</span>' : ''; ?>
+        </div>
+        <div>
+            <h6 class="label_profil">Environnement</h6>
+            <?= $quartier['lac'] ? '<span>Lac</span>' : ''; ?>
+            <?= $quartier['foret'] ? '<span>Forêt</span>' : ''; ?>
+            <?= $quartier['campagne'] ? '<span>Campagne</span>' : ''; ?>
+            <?= $quartier['mer'] ? '<span>Mer</span>' : ''; ?>
+            <?= $quartier['ville_env'] ? '<span>Ville</span>' : ''; ?>
+            <?= $quartier['autre'] ? '<span>Autre</span>' : ''; ?>
         </div>
     </div>
 
