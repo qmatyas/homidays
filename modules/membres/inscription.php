@@ -46,6 +46,22 @@ else {
     if($_POST['pass'] !== $_POST['pass2']) {
             $valid = false;
     }
+    if(!empty($_FILES)){
+        $img = $_FILES['img'];
+        $ext = strtolower(substr($img['name'],-3));
+        $allow_ext = array('jpg', 'png', 'gif');
+        if(in_array($ext,$allow_ext)) {
+            $form['avatar'] = "images/avatar/".$form['pseudo'].'.'.$ext;
+            move_uploaded_file($img['tmp_name'], $form['avatar']);
+        }
+        else{
+            $valid = false;
+            $erreur_avatar = 'Votre fichier n\'est pas une image.';
+        }
+    } else {
+        $valid = false;
+        $erreur_avatar = 'Vous devez envoyer une image.';
+    }
     valid('nb_adulte', 'adultes');
     valid('nb_enfant', 'enfants');
     valid('interet', 'intérêt');
@@ -56,9 +72,9 @@ else {
     if ($valid) {
 			$form['pass'] = sha1($form['pass']);
 			$form['hash_validation'] = md5(uniqid(rand(), true));
-			include CHEMIN_MODELE.'inscription.php';
+			include CHEMIN_MODELE.'membres.php';
 			try {
-				$result = ajouter_membre_dans_bdd($form);
+				$result = membre_ajouter($form);
 			} catch (PDOException $e) {
 				if ($e->getCode == 23000) {
 					$erreur['pseudo'] = 'Utilisateur déjà existant.';
@@ -71,8 +87,8 @@ else {
 			if ($result) {
 				// Preparation du mail
 				$message_mail = '<html><head></head><body>
-				<p>Merci de vous être inscrit sur "mon site" !</p>
-				<p>Veuillez cliquer sur <a href="'.$_SERVER['PHP_SELF'].'?module=membres&amp;action=valider_compte&amp;hash='.$form['hash_validation'].'">ce lien</a> pour activer votre compte !</p>
+				<p>Merci de vous être inscrit sur "Homidays" !</p>
+				<p>Veuillez cliquer sur <a href="localhost/'.$_SERVER['PHP_SELF'].'?module=membres&amp;action=valider_compte&amp;hash='.$form['hash_validation'].'">ce lien</a> pour activer votre compte !</p>
 				</body></html>';
 
 				$headers_mail  = 'MIME-Version: 1.0'                           ."\r\n";
@@ -85,7 +101,7 @@ else {
 			} else {
 				echo 'Un problème';
 				include CHEMIN_VUE.'formulaire_inscription.php';
-                        }
+            }
 
     }
     

@@ -10,8 +10,8 @@ if (!utilisateur_est_connecte()) {
                 if ($_POST['pass'] === $_POST['pass2']) {
                     include CHEMIN_MODELE.'membres.php';
                     $pass = sha1($_POST['pass0']);
-                    if ($pass === recuperer_pass($_SESSION['Utilisateur']['id'])){
-                        maj_pass_membre($_SESSION['Utilisateur']['id'], $pass);
+                    if ($pass === membre_recuperer_pass($_SESSION['Utilisateur']['id'])){
+                        membre_modifier_pass($_SESSION['Utilisateur']['id'], $pass);
                     } else {
                         $erreur['pass'] = 'Mauvais mot de passe.';
                     }
@@ -57,10 +57,10 @@ if (!utilisateur_est_connecte()) {
 		$form['sexe'] = $_POST['sexe'] === 'femme';
 
 		if ($valid) {
-			include CHEMIN_MODELE.'inscription.php';
+			include CHEMIN_MODELE.'membres.php';
 			try {
                                 $form['id'] = $_SESSION['Utilisateur']['id'];
-				$result = modifier_membre($form);
+				$result = membre_modifier($form);
 			} catch (PDOException $e) {
                                 echo "Echec de la connexion à la base de données.\nErreur : " . $e->getMessage();
 				include CHEMIN_VUE.'formulaire_modifier_profil.php';

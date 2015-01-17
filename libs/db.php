@@ -1,6 +1,5 @@
 <?php
 
-
 class DB {
 
     private static $_bdd = false;

@@ -2,9 +2,12 @@
 
 // Vérification des droits d'accès de la page
 if (!utilisateur_est_connecte()) {
+
     // On affiche la page d'erreur comme quoi l'utilisateur est déjà connecté   
     include CHEMIN_VUE_GLOBALE.'erreur_non_connecte.php';  
-} else {
+}
+
+else {
     if (empty($_POST)) {
         include CHEMIN_VUE.'formulaire_inscription.php';
     } 
@@ -50,6 +53,8 @@ if (!utilisateur_est_connecte()) {
 	valid($logement, 'code_postal', 'code postal');
 	valid($logement, 'ville', 'ville');
 	valid($logement, 'pays', 'pays');
+//	valid($logement, 'justificatif_logement', 'justificatif_logement');
+//	valid($logement, 'photo_logement', 'photo_logement');
 	valid($logement, 'type_logement', 'type_logement');
 	valid($logement, 'superficie', 'superficie');
 	valid($logement, 'nombre_piece', 'nombre de pièce');
@@ -101,22 +106,19 @@ if (!utilisateur_est_connecte()) {
 	valid($option, 'autre', 'autre', 'bool');
         
         if($valid){
-            include CHEMIN_MODELE.'logements.php';
+            include CHEMIN_MODELE.'inscription.php';
 		try{
-            $logement['id'] = logements_ajouter($logement, $quartier, $contrainte, $service, $option, $activite, $transport, $environnement);
+                    $result = ajouter_logement_dans_bdd($logement, $quartier, $activite, $transport, $environnement, $contrainte, $service, $option);
 		} catch(PDOException $e){
 			echo "Echec de la connexion à la base de données.\nErreur : " . $e->getMessage();
 			die();
-        }
-        if ($logement['id']) {
-            include ('modules/images/images_ajouter.php');
-        }
-        else{
-            include CHEMIN_VUE. 'erreur_inscription_logement.php';
+                }
+                if ($result)
+                    echo 'Youpi !!!!';
+                else
+                    echo ':\'(';
 	}
 }
-}
-
 }
 
 

@@ -16,7 +16,7 @@ else {
                             include CHEMIN_MODELE.'membres.php';
 				try{
                                         // combinaison_connexion_valide() est définit dans ~/modeles/membres.php
-                                        $utilisateur = utilisateur_connexion($_POST['pseudo']);
+                                        $utilisateur = membre_connecter($_POST['pseudo']);
 				}
 				catch (PDOException $e) {
 					echo "Echec de la connexion à la base de données.\nErreur : " . $e->getMessage();
@@ -27,7 +27,7 @@ else {
 				if ($utilisateur) {
                                         if (sha1($_POST['pass'] === $utilisateur['pass'])) {
                                             // On enregistre les informations dans la session
-                                            $_SESSION['Utilisateur']       = $utilisateur;    
+                                            $_SESSION['Utilisateur'] = $utilisateur;  
 
                                             // Affichage de la confirmation de la connexion
                                             include CHEMIN_VUE.'connexion_ok.php';

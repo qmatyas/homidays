@@ -87,9 +87,9 @@
 		<label for="voyageurs">Nombre de voyageurs:</label>
              <div id='align'>
                 Adulte <input type="number" min="0" size="10" name="nb_adulte" id="nb_adulte" value="<?= isset($_SESSION['Utilisateur']['nb_adulte']) ? $_SESSION['Utilisateur']['nb_adulte'] : ''; ?>" required/>
-				Enfant <input type="number" min="0" size="10" name="nb_enfant" id="nb_enfant" value="<?= isset($_SESSION['Utilisateur']['nb_enfant']) ? $_SESSION['Utilisateur']['nb_enfant'] : ''; ?>" required/>
-				<span class="error_message"> <?= isset($erreur['nb_adulte']) ? $erreur['nb_adulte'] : ''; ?> </span>
-				<span class="error_message"> <?= isset($erreur['nb_enfant']) ? $erreur['nb_enfant'] : ''; ?> </span>
+                Enfant <input type="number" min="0" size="10" name="nb_enfant" id="nb_enfant" value="<?= isset($_SESSION['Utilisateur']['nb_enfant']) ? $_SESSION['Utilisateur']['nb_enfant'] : ''; ?>" required/>
+                <span class="error_message"> <?= isset($erreur['nb_adulte']) ? $erreur['nb_adulte'] : ''; ?> </span>
+                <span class="error_message"> <?= isset($erreur['nb_enfant']) ? $erreur['nb_enfant'] : ''; ?> </span>
              </div>
 	</p>
 	<p>
@@ -130,4 +130,4 @@
             </p>
             <input type="submit" id="submit" value="Enregistrer">
         </fieldset>
-</form>
+</form> 

@@ -2,27 +2,23 @@
 
 // Vérification des droits d'accès de la page
 if (!utilisateur_est_connecte()) {
-    // On affiche la page d'erreur comme quoi l'utilisateur est déjà connecté   
-    include CHEMIN_VUE_GLOBALE.'erreur_non_connecte.php';  
+	// On affiche la page d'erreur comme quoi l'utilisateur est déjà connecté   
+	include CHEMIN_VUE_GLOBALE.'erreur_non_connecte.php';
 } else {
-    if (empty($_POST)) {
-        include CHEMIN_VUE.'formulaire_inscription.php';
-    } 
-    
-    else {
-        $erreur = array();
-	$valid = true;
+	
+		$valid = true;
+		$erreur = array();
 
-	$logement = array();
-	$quartier = array();
-	$activite = array();
-	$transport = array();
-	$environnement = array();
-	$contrainte = array();
-	$service = array();
-	$option = array();
-        
-        // Recuperer l'id de l'utilisateur connecte ! Provisoirement on en met un bidon.
+		$logement = array();
+		$quartier = array();
+		$activite = array();
+		$transport = array();
+		$environnement = array();
+		$contrainte = array();
+		$service = array();
+		$option = array();
+
+	// Recuperer l'id de l'utilisateur connecte ! Provisoirement on en met un bidon.
 	$logement['utilisateur'] = $_SESSION['Utilisateur']['id'];
 
 	function valid (&$array, $nom, $titre, $type = null) {
@@ -99,27 +95,22 @@ if (!utilisateur_est_connecte()) {
 	valid($option, 'equipement_sportif', 'equipement_sportif', 'bool');
 	valid($option, 'acces_handicape', 'acces_handicape', 'bool');
 	valid($option, 'autre', 'autre', 'bool');
-        
-        if($valid){
-            include CHEMIN_MODELE.'logements.php';
-		try{
-            $logement['id'] = logements_ajouter($logement, $quartier, $contrainte, $service, $option, $activite, $transport, $environnement);
-		} catch(PDOException $e){
-			echo "Echec de la connexion à la base de données.\nErreur : " . $e->getMessage();
-			die();
-        }
-        if ($logement['id']) {
-            include ('modules/images/images_ajouter.php');
-        }
-        else{
-            include CHEMIN_VUE. 'erreur_inscription_logement.php';
+
+		if ($valid) {
+			include CHEMIN_MODELE.'membres.php';
+			try {
+                $form['id'] = $_SESSION['Utilisateur']['id'];
+				$result = membre_modifier($form);
+			} catch (PDOException $e) {
+                                echo "Echec de la connexion à la base de données.\nErreur : " . $e->getMessage();
+				include CHEMIN_VUE.'formulaire_modifier_logement.php';
+				die();
+			}
+                        foreach ($form as $key => $value) {
+                            $_SESSION['Utilisateur'][$key] = $value;
+                        }
+		}
+            }
 	}
+        include CHEMIN_VUE.'formulaire_modifier_logement.php';
 }
-}
-
-}
-
-
-        
-    
-

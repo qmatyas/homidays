@@ -13,34 +13,9 @@ define('CHEMIN_MODELE', 'modeles/');
 define('CHEMIN_LIB',    'libs/');
 define('CHEMIN_VUE_GLOBALE', 'vues_globales/');
 
-// Configurations relatives à l'avatar
-define('AVATAR_LARGEUR_MAXI', 100);
-define('AVATAR_HAUTEUR_MAXI', 100);
-define('DOSSIER_AVATAR', 'images/avatars/');
-
-// Configurations relatives à la carte d'identité
-define('CARTE_ID_LARGEUR_MAXI', 100);
-define('CARTE_ID_HAUTEUR_MAXI', 100);
-define('DOSSIER_CARTE_ID', 'images/carte_ID/');
-
-// Configurations relatives au justificatif de logement
-define('JUST_LOG_LARGEUR_MAXI', 100);
-define('JUST_LOG_HAUTEUR_MAXI', 100);
-define('DOSSIER_JUST_LOG', 'images/just_log/');
-
-// Configurations relatives aux photos
-define('PHOTO_LARGEUR_MAXI', 100);
-define('PHOTO_HAUTEUR_MAXI', 100);
-define('DOSSIER_PHOTO', 'images/photos/');
-
 // Nombre de messages à afficher par page
  define('MAX_ARTICLES_PAR_PAGE', 15);
  
- //Forum
-define('VISITEUR',1);
-define('INSCRIT',2);
-define('MODO',3);
-define('ADMIN',4);
 
 
 

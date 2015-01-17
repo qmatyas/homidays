@@ -16,8 +16,8 @@ if (!empty($_GET['hash'])) {
 	// On veut utiliser le modèle des membres (~/modeles/membres.php)
 	include CHEMIN_MODELE.'membres.php';
 
-	// valider_compte_avec_hash() est définit dans ~/modeles/membres.php
-	if (valider_compte_avec_hash($_GET['hash'])) {
+	// membre_valider_compte() est définit dans ~/modeles/membres.php
+	if (membre_valider_compte($_GET['hash'])) {
 	
 		// Affichage de la confirmation de validation du compte
 		include CHEMIN_VUE.'compte_valide.php';

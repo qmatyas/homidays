@@ -1,31 +1,40 @@
 <?php
 
-function tout_obtenir_forum($lvl) {
+//TOPICS
 
-	$pdo = DB::Connect();
-
-	$requete = $pdo->prepare('SELECT cat_id, cat_nom, 
-        forum.forum_id, forum_nom, forum_description, forum_message, forum_sujet, auth_vue, sujets.sujet_id,  sujets.sujet_message, message_id, message_date, message_createur, pseudo, 
-        utilisateurs.id 
-        FROM categories
-        LEFT JOIN forum ON categories.cat_id = forum.forum_cat_id
-        LEFT JOIN messages ON messages.message_id = forum.forum_dernier_message_id
-        LEFT JOIN sujets ON sujets.sujet_id = messages.sujet_id
-        LEFT JOIN utilisateurs ON utilisateurs.id = messages.message_createur
-        WHERE auth_vue <= :lvl 
-        ORDER BY categories.cat_ordre, forum.forum_ordre DESC');
-
-	$requete->bindValue(':lvl',$lvl);
-	return $requete->execute();
+function recupsujet($bdd)
+{
+	$req = $bdd->query('SELECT * FROM topic');
+	return $req;
 }
 
-function total_membres($lvl) {
+function ajoutsujet($bdd, $login, $nom)
+{
+	$req = $bdd->query("INSERT INTO `topic`( `Login`, `Nom`,`date`) VALUES ('$login', '$nom',NOW())");
+	return $req;
+}
 
-	$pdo = DB::Connect();
+function effacertopic($bdd)
+{
+	$id_topic=$_GET['id'];
+	$req = $bdd->query("DELETE FROM topic WHERE idtopic=$id_topic");
+	return $req;
+}
 
-	$requete = $pdo->prepare('SELECT COUNT(*) 
-        FROM utilisateurs');
+//MESSAGES
 
-	$requete->bindValue(':lvl',$lvl);
-	return $requete->execute();
+function recupMessage($bdd){
+	$id_topic=$_GET['id'];
+	$req = $bdd->query("SELECT * FROM message WHERE id_topic=$id_topic");
+	return $req;
+}
+
+function ajoutmessage($bdd,$msg, $login, $id_topic){
+	$req = $bdd->query("INSERT INTO message (msg,id_topic,login,date) VALUES ('$msg', '$id_topic','$login',NOW())");
+}
+
+function effacermessage($bdd){
+	$id_message=$_GET['idmessage'];
+	$req = $bdd->query("DELETE FROM message WHERE ID_Message=$id_message");
+	return $req;
 }

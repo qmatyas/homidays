@@ -1,0 +1,1 @@
+<p>Vos photos ont bien été enregistrées!</p>
