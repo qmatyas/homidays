@@ -15,6 +15,8 @@ if (!utilisateur_est_connecte()) {
 		} else {
 			include CHEMIN_MODELE . 'membres.php';
 			$membre = membres_recuperer($id);
+			include CHEMIN_MODELE . 'logements.php';
+			$logement = logements_recuperer_liste($depart, $nombre, $id);
 
 			// Si le profil existe et que le compte est validé
 			if (!$membre && !empty($membre['hash_validation'])) {

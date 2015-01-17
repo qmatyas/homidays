@@ -1,19 +1,51 @@
+<h2>Modification de votre logement</h2>
 
-<h2>Profil de <?= htmlspecialchars($infos_logement['nom']); ?></h2>
-<div><span class="label_profil">Note: </span> : <?= $infos_logement['note_totale']; ?></p></div>
-
-<p>
-    
+<form method="post" action="" id="form" name="form"> 
     <fieldset>
    	<legend><b>Adresse</b></legend>
     	<p>
-		    <div><span class="label_profil">Nom</span> : <?= isset($_SESSION['Utilisateur']['']) ? $_SESSION['']['nom'] : ''; ?></p></div>
-		    <div><span class="label_profil">Enregistrée le:</span> : <?= isset($_SESSION['']['']) ? $_SESSION['']['date_inscription'] : ''; ?></p></div>
-		    <div><span class="label_profil">Type</span> : <?= isset($_SESSION['']['']) ? $_SESSION['']['type_logement'] : ''; ?></p></div>
-		    <div><span class="label_profil">Rue</span> : <?= isset($_SESSION['']['']) ? $_SESSION['']['rue'] : '';?></p></div>
-		    <div><span class="label_profil">Code postal</span> : <?= isset($_SESSION['']['']) ? $_SESSION['']['code_postal'] : '';?></p></div>
-		    <div><span class="label_profil">Ville</span> : <?= isset($_SESSION['']['']) ? $_SESSION['']['ville'] : '';?></p></div>
-		    <div><span class="label_profil">Pays</span> : <?= isset($_SESSION['']['']) ? $_SESSION['']['pays'] : '';?></p></div>
+		    <p>
+		    <label for="nom">Nom</label> : 
+		    <input type="text" name="nom" value="<?= isset($_SESSION['Utilisateur']['']) ? $_SESSION['']['nom'] : ''; ?>
+		    <span class="error_message"><?= isset($erreur['nom']) ? $erreur['nom'] : ''; ?></span>
+		    </p>
+
+		    <p>
+		    <label for="date_inscription">Enregistrée le:</label> : 
+		    <input type="date_inscription" name="date_inscription" value="<?= isset($_SESSION['']['']) ? $_SESSION['']['date_inscription'] : ''; ?>
+		    <span class="error_message"><?= isset($erreur['date_inscription']) ? $erreur['date_inscription'] : ''; ?></span>
+		    </p>
+
+		    <p>
+		    <label for="type_logement">Type</label> : 
+		    <input type="type_logement" name="type_logement" value="<?= isset($_SESSION['']['']) ? $_SESSION['']['type_logement'] : ''; ?>
+		    <span class="error_message"><?= isset($erreur['type_logement']) ? $erreur['type_logement'] : ''; ?></span>
+		    </p>
+
+		    <p>
+		    <label for="rue">Rue</label> : 
+		    <input type="text" name="rue" value="<?= isset($_SESSION['']['']) ? $_SESSION['']['rue'] : '';?>
+		    <span class="error_message"><?= isset($erreur['rue']) ? $erreur['rue'] : ''; ?></span>
+		    </p>
+
+		    <p>
+		    <label for="code_postal">Code postal</label> : 
+		    <input type="text" name="code_postal" value="<?= isset($_SESSION['']['']) ? $_SESSION['']['code_postal'] : '';?>
+		    <span class="error_message"><?= isset($erreur['code_postal']) ? $erreur['code_postal'] : ''; ?></span>
+		    </p>
+
+		    <p>
+		    <label for="ville">Ville</label> : 
+		    <input type="text" name="ville" value="<?= isset($_SESSION['']['']) ? $_SESSION['']['ville'] : '';?>
+		    <span class="error_message"><?= isset($erreur['ville']) ? $erreur['ville'] : ''; ?></span>
+		    </p>
+
+		    <p>
+		    <label for="pays">Pays</label> : 
+		    <input type="text" name="pays" value="<?= isset($_SESSION['']['']) ? $_SESSION['']['pays'] : '';?>
+		    <span class="error_message"><?= isset($erreur['pays']) ? $erreur['pays'] : ''; ?></span>
+		    </p>
+
    		 </p>
     </fieldset>
 

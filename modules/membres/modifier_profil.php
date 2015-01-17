@@ -59,7 +59,7 @@ if (!utilisateur_est_connecte()) {
 		if ($valid) {
 			include CHEMIN_MODELE.'membres.php';
 			try {
-                                $form['id'] = $_SESSION['Utilisateur']['id'];
+                $form['id'] = $_SESSION['Utilisateur']['id'];
 				$result = membre_modifier($form);
 			} catch (PDOException $e) {
                                 echo "Echec de la connexion à la base de données.\nErreur : " . $e->getMessage();

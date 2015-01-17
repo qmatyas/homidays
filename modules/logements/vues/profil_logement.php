@@ -7,10 +7,10 @@
 <?php endforeach; ?>
     </div>
     <p class="label_profil"><b>Note :</b> <?= $logement['note_totale']; ?></p>
-    <div>
+    <div class="">
         <h3>Adresse</h3>
-        <p class="label_profil"><b>Nom :</b> <?= $logement['nom']; ?></p>
-        <p class="label_profil"><b>Enregistrée le :</b> <?= $logement['date_inscription']; ?></p>
+        <p class="label_profil"><b>Note :</b> <?= $logement['note_totale'] === null ? '-' : $logement['note_totale']; ?> /10</p>
+        <p class="label_profil"><b>Date d'inscription :</b> <?= (new DateTime($logement['date_inscription']))->format('d/m/Y'); ?></p>
         <p class="label_profil"><b>Type :</b> <?= $logement['type_logement']; ?></p>
         <p class="label_profil"><b>Rue :</b> <?= $logement['rue']; ?></p>
         <p class="label_profil"><b>Code postal :</b> <?= $logement['code_postal']; ?></p>
@@ -21,10 +21,11 @@
     <div class="">
         <h3>Logement</h3>
         <p class="label_profil"><b>Superficie (en m²) :</b> <?= $logement['superficie']; ?></p>
-        <p class="label_profil">Nombre de pièces</span> : <?= $logement['nb_piece']; ?></p>
-        <p class="label_profil">Nombre de chambres</span> : <?= $logement['nb_chambre']; ?></p>
-        <p class="label_profil">Nombre de salles de bain</span> : <?= $logement['nb_salle_bain']; ?></p>
-        <p class="label_profil">Description</span> :<br> <?= nl2br($logement['description']); ?></p>
+        <p class="label_profil">Nombre de pièces</b> : <?= $logement['nb_piece']; ?></p>
+        <p class="label_profil">Nombre de chambres</b> : <?= $logement['nb_chambre']; ?></p>
+        <p class="label_profil">Nombre de salles de bain</b> : <?= $logement['nb_salle_bain']; ?></p>
+        <p class="label_profil">Description</b> :<br>
+        <?= nl2br($logement['description']); ?></p>
     </div>
 
     <div class="">

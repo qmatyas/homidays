@@ -155,32 +155,20 @@ function membres_recuperer_liste($depart, $nombre) {
 
 	$pdo = DB::Connect();
 
-	$requete = $pdo->query("SELECT id, pseudo, avatar, date_inscription, note_totale, nb_adulte, nb_enfant
-                FROM utilisateurs
-                ORDER BY pseudo ASC 
-                LIMIT $depart, $nombre");
-        
-        return $requete->fetchAll();
-}
-
-function membres_recuperer_recherche($depart, $nombre) {
-
-	$pdo = DB::Connect();
-
-	$requete = $pdo->query("SELECT *
-                FROM utilisateurs
-                WHERE pseudo LIKE '%".$_GET['pseudo']."%' 
-                ORDER BY pseudo ASC 
-                LIMIT $depart, $nombre");
-        
-        return $requete->fetchAll();
+	$requete = $pdo->prepare("SELECT id, pseudo, avatar, date_inscription, note_totale, nb_adulte, nb_enfant
+        FROM utilisateurs"
+        . (isset($_GET['pseudo']) ? " WHERE pseudo LIKE ? " : ' ')
+        . "ORDER BY pseudo ASC 
+        LIMIT $depart, $nombre");
+    $requete->execute(isset($_GET['pseudo']) ? ['%' . $_GET['pseudo'] . '%'] : null);
+    return $requete->fetchAll();
 }
 
 function membres_compter() {
     
-    $pdo = DB::Connect();
-    
-    return $pdo->query('SELECT COUNT(id) FROM utilisateurs')->fetch(PDO::FETCH_NUM)[0];  
+    $requete = DB::Connect()->prepare('SELECT COUNT(id) FROM utilisateurs' . (isset($_GET['pseudo']) ? " WHERE pseudo LIKE ? " : ''));
+    $requete->execute(isset($_GET['pseudo']) ? ['%' . $_GET['pseudo'] . '%'] : null);
+    return $requete->fetch(PDO::FETCH_NUM)[0];  
 }
 
 

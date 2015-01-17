@@ -5,8 +5,8 @@
 	<legend><b>Votre Identité</b></legend>
 	<p>
 		<label for="nom">Nom :</label>
-		<input type="text" name="nom" id="nom" value="<?= isset($_SESSION['Utilisateur']['nom']) ? $_SESSION['Utilisateur']['nom'] : ''; ?>"required /> <!--Ici, le PHP sert à conserver les champs où il n'y a pas d'erreur-->
-		<span class="error_message"> <?= isset($erreur['nom']) ? $erreur['nom'] : ''; ?> </span> <!--Ici, le PHP sert à afficher un message d'erreur si la case est vide-->
+		<input type="text" name="nom" id="nom" value="<?= isset($_SESSION['Utilisateur']['nom']) ? $_SESSION['Utilisateur']['nom'] : ''; ?>"required /> 
+		<span class="error_message"> <?= isset($erreur['nom']) ? $erreur['nom'] : ''; ?> </span> 
 	</p>
 	<p>
 		<label for="prenom">Prénom :</label>

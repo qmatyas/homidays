@@ -97,10 +97,10 @@ if (!utilisateur_est_connecte()) {
 	valid($option, 'autre', 'autre', 'bool');
 
 		if ($valid) {
-			include CHEMIN_MODELE.'membres.php';
+			include CHEMIN_MODELE.'logements.php';
 			try {
                 $form['id'] = $_SESSION['Utilisateur']['id'];
-				$result = membre_modifier($form);
+				$result = logement_modifier($form);
 			} catch (PDOException $e) {
                                 echo "Echec de la connexion à la base de données.\nErreur : " . $e->getMessage();
 				include CHEMIN_VUE.'formulaire_modifier.php';
