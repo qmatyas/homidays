@@ -11,7 +11,7 @@
                 <ul>
                     <img class="flottant_droite" src="<?= $_SESSION['Utilisateur']['avatar']; ?>" title="Avatar de <?= htmlspecialchars($_SESSION['Utilisateur']['avatar']); ?>">
                     <li><a href="index.php?module=membres&amp;action=afficher&amp;id=<?php echo $_SESSION['Utilisateur']['id'];?>">Mon profil</a></li>
-                    <li><a href="index.php?module=logements&amp;action=lister&id=<?= $_SESSION['Utilisateur']['id']; ?>">Mes logements</a></li>
+                    <li><a href="index.php?module=logements&amp;action=lister&amp;id=<?= $_SESSION['Utilisateur']['id']; ?>">Mes logements</a></li>
                     <li><a href="index.php?module=logements&amp;action=inscription">Proposer un logement</a></li>
                     <li><a href="index.php?module=membres&amp;action=modifier_profil">Modifier mon profil</a></li>
                     <li><a href="index.php?module=logements&amp;action=modifier_logement">Modifier mes logements</a></li>

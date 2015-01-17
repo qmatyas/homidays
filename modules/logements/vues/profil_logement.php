@@ -10,7 +10,7 @@
 
 <div><span class="label_profil">Note</span> : <?= $logement['note_totale']; ?></div>
 
-<p>
+<section>
     
     <fieldset>
     <legend><b>Adresse</b></legend>
@@ -36,72 +36,68 @@
       </p>
     </fieldset>
 
-  <fieldset>
-    <legend><b>Quartier</b></legend>
-      <p>
-        <div><span class="label_profil">Points forts</span> :<br> <?= nl2br($logement['points_forts']); ?></div>
+    <div class="">
+        <h3>Quartier</h3>
+        <div>
+        <div><span class="label_profil">Points forts</span> :<br> <?= nl2br($quartier['points_forts']); ?></div>
 
-        <div><span class="label_profil">Activité</span> : 
-        <?= $logement['musee'] ? 'Musée' : ''; ?>
-        <?= $logement['sport'] ? 'Sport' : ''; ?>
-        <?= $logement['parc_attraction'] ? 'Parc d\'attraction' : ''; ?>
-        <?= $logement['shopping'] ? 'Shopping' : ''; ?>
-        <?= $logement['autre'] ? 'Autre' : ''; ?>
+        <div>
+            <h6 class="label_profil">Activité</h6>
+            <?= $quartier['musee'] ? '<span>Musée</span>' : ''; ?>
+            <?= $quartier['sport'] ? '<span>Sport</span>' : ''; ?>
+            <?= $quartier['parc_attraction'] ? '<span>Parc d\'attraction</span>' : ''; ?>
+            <?= $quartier['shopping'] ? '<span>Shopping</span>' : ''; ?>
+            <?= $quartier['autre'] ? '<span>Autre</span>' : ''; ?>
         </div>
 
-        <div><span class="label_profil">Restauration</span> :<br> <?= nl2br($infos_quartier['restauration']); ?></div>
+        <div><span class="label_profil">Restauration</span> :<br> <?= nl2br($quartier['restauration']); ?></div>
 
         <div><span class="label_profil">Transport</span> :
-        <?= $logement['metro'] ? 'Métro' : ''; ?>
-        <?= $logement['velib'] ? 'Vélib' : ''; ?>
-        <?= $logement['bus'] ? 'Bus' : ''; ?>
-        <?= $logement['tramway'] ? 'Tramway' : ''; ?>
-        <?= $logement['autre'] ? 'Autre' : ''; ?>
+        <?= $quartier['metro'] ? 'Métro' : ''; ?>
+        <?= $quartier['velib'] ? 'Vélib' : ''; ?>
+        <?= $quartier['bus'] ? 'Bus' : ''; ?>
+        <?= $quartier['tramway'] ? 'Tramway' : ''; ?>
+        <?= $quartier['autre'] ? 'Autre' : ''; ?>
         </div>
 
         <div><span class="label_profil">Environnement</span> : 
-        <?= $logement['lac'] ? 'Lac' : ''; ?>
-        <?= $logement['foret'] ? 'Forêt' : ''; ?>
-        <?= $logement['campagne'] ? 'Campagne' : ''; ?>
-        <?= $logement['mer'] ? 'Mer' : ''; ?>
-        <?= $logement['ville_env'] ? 'Ville' : ''; ?>
-         <?= $logement['autre'] ? 'Autre' : ''; ?>
+        <?= $quartier['lac'] ? 'Lac' : ''; ?>
+        <?= $quartier['foret'] ? 'Forêt' : ''; ?>
+        <?= $quartier['campagne'] ? 'Campagne' : ''; ?>
+        <?= $quartier['mer'] ? 'Mer' : ''; ?>
+        <?= $quartier['ville_env'] ? 'Ville' : ''; ?>
+         <?= $quartier['autre'] ? 'Autre' : ''; ?>
         </div>
-    </p>
-    </fieldset>
+    </div>
 
-    <fieldset>
-    <legend><b>Informations complémentaires</b></legend>
-      <p>
-      
-        <div><span class="label_profil">Contraintes</span> : 
-        <?= $logement['pas_fumer'] ? 'Ne pas fumer dans le logement' : ''; ?>
-        <?= $logement['pas_bruit'] ? 'Pas de bruit après 23h' : ''; ?>
-        <?= $logement['pas_enfant'] ? 'Pas d\'enfants' : ''; ?>
-        <?= $logement['pas_animaux'] ? 'Pas d\'pas_animaux' : ''; ?>
-         <?= $logement['autre'] ? 'Autre' : ''; ?>
+    <div class="">
+        <h3>Informations complémentaires</h3>
+        <div>
+            <h6 class="label_profil">Contraintes</h6> : 
+            <?= $logement['pas_fumer'] ? '<span>Ne pas fumer dans le logement</span>' : ''; ?>
+            <?= $logement['pas_bruit'] ? '<span>Pas de bruit après 23h</span>' : ''; ?>
+            <?= $logement['pas_enfant'] ? '<span>Pas d\'enfants</span>' : ''; ?>
+            <?= $logement['pas_animaux'] ? '<span>Pas d\'pas_animaux</span>' : ''; ?>
+            <?= $logement['contrainte_autre'] ? '<span>Autre</span>' : ''; ?>
         </div>
-
-        <div><span class="label_profil">Services</span> :
-        <?= $logement['fermer'] ? 'Fermer la porte à double tour en sortant ' : ''; ?>
-        <?= $logement['gader_animaux'] ? 'Garder les animaux domestiques' : ''; ?>
-        <?= $logement['arroser_plantes'] ? 'Arroser les plantes' : ''; ?>
-        <?= $logement['discuter_voisine'] ? 'Discuter avec la vieille voisine' : ''; ?>
-        <?= $logement['menage'] ? 'Faire le ménage avant de quitter le logement' : ''; ?>
-         <?= $logement['autre'] ? 'Autre' : ''; ?>
+        <div>
+            <h6 class="label_profil">Services</h6> :
+            <?= $logement['fermer'] ? '<span>Fermer la porte à double tour en sortant </span>' : ''; ?>
+            <?= $logement['garder_animaux'] ? '<span>Garder les animaux domestiques</span>' : ''; ?>
+            <?= $logement['arroser_plantes'] ? '<span>Arroser les plantes</span>' : ''; ?>
+            <?= $logement['discuter_voisine'] ? '<span>Discuter avec la vieille voisine</span>' : ''; ?>
+            <?= $logement['menage'] ? '<span>Faire le ménage avant de quitter le logement</span>' : ''; ?>
+            <?= $logement['service_autre'] ? '<span>Autre</span>' : ''; ?>
         </div>
-
-        <div><span class="label_profil">Options</span> : 
-        <?= $logement['wifi'] ? 'Wifi' : ''; ?>
-        <?= $logement['voiture'] ? 'Voiture' : ''; ?>
-        <?= $logement['jardin_terrasse'] ? 'Jardin / Terrasse' : ''; ?>
-        <?= $logement['piscine'] ? 'Piscine' : ''; ?>
-        <?= $logement['equipement_sportif'] ? 'Equipement sportif' : ''; ?>
-        <?= $logement['acces_handicape'] ? 'Accès handicapé' : ''; ?>
-         <?= $logement['autre'] ? 'Autre' : ''; ?>
+        <div>
+            <h6 class="label_profil">Options</h6> : 
+            <?= $logement['wifi'] ? '<span>Wifi</span>' : ''; ?>
+            <?= $logement['voiture'] ? '<span>Voiture</span>' : ''; ?>
+            <?= $logement['jardin_terrasse'] ? '<span>Jardin / Terrasse</span>' : ''; ?>
+            <?= $logement['piscine'] ? '<span>Piscine</span>' : ''; ?>
+            <?= $logement['equipement_sportif'] ? '<span>Equipement sportif</span>' : ''; ?>
+            <?= $logement['acces_handicape'] ? '<span>Accès handicapé</span>' : ''; ?>
+            <?= $logement['option_autre'] ? '<span>Autre</span>' : ''; ?>
         </div>
-    
-    </p>
-    </fieldset>
-
-</p>
+    </div>
+</section>

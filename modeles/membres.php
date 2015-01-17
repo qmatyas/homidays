@@ -155,7 +155,7 @@ function membres_recuperer_liste($depart, $nombre) {
 
 	$pdo = DB::Connect();
 
-	$requete = $pdo->query("SELECT id, pseudo, date_inscription, note_totale, nb_adulte, nb_enfant
+	$requete = $pdo->query("SELECT id, pseudo, avatar, date_inscription, note_totale, nb_adulte, nb_enfant
                 FROM utilisateurs
                 ORDER BY pseudo ASC 
                 LIMIT $depart, $nombre");

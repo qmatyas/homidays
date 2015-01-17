@@ -103,14 +103,14 @@ if (!utilisateur_est_connecte()) {
 				$result = membre_modifier($form);
 			} catch (PDOException $e) {
                                 echo "Echec de la connexion à la base de données.\nErreur : " . $e->getMessage();
-				include CHEMIN_VUE.'formulaire_modifier_logement.php';
+				include CHEMIN_VUE.'formulaire_modifier.php';
 				die();
 			}
                         foreach ($form as $key => $value) {
                             $_SESSION['Utilisateur'][$key] = $value;
                         }
 		}
-            }
-	}
-        include CHEMIN_VUE.'formulaire_modifier_logement.php';
+            
+	
+        include CHEMIN_VUE.'formulaire_modifier.php';
 }

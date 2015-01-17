@@ -1,8 +1,10 @@
 <?php
 
-function images_compter () {
+function images_compter ($logement_id = null) {
 
-	return DB::Connect()->query('SELECT COUNT(*) FROM images')->fetch(PDO::FETCH_NUM)[0];
+	$requete = DB::Connect()->prepare('SELECT COUNT(*) FROM images' . ($logement_id ? ' WHERE logement_id=?' : ''));
+	$requete->execute([$logement_id]);
+	return $requete->fetch(PDO::FETCH_NUM)[0];
 
 }
 

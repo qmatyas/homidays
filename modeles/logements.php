@@ -275,12 +275,40 @@ function logement_recuperer ($id) {
     
     $pdo = DB::Connect();
 
-    $requete = $pdo->prepare('SELECT * FROM logements WHERE id = :id');
-    $requete->bindValue(':id', $id);
-    $requete->execute();
-
+    $requete = $pdo->prepare('
+        SELECT
+            l.id, utilisateur_id, nom, date_inscription, type_logement, rue, code_postal, ville, pays, superficie, nb_piece, nb_chambre, nb_salle_bain, note_totale, note_nombre, description,
+            s.id as service_id, fermer, garder_animaux, arroser_plantes, discuter_voisine, menage, s.autre as service_autre,
+            c.id as contrainte_id, pas_fumer, pas_bruit, pas_enfant, pas_animaux, c.autre as contrainte_autre,
+            o.id as option_id, wifi, voiture, jardin_terrasse, piscine, equipement_sportif, acces_handicape, o.autre as option_autre
+        FROM logements as l
+        LEFT JOIN services as s ON l.id=s.logement_id
+        LEFT JOIN contraintes as c ON l.id=c.logement_id
+        LEFT JOIN options as o ON l.id=o.logement_id
+        WHERE l.id=?
+    ');
+    $requete->execute([$id]);
     return $requete->fetch();
+}
 
+function quartier_recuperer ($id){
+
+    $pdo = DB :: Connect();
+
+    $requete = $pdo->prepare('
+        SELECT
+            q.id, point_fort, restauration,
+            a.id as activite_id, musee, sport, parc_attraction, shopping, a.autre as activite_autre,
+            t.id as transport_id, metro, velib, bus, tramway, a.t as transport_autre,
+            e.id as environnement_id, lac, foret, campagne, mer, ville, e.autre as environnement_autre
+        FROM quartiers as q
+        LEFT JOIN activites as a ON q.id=a.quartier_id
+        LEFT JOIN transports as t ON q.id=t.quartier_id
+        LEFT JOIN environnements as e ON q.id=e.quartier_id
+        WHERE q.id=?
+    ');
+    $requete->execute([$id]);
+    return $requete->fetch();
 }
 
 function logements_recuperer_recherche($id) {
@@ -298,14 +326,16 @@ function logements_recuperer_liste($depart, $nombre, $id) {
 
 	$pdo = DB::Connect();
 
-    $requete = $pdo->prepare("SELECT logements.id, images.id as image_id, images.nom as image_nom, logements.nom utilisateur_id, type_logement, ville, pays, nb_piece, note_totale FROM logements LEFT JOIN images ON images.logement_id=logements.id" . ($id ? ' WHERE utilisateur_id=?' : '') . " ORDER BY nom ASC LIMIT $depart, $nombre");
+    $requete = $pdo->prepare("SELECT logements.id, images.id as image_id, images.nom as image_nom, logements.nom, utilisateur_id, type_logement, ville, pays, nb_piece, note_totale FROM logements LEFT JOIN images ON images.logement_id=logements.id" . ($id ? ' WHERE utilisateur_id=?' : '') . " GROUP BY logements.id ASC LIMIT $depart, $nombre");
     $requete->execute([$id]);
     return $requete->fetchAll();
 }
 
-function logements_compter() {
+function logements_compter($id) {
     
     $pdo = DB::Connect();
     
-    return $pdo->query('SELECT COUNT(id) FROM logements')->fetch(PDO::FETCH_NUM)[0];  
+    $requete = $pdo->prepare('SELECT COUNT(id) FROM logements' . ($id ? ' WHERE utilisateur_id=?' : ''));
+    $requete->execute([$id]);
+    return $requete->fetch(PDO::FETCH_NUM)[0];  
 }

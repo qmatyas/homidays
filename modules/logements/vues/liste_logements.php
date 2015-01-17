@@ -1,4 +1,4 @@
-<?php if ($_GET['id'] != $_SESSION['Utilisateur']['id']) : ?>
+<?php if (!isset($_GET['id']) || $_GET['id'] != $_SESSION['Utilisateur']['id']) : ?>
 <p>Recherche:</p>
 
 <p><a href="index.php?module=logements&action=recherche_avancee.php">Recherche avancée</a></p>
@@ -13,6 +13,7 @@
 <?php
 foreach ($offres as $offre) {
     echo '<li>';
+    echo '<img src="' . $offre['image_nom'] . '" alt="Image de maison ' . $offre['id'] . '">';
     if (utilisateur_est_connecte()) {
         echo '<a href="index.php?module=logements&action=afficher&id=' . $offre['id'] . '">';
     }
@@ -26,8 +27,8 @@ foreach ($offres as $offre) {
 </ul>
 
 <?php if ($page > 1) : ?>
-<a href="index.php?module=logements&action=liste_logements&page=<?= $page - 1; ?>">Page précédente</a>
+<a href="index.php?module=logements&action=lister<?= isset($_GET['id']) ? '&id=' . $_GET['id'] : '' ?>&page=<?= $page - 1; ?>">Page précédente</a>
 <?php endif; ?>
 <?php if ($page * $nombre_resultat < $nombre_offres) : ?>
-<a href="index.php?module=logements&action=liste_logements&page=<?= $page + 1; ?>">Page suivante</a>
+<a href="index.php?module=logements&action=lister<?= isset($_GET['id']) ? '&id=' . $_GET['id'] : '' ?>&page=<?= $page + 1; ?>">Page suivante</a>
 <?php endif; ?>

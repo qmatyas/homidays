@@ -1,4 +1,3 @@
-<?php
 
 <h2>Profil de <?= htmlspecialchars($infos_logement['nom']); ?></h2>
 <div><span class="label_profil">Note: </span> : <?= $infos_logement['note_totale']; ?></p></div>
@@ -8,41 +7,41 @@
     <fieldset>
    	<legend><b>Adresse</b></legend>
     	<p>
-		    <div><span class="label_profil">Nom</span> : <?= isset($_SESSION['Utilisateur']['']) ? $_SESSION['']['nom'] : '';?>' ?></p></div>
-		    <div><span class="label_profil">Enregistrée le:</span> : <?= isset($_SESSION['']['']) ? $_SESSION['']['date_inscription'] : '';?>' ?></p></div>
-		    <div><span class="label_profil">Type</span> : <?= isset($_SESSION['']['']) ? $_SESSION['']['type_logement'] : '';?>' ?></p></div>
-		    <div><span class="label_profil">Rue</span> : <?= isset($_SESSION['']['']) ? $_SESSION['']['rue'] : '';?>' ?></p></div>
-		    <div><span class="label_profil">Code postal</span> : <?= isset($_SESSION['']['']) ? $_SESSION['']['code_postal'] : '';?>' ?></p></div>
-		    <div><span class="label_profil">Ville</span> : <?= isset($_SESSION['']['']) ? $_SESSION['']['ville'] : '';?>' ?></p></div>
-		    <div><span class="label_profil">Pays</span> : <?= isset($_SESSION['']['']) ? $_SESSION['']['pays'] : '';?>' ?></p></div>
+		    <div><span class="label_profil">Nom</span> : <?= isset($_SESSION['Utilisateur']['']) ? $_SESSION['']['nom'] : ''; ?></p></div>
+		    <div><span class="label_profil">Enregistrée le:</span> : <?= isset($_SESSION['']['']) ? $_SESSION['']['date_inscription'] : ''; ?></p></div>
+		    <div><span class="label_profil">Type</span> : <?= isset($_SESSION['']['']) ? $_SESSION['']['type_logement'] : ''; ?></p></div>
+		    <div><span class="label_profil">Rue</span> : <?= isset($_SESSION['']['']) ? $_SESSION['']['rue'] : '';?></p></div>
+		    <div><span class="label_profil">Code postal</span> : <?= isset($_SESSION['']['']) ? $_SESSION['']['code_postal'] : '';?></p></div>
+		    <div><span class="label_profil">Ville</span> : <?= isset($_SESSION['']['']) ? $_SESSION['']['ville'] : '';?></p></div>
+		    <div><span class="label_profil">Pays</span> : <?= isset($_SESSION['']['']) ? $_SESSION['']['pays'] : '';?></p></div>
    		 </p>
     </fieldset>
 
 	<fieldset>
    	<legend><b>Logement</b></legend>
     	<p>
-		    <div><span class="label_profil">Superficie (en m²): </span> : <?= isset($_SESSION['']['']) ? $_SESSION['']['superficie'] : '';?>' ?></p></div>
-		    <div><span class="label_profil">Nombre de pièces</span> : <?= isset($_SESSION['']['']) ? $_SESSION['']['nb_piece'] : '';?>' ?></p></div>
-		    <div><span class="label_profil">Nombre de chambres</span> : <?= isset($_SESSION['']['']) ? $_SESSION['']['nb_chambre'] : '';?>' ?></p></div>
-		    <div><span class="label_profil">Nombre de salles de bain</span> : <?= isset($_SESSION['']['']) ? $_SESSION['']['nb_salle_bain'] : '';?>' ?></p></div>
-		    <div><span class="label_profil">Description</span> :<br>: <?= isset($_SESSION['']['']) ? $_SESSION[''][ement['description']) : '';?>' ?></p></div>
+		    <div><span class="label_profil">Superficie (en m²): </span> : <?= isset($_SESSION['']['']) ? $_SESSION['']['superficie'] : '';?></p></div>
+		    <div><span class="label_profil">Nombre de pièces</span> : <?= isset($_SESSION['']['']) ? $_SESSION['']['nb_piece'] : '';?></p></div>
+		    <div><span class="label_profil">Nombre de chambres</span> : <?= isset($_SESSION['']['']) ? $_SESSION['']['nb_chambre'] : '';?></p></div>
+		    <div><span class="label_profil">Nombre de salles de bain</span> : <?= isset($_SESSION['']['']) ? $_SESSION['']['nb_salle_bain'] : '';?></p></div>
+		    <div><span class="label_profil">Description</span> :<br>: <?= isset($_SESSION['']['']) ? $_SESSION['']['description'] : '';?></p></div>
     	</p>
     </fieldset>
 
 	<fieldset>
    	<legend><b>Quartier</b></legend>
     	<p>
-		    <div><span class="label_profil">Points forts: </span> :<br>: <?= isset($_SESSION['']['']) ? $_SESSION[''][rtier['points_forts']) : '';?>' ?></p></div>
+		    <div><span class="label_profil">Points forts: </span> :<br>: <?= isset($_SESSION['']['']) ? $_SESSION['']['points_forts'] : '';?></p></div>
 
-		    <div><span class="label_profil">Activité: </span> : 
-		    <?= isset($_SESSION['']['']) ? $_SESSION['']['musee'] ? 'Musée' : '' : '';?>' ?>
-		    <?= isset($_SESSION['']['']) ? $_SESSION['']['sport'] ? 'Sport' : '' : '';?>' ?>
-		    <?= isset($_SESSION['']['']) ? $_SESSION['']['parc_attraction'] ? 'Parc d\'attraction' : '' : '';?>' ?>
-		    <?= isset($_SESSION['']['']) ? $_SESSION['']['shopping'] ? 'Shopping' : '' : '';?>' ?>
-		    <?= isset($_SESSION['']['']) ? $_SESSION['']['autre'] ? '.<?= isset($_SESSION['']['']) ? $_SESSION['']['autre'] : '';?>' ?>.' : '' : '';?>' ?>
+		    <div><span class="label_profil">Activité:</span> : 
+		    <?= isset($_SESSION['']['']) ? $_SESSION['']['musee'] ? 'Musée' : '' ;?>
+		    <?= isset($_SESSION['']['']) ? $_SESSION['']['sport'] ? 'Sport' : '' ;?>
+		    <?= isset($_SESSION['']['']) ? $_SESSION['']['parc_attraction'] ? 'Parc d\'attraction' : '';?>
+		    <?= isset($_SESSION['']['']) ? $_SESSION['']['shopping'] ? 'Shopping' : '' ;?>
+		    <?= isset($_SESSION['']['']) ? $_SESSION['']['autre'] ? 'Autre' : '' ;?>
 		    </div>
 
-		    <div><span class="label_profil">Restauration: </span> :<br>: <?= isset($_SESSION['']['']) ? $_SESSION[''][rtier['restauration']) : '';?>' ?></p></div>
+		    <div><span class="label_profil">Restauration: </span> :<br>: <?= isset($_SESSION['']['']) ? $_SESSION['']['restauration'] : '';?>' ?></p></div>
 
 		    <div><span class="label_profil">Transport: </span> :
 		    <?= isset($_SESSION['']['']) ? $_SESSION['']['metro'] ? 'Métro' : '' : '';?>' ?>

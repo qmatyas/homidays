@@ -108,8 +108,8 @@ if (!utilisateur_est_connecte()) {
 			echo "Echec de la connexion à la base de données.\nErreur : " . $e->getMessage();
 			die();
         }
-        if ($logement['id']) {
-            include ('modules/images/images_ajouter.php');
+        if (isset($logement['id'])) {
+            header('Location: /GitHub/Homidays-V2/index.php?module=images&action=images_ajouter&id=' . $logement['id']);
         }
         else{
             include CHEMIN_VUE. 'erreur_inscription_logement.php';

@@ -8,6 +8,7 @@ if (!utilisateur_est_connecte()) {
     include CHEMIN_MODELE.'images.php';
 
     $logement = logement_recuperer($_GET['id']);
+    $quartier = quartier_recuperer($_GET['id']);
     $images = images_recuperer($_GET['id']);
 
     include CHEMIN_VUE.'profil_logement.php';

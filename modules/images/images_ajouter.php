@@ -1,10 +1,10 @@
 <?php
 
 
-if (!isset($_POST['logement_id']) && !isset($_GET['id'])) {
-    header('Location : /');
+if (!isset($_GET['id'])) {
+    header('Location: /');
 } else {
-    $logement_id = isset($_POST['logement_id']) ? $_POST['logement_id'] : $_GET['id'];
+    $logement_id = $_GET['id'];
     if (!isset($_FILES['photos']) || empty($_FILES['photos']['tmp_name'][0])) {
         include CHEMIN_VUE . 'images_logements.php';
         $erreur = 'Vous n\'avez pas envoyer de photos.';
@@ -12,7 +12,7 @@ if (!isset($_POST['logement_id']) && !isset($_GET['id'])) {
         $fichiers = $_FILES['photos'];
         $nombre = count($fichiers['tmp_name']);
         include CHEMIN_MODELE . 'images.php';
-        $total = images_compter() + $nombre;
+        $total = images_compter($logement_id) + $nombre;
         if ($total < 3) {
             $erreur = 'Vous devez envoyer au moins 3 photos.';
         }
@@ -21,6 +21,7 @@ if (!isset($_POST['logement_id']) && !isset($_GET['id'])) {
         }
         if (isset($erreur)) {
             include CHEMIN_VUE . 'images_logements.php';
+            return;
         }
 
         $envoye = true;
