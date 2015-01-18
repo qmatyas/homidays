@@ -6,7 +6,7 @@
         <input type="hidden" name="action" value="lister">
         <input type="text" name="pseudo" class="pseudo" placeholder="Qui voulez-vous trouver ?" value="<?= (isset($_GET['pseudo']) ? $_GET['pseudo'] : ''); ?>">
         <input type="submit" value="Rechercher">
-        <a href="index.php?module=membres&action=recherche_avancee.php" class="">Recherche avancée</a>
+        <a href="index.php?module=membres&action=recherche_avancee" class="">Recherche avancée</a>
     </form>
     <h2>Résultats</h2>
     <p><?= count($membres) . ' sur ' . $nombre_membres; ?> membres</p>

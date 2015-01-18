@@ -1,10 +1,12 @@
 <p>Hello</p>
 
-<p>Recherche:</p>
+<h2>Recherche</h2>
 
-<form action="index.php?module=logements&action=lister.php" method="get" class="recherche" >
-    <input type="text" name="pseudo" class="pseudo" placeholder="Ex: Pays, Ville ... ">
-    <input type="submit" value="Valider" class="valider">
+<form action="index.php?module=logements&action=lister" method="get" class="recherche">
+    <input type="hidden" name="module" value="logements">
+    <input type="hidden" name="action" value="lister">
+    <input type="text" name="ville" class="ville" placeholder="Dans quelle ville, voulez-vous aller ?" value="<?= (isset($_GET['ville']) ? $_GET['ville'] : ''); ?>">
+    <input type="submit" value="Rechercher">
 </form>
 
 <?php include 'global/themes.php'; ?>

@@ -164,6 +164,22 @@ function membres_recuperer_liste($depart, $nombre) {
     return $requete->fetchAll();
 }
 
+function membres_recuperer_recherche($depart, $nombre) {
+
+    $pdo = DB::Connect();
+
+    $requete = $pdo->prepare("SELECT id, pseudo, avatar, date_inscription, note_totale, nb_adulte, nb_enfant
+        FROM utilisateurs"
+        . (isset($_GET['animaux']) ? " WHERE animaux = on " : ' ')
+        . (isset($_GET['fumeur']) ? " WHERE fumeur =  " : ' ')
+        . (isset($_GET['nb_adulte']) ? " WHERE nb_adulte  " : ' ')
+        . (isset($_GET['nb_enfant']) ? " WHERE nb_enfant " : ' ')
+        . "ORDER BY pseudo ASC 
+        LIMIT $depart, $nombre");
+    $requete->execute(isset($_GET['pseudo']) ? ['%' . $_GET['pseudo'] . '%'] : null);
+    return $requete->fetchAll();
+}
+
 function membres_compter() {
     
     $requete = DB::Connect()->prepare('SELECT COUNT(id) FROM utilisateurs' . (isset($_GET['pseudo']) ? " WHERE pseudo LIKE ? " : ''));
