@@ -4,9 +4,12 @@
     <form action="" method="get" class="recherche">
         <input type="hidden" name="module" value="membres">
         <input type="hidden" name="action" value="lister">
+<?php if (LANG === 'en') : ?>
+        <input type="hidden" name="lang" value="en">
+<?php endif; ?>
         <input type="text" name="pseudo" class="pseudo" placeholder="Qui voulez-vous trouver ?" value="<?= (isset($_GET['pseudo']) ? $_GET['pseudo'] : ''); ?>">
         <input type="submit" value="Rechercher">
-        <a href="index.php?module=membres&action=recherche_avancee" class="">Recherche avancée</a>
+        <a href="<?= url('membres', 'recherche_avancee'); ?>" class="">Recherche avancée</a>
     </form>
     <h2>Résultats</h2>
     <p><?= count($membres) . ' sur ' . $nombre_membres; ?> membres</p>
@@ -20,15 +23,15 @@
             <span><b>Nombre d'adultes :</b> <?= $membre['nb_adulte']; ?></span>
             <span><b>Nombre d'enfants :</b> <?= $membre['nb_adulte']; ?></span>
     <?php if (utilisateur_est_connecte()) : ?>
-            <a href="index.php?module=membres&action=afficher&id=<?= $membre['id']; ?>">Voir son profil</a>
+            <a href="<?= url('membres', 'afficher', ['id' => $membre['id']]); ?>">Voir son profil</a>
     <?php endif; ?>
         </div>
     </div>
 <?php endforeach; ?>
 <?php if ($page > 1) : ?>
-    <a href="index.php?module=membres&action=lister<?= isset($_GET['pseudo']) ? '&pseudo=' . $_GET['pseudo'] : ''; ?>&page=<?= $page - 1; ?>">Page précédente</a>
+    <a href="<?= url('membres', 'lister', ['page' => $page - 1, 'pseudo' => isset($_GET['pseudo']) ? $_GET['pseudo'] : null]); ?>">Page précédente</a>
 <?php endif; ?>
 <?php if ($page * $nombre_resultat < $nombre_membres) : ?>
-    <a href="index.php?module=membres&action=lister<?= isset($_GET['pseudo']) ? '&pseudo=' . $_GET['pseudo'] : ''; ?>&page=<?= $page + 1; ?>">Page suivante</a>
+    <a href="<?= url('membres', 'lister', ['page' => $page + 1, 'pseudo' => isset($_GET['pseudo']) ? $_GET['pseudo'] : null]); ?>">Page suivante</a>
 <?php endif; ?>
 </section>

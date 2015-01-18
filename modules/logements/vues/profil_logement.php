@@ -22,7 +22,7 @@
     <div class="">
         <h3>Propriétaire</h3>
         <img src="<?= $logement['avatar']; ?>" alt="Image de <?= $logement['pseudo']; ?>">
-        <a href="index.php?module=membres&action=afficher&id=<?= $logement['utilisateur_id']; ?>"><?= $logement['prenom'] . ' ' . $logement['utilisateur_nom']; ?></a>
+        <a href="<?= url('membres', 'afficher', ['id' => $logement['utilisateur_id']]); ?>"><?= $logement['prenom'] . ' ' . $logement['utilisateur_nom']; ?></a>
     </div>
 <?php endif; ?>
 
@@ -37,13 +37,18 @@
     </div>
 
     <div class="">
-        <h3>Disponibilités<?= $logement['utilisateur_id'] == $_SESSION['Utilisateur']['id'] ? ' <a href="index.php?module=disponibilites&action=ajouter_disponibilites"><small>Modifier</small></a>' : ''; ?></h3>
+        <h3>
+        	Disponibilités
+        	<? if ($logement['utilisateur_id'] == $_SESSION['Utilisateur']['id'] : ?>
+        	<a href="<?= url('disponibilites', 'ajouter_disponibilites'); ?>"><small>Modifier</small></a>' : '';
+        	<?php endif; ?>
+        </h3>
         <ul>
 <?php foreach ($logement['disponibilites'] as $disponibilite) : ?>
             <li>
                 Du <?= (new DateTime($disponibilite['date_debut']))->format('d/m/Y'); ?> au <?= (new DateTime($disponibilite['date_fin']))->format('d/m/Y'); ?>
 <?php if ($logement['utilisateur_id'] != $_SESSION['Utilisateur']['id']) : ?>
-                <a href="index.php?module=disponibilites&action=reserver&id=<?= $disponibilite['id']; ?>">Réserver</a>
+                <a href="<?= url('disponibilites', 'reserver', ['id' => $disponibilite['id']]); ?>">Réserver</a>
 <?php endif; ?>
             </li>
 <?php endforeach; ?>

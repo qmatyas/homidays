@@ -15,8 +15,8 @@
             <ul>
 <!--		<li><a href="#"><img src="../Header/logo.png" alt="Homidays" title="Homidays" width="100" height="50" class="logo" id='logo'; /></a></li>-->
 		<li><a href="index.php">Accueil</a></li>
-		<li><a href="index.php?module=logements&action=lister">Logements</a></li>
-		<li><a href="index.php?module=membres&action=lister">Membres</a></li>
+		<li><a href="<?= url('logements', 'lister'); ?>">Logements</a></li>
+		<li><a href="<?= url('membres', 'lister'); ?>">Membres</a></li>
                 <li><a href="forum/indexf.php">Forum</a></li>
             </ul>
 	</nav>

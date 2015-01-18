@@ -34,7 +34,7 @@
 	<div>
 		<h3><?= $membre['id'] == $_SESSION['Utilisateur']['id'] ? (count($logements) > 1 ? 'Mes' : 'Mon') : (count($logements) > 1 ? 'Ses' : 'Son'); ?> logement<?= count($logements) > 1 ? 's' : ''; ?></h3>
 <?php foreach ($logements as $logement) : ?>
-		<p><a href="index.php?module=logements&action=afficher&id=<?= $logement['id']; ?>"><?= $logement['nom']; ?></a></p>
+		<p><a href="<?= url('logements', 'afficher', ['id' => $logement['id']]); ?>"><?= $logement['nom']; ?></a></p>
 <?php endforeach; ?>
 	</div>
 

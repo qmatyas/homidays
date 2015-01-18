@@ -3,6 +3,9 @@
     <form action="" method="get" class="recherche">
         <input type="hidden" name="module" value="membres">
         <input type="hidden" name="action" value="recherche_avancee">
+<?php if (LANG === 'en') : ?>
+        <input type="hidden" name="lang" value="en">
+<?php endif; ?>
         <label for="id_animaux">Animaux :</label><input id="id_animaux" name="animaux" type="checkbox"<?= isset($_GET['animaux']) && $_GET['animaux'] ==='on' ? ' checked' : ''; ?>>
         <label for="id_fumeur">Fumeur :</label><input id="id_fumeur" name="fumeur" type="checkbox"<?= isset($_GET['fumeur']) && $_GET['fumeur'] === 'on' ? ' checked' : ''; ?>>
         <label for="voyageurs">Nombre de voyageurs:</label>
@@ -24,15 +27,15 @@
             <span><b>Nombre d'adultes :</b> <?= $membre['nb_adulte']; ?></span>
             <span><b>Nombre d'enfants :</b> <?= $membre['nb_adulte']; ?></span>
     <?php if (utilisateur_est_connecte()) : ?>
-            <a href="index.php?module=membres&action=afficher&id=<?= $membre['id']; ?>">Voir son profil</a>
+            <a href="<?= url('membres', 'afficher', ['id' => $membre['id']]); ?>">Voir son profil</a>
     <?php endif; ?>
         </div>
     </div>
 <?php endforeach; ?>
 <?php if ($page > 1) : ?>
-    <a href="index.php?module=membres&action=lister<?= isset($_GET['pseudo']) ? '&pseudo=' . $_GET['pseudo'] : ''; ?>&page=<?= $page - 1; ?>">Page précédente</a>
+    <a href="<?= url('membres', 'lister', ['page' => $page - 1, 'pseudo' => isset($_GET['pseudo']) ? $_GET['pseudo'] : null]); ?>">Page précédente</a>
 <?php endif; ?>
 <?php if ($page * $nombre_resultat < $nombre_membres) : ?>
-    <a href="index.php?module=membres&action=lister<?= isset($_GET['pseudo']) ? '&pseudo=' . $_GET['pseudo'] : ''; ?>&page=<?= $page + 1; ?>">Page suivante</a>
+    <a href="<?= url('membres', 'lister', ['page' => $page + 1, 'pseudo' => isset($_GET['pseudo']) ? $_GET['pseudo'] : null]); ?>">Page suivante</a>
 <?php endif; ?>
 </section>
