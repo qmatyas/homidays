@@ -13,7 +13,7 @@ else {
 		$erreur = array();
 		if (isset($_POST['pseudo']) && !empty($_POST['pseudo'])) {
 			if (isset($_POST['pass']) && !empty($_POST['pass'])) {	
-                            include CHEMIN_MODELE.'membres.php';
+                            include_once CHEMIN_MODELE.'membres.php';
 				try{
                                         // combinaison_connexion_valide() est définit dans ~/modeles/membres.php
                                         $utilisateur = membre_connecter($_POST['pseudo']);

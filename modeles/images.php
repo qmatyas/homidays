@@ -12,7 +12,7 @@ function images_ajouter ($logement_id, $nom) {
 
 	$pdo = DB::Connect();
 
-	include CHEMIN_MODELE.'logements.php';
+	include_once CHEMIN_MODELE.'logements.php';
 	$logement = logement_recuperer($logement_id);
 	if (!$logement)
 		return false;

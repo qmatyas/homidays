@@ -5,7 +5,7 @@ function disponibilites_ajouter ($logement_id, $debut, $fin) {
 
 	$pdo = DB::Connect();
 
-	include CHEMIN_MODELE.'logements.php';
+	include_once CHEMIN_MODELE.'logements.php';
 	$logement = logement_recuperer($logement_id);
 	if (!$logement)
 		return false;
@@ -29,18 +29,21 @@ function disponibilites_recuperer ($logement_id) {
 
 }
 
-function disponibilites_supprimer ($id) {
-
-	$pdo = DB::Connect();
-	$requete = $pdo->prepare('
-		SELECT d.id, u.id as utilisateur_id
+function disponibilite_recuperer ($id) {
+	$requete = DB::Connect()->prepare('
+		SELECT d.id, u.id as utilisateur_id, l.id as logement_id
 		FROM disponibilites as d
 		LEFT JOIN logements as l ON l.id=d.logement_id
 		LEFT JOIN utilisateurs as u ON u.id=l.utilisateur_id
 		WHERE d.id=?
 	');
 	$requete->execute([$id]);
-	$disponibilite = $requete->fetch();
+	return $requete->fetch();
+}
+
+function disponibilites_supprimer ($id) {
+
+	$disponibilite = disponibilite_recuperer($id);
 
 	if (!$disponibilite)
 		return false;
@@ -50,5 +53,46 @@ function disponibilites_supprimer ($id) {
 
 	$pdo->query('DELETE FROM disponibilites WHERE id=' . $disponibilite['id']);
 	return true;
+
+}
+
+function disponibilite_reserver ($id) {
+
+	$pdo = DB::Connect();
+
+	$disponibilite = disponibilite_recuperer($id);
+
+	if (!$disponibilite)
+		return false;
+
+	if ($disponibilite['utilisateur_id'] == $_SESSION['Utilisateur']['id'])
+		return false;
+
+	$requete = $pdo->prepare('
+		INSERT INTO echanges SET
+		logement_id=:logement_id,
+		utilisateur_id=:utilisateur_id,
+		victime_id=' . $pdo->quote($_SESSION['Utilisateur']['id']) . ',
+		disponibilite_id=:id
+	');
+	$requete->execute($disponibilite);
+
+	return true;
+
+}
+
+function reservations_recuperer () {
+
+	$requete = DB::Connect()->prepare('
+		SELECT
+			e.id, confirmee,
+			pseudo, u.id as utilisateur_id,
+			l.nom
+		FROM echanges as e
+		LEFT JOIN utilisateurs as u ON u.id=e.utilisateur_id
+		LEFT JOIN logements as l ON l.id=e.logement_id
+		WHERE victime_id=' . $_SESSION['Utilisateur']['id']);
+	$requete->execute();
+	return $requete->fetchAll();
 
 }

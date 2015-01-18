@@ -8,7 +8,7 @@ if (!utilisateur_est_connecte()) {
 	if (!empty($_POST)) {
             if (isset($_POST['pass'], $_POST['pass0'], $_POST['pass2'])) {
                 if ($_POST['pass'] === $_POST['pass2']) {
-                    include CHEMIN_MODELE.'membres.php';
+                    include_once CHEMIN_MODELE.'membres.php';
                     $pass = sha1($_POST['pass0']);
                     if ($pass === membre_recuperer_pass($_SESSION['Utilisateur']['id'])){
                         membre_modifier_pass($_SESSION['Utilisateur']['id'], $pass);
@@ -57,7 +57,7 @@ if (!utilisateur_est_connecte()) {
 		$form['sexe'] = $_POST['sexe'] === 'femme';
 
 		if ($valid) {
-			include CHEMIN_MODELE.'membres.php';
+			include_once CHEMIN_MODELE.'membres.php';
 			try {
                 $form['id'] = $_SESSION['Utilisateur']['id'];
 				$result = membre_modifier($form);

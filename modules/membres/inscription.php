@@ -72,7 +72,7 @@ else {
     if ($valid) {
 			$form['pass'] = sha1($form['pass']);
 			$form['hash_validation'] = md5(uniqid(rand(), true));
-			include CHEMIN_MODELE.'membres.php';
+			include_once CHEMIN_MODELE.'membres.php';
 			try {
 				$result = membre_ajouter($form);
 			} catch (PDOException $e) {

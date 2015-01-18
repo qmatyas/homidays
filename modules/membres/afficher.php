@@ -13,7 +13,7 @@ if (!utilisateur_est_connecte()) {
 			// Si le membre demande à voir son profil
 			$membre = $_SESSION['Utilisateur'];
 		} else {
-			include CHEMIN_MODELE . 'membres.php';
+			include_once CHEMIN_MODELE . 'membres.php';
 			$membre = membres_recuperer($id);
 
 			// Si le profil existe et que le compte est validé
@@ -21,8 +21,8 @@ if (!utilisateur_est_connecte()) {
 				include CHEMIN_VUE . 'erreur_profil_inexistant.php';
 			}
 		}
-		include CHEMIN_MODELE . 'logements.php';
-		$logements = logements_recuperer_liste($id);
+		include_once CHEMIN_MODELE . 'logements.php';
+		$logements = logements_recuperer_liste(['id' => $id]);
 		include CHEMIN_VUE . 'profil_membre.php';
 	}
 

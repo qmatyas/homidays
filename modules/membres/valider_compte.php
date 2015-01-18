@@ -14,7 +14,7 @@ else {
 if (!empty($_GET['hash'])) {
 
 	// On veut utiliser le modèle des membres (~/modeles/membres.php)
-	include CHEMIN_MODELE.'membres.php';
+	include_once CHEMIN_MODELE.'membres.php';
 
 	// membre_valider_compte() est définit dans ~/modeles/membres.php
 	if (membre_valider_compte($_GET['hash'])) {

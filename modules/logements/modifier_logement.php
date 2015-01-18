@@ -97,7 +97,7 @@ if (!utilisateur_est_connecte()) {
 	valid($option, 'autre', 'autre', 'bool');
 
 		if ($valid) {
-			include CHEMIN_MODELE.'logements.php';
+			include_once CHEMIN_MODELE.'logements.php';
 			try {
                 $form['id'] = $_SESSION['Utilisateur']['id'];
 				$result = logement_modifier($form);

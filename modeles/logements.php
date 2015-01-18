@@ -173,7 +173,7 @@ function logement_recuperer ($id) {
     $requete->execute([$id]);
     $result = $requete->fetch();
 
-    include CHEMIN_MODELE . 'disponibilites.php';
+    include_once CHEMIN_MODELE . 'disponibilites.php';
     $result['disponibilites'] = disponibilites_recuperer($result['id']);
 
     return $result;
@@ -210,31 +210,21 @@ function logements_recuperer_recherche($id) {
     return $requete->fetch();  
 }
 
-function logements_recuperer_liste($argument) {
+function logements_recuperer_liste($params) {
 
-    if (is_numeric($argument)) {
-        $id = $argument;
-        $limit = false; 
-    } else {
-        $id = false;
-        $limit = ' LIMIT ' . $argument[0] . ', ' . $argument[1];
-    }
+    extract($params);
 
 	$pdo = DB::Connect();
 
     $requete = $pdo->prepare("SELECT logements.id, images.id as image_id, images.nom as image_nom, logements.nom, utilisateur_id, type_logement, ville, pays, nb_piece, note_totale
     FROM logements
-    LEFT JOIN images ON images.logement_id=logements.id" . ($id ? ' WHERE utilisateur_id=?' : '')
-        . (isset($_GET['ville']) ? " WHERE ville LIKE ?" : ' ') . " GROUP BY logements.id" . $limit);
+    LEFT JOIN images ON images.logement_id=logements.id" . (isset($id) ? ' WHERE utilisateur_id=?' : '')
+        . (isset($_GET['ville']) ? " WHERE ville LIKE ?" : '') . " GROUP BY logements.id" . (isset($debut, $nombre) ? ' LIMIT ' . $debut . ', ' . $nombre : ''));
     $data = [];
-    if ($id) {
+    if (isset($id))
         $data[] = $id;
-    }
-    if (isset($_GET['ville'])) {
+    if (isset($_GET['ville']))
         $data[] = '%' . $_GET['ville'] . '%';
-    }
-    // var_dump($requete, $data);
-    // die();
     $requete->execute($data);
     return $requete->fetchAll();
     
@@ -242,13 +232,14 @@ function logements_recuperer_liste($argument) {
 
 function logements_compter($id) {
 
-    $requete = DB::Connect()->prepare('SELECT COUNT(id) FROM logements' . (isset($_GET['ville']) ? " WHERE ville LIKE ? " : ''));
-    $requete->execute(isset($_GET['ville']) ? ['%' . $_GET['ville'] . '%'] : null);
+    $requete = DB::Connect()->prepare('SELECT COUNT(id) FROM logements' . (isset($id) ? ' WHERE utilisateur_id=?' : '')
+        . (isset($_GET['ville']) ? " WHERE ville LIKE ?" : ''));
+    $data = [];
+    if (isset($id))
+        $data[] = $id;
+    if (isset($_GET['ville']))
+        $data[] = '%' . $_GET['ville'] . '%';
+    $requete->execute($data);
     return $requete->fetch(PDO::FETCH_NUM)[0];
-    
-    // $pdo = DB::Connect();
-    
-    // $requete = $pdo->prepare('SELECT COUNT(id) FROM logements' . ($id ? ' WHERE utilisateur_id=?' : ''));
-    // $requete->execute([$id]);
-    // return $requete->fetch(PDO::FETCH_NUM)[0];  
+
 }

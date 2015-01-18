@@ -11,7 +11,7 @@ if (!isset($_GET['id']) || !utilisateur_est_connecte()) {
     } else {
         $fichiers = $_FILES['photos'];
         $nombre = count($fichiers['tmp_name']);
-        include CHEMIN_MODELE . 'images.php';
+        include_once CHEMIN_MODELE . 'images.php';
         $total = images_compter($logement_id) + $nombre;
         if ($total < 3) {
             $erreur = 'Vous devez envoyer au moins 3 photos.';

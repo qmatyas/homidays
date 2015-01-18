@@ -1,12 +1,11 @@
 <?php
 
-
 if (!isset($_GET['id']) || !utilisateur_est_connecte()) {
     header('Location: index.php');
 } else {
 	include_once CHEMIN_MODELE.'disponibilites.php';
-	if (!disponibilites_supprimer($_GET['id']))
-		header('Location: index.php');
-	setFlash('Votre disponibilité a été supprimée.');
+	if (disponibilite_reserver($_GET['id'])) {
+		setFlash('Bravo ! Votre réservation est faite.');
+	}
 	redirect();
 }

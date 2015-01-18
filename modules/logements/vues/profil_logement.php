@@ -3,7 +3,7 @@
 <section class="">
     <div id="carrousel">
 <?php foreach ($images as $image) : ?>
-        <img src="<?= $image['nom']; ?>" alt="photo" title="Photo<?= $image['id']; ?>" class="">';
+        <img src="<?= $image['nom']; ?>" alt="photo" title="Photo<?= $image['id']; ?>" class="">
 <?php endforeach; ?>
     </div>
     <p class="label_profil"><b>Note :</b> <?= $logement['note_totale']; ?></p>
@@ -18,11 +18,13 @@
         <p class="label_profil"><b>Pays :</b> <?= $logement['pays']; ?></p>
     </div>
 
+<?php if ($logement['utilisateur_id'] != $_SESSION['Utilisateur']['id']) : ?>
     <div class="">
         <h3>Propriétaire</h3>
         <img src="<?= $logement['avatar']; ?>" alt="Image de <?= $logement['pseudo']; ?>">
         <a href="index.php?module=membres&action=afficher&id=<?= $logement['utilisateur_id']; ?>"><?= $logement['prenom'] . ' ' . $logement['utilisateur_nom']; ?></a>
     </div>
+<?php endif; ?>
 
     <div class="">
         <h3>Logement</h3>
@@ -35,10 +37,15 @@
     </div>
 
     <div class="">
-        <h3>Disponibilités</h3>
+        <h3>Disponibilités<?= $logement['utilisateur_id'] == $_SESSION['Utilisateur']['id'] ? ' <a href="index.php?module=disponibilites&action=ajouter_disponibilites"><small>Modifier</small></a>' : ''; ?></h3>
         <ul>
 <?php foreach ($logement['disponibilites'] as $disponibilite) : ?>
-            <li>Du <?= (new DateTime($disponibilite['date_debut']))->format('d/m/Y'); ?> au <?= (new DateTime($disponibilite['date_fin']))->format('d/m/Y'); ?> <a href="index.php?module=disponibilites&action=reserver&id=<?= $disponibilite['id']; ?>">Réserver</a></li>
+            <li>
+                Du <?= (new DateTime($disponibilite['date_debut']))->format('d/m/Y'); ?> au <?= (new DateTime($disponibilite['date_fin']))->format('d/m/Y'); ?>
+<?php if ($logement['utilisateur_id'] != $_SESSION['Utilisateur']['id']) : ?>
+                <a href="index.php?module=disponibilites&action=reserver&id=<?= $disponibilite['id']; ?>">Réserver</a>
+<?php endif; ?>
+            </li>
 <?php endforeach; ?>
         </ul>
     </div>
