@@ -150,141 +150,24 @@ function logement_modifier ($logement, $quartier, $activite, $transport, $enviro
 	return $requete->errorInfo();
 }
 
-
 //AFFICHER
-
-function logement_lire_infos ($id_logement, $id_quartier, $id_activite, $id_transport, $id_environnement, $id_contrainte, $id_service, $id_option) {
-
-    $pdo = DB::Connect();
-
-    $req1 = $pdo->prepare("SELECT nom, utilisateur_id, date_inscription, type_logement, rue, code_postal, ville, pays, superficie, nb_piece, nb_chambre, nb_salle_bain, note_totale, description
-            FROM logements
-            WHERE
-            id = :id_logement");
-
-    $req2 = $pdo->prepare("SELECT logement_id, point_fort, restauration 
-        FROM quartiers
-        WHERE
-        id = :id_quartier");
-
-    $req3 = $pdo->prepare("SELECT quartiers_id, musee, sport, parc_attraction, shopping, autre
-    	FROM activites
-    	WHERE 
-    	id = :id_activite");
-
-    $req4 = $pdo->prepare("SELECT quartiers_id, metro, velib, bus, tramway, autre
-    	FROM tranports
-    	WHERE
-    	id = :id_transport");
-
-    $req5 = $pdo->prepare("SELECT quartiers_id, lac, foret, campagne, mer, ville, autre  
-    	FROM environnements
-    	WHERE 
-    	id = :id_environnement");
-
-    $req6 = $pdo->prepare("SELECT logement_id, pas_fumer, pas_bruit, pas_enfant, pas_animaux , autre
-     	FROM contraintes
-    	WHERE
-    	id = :id_contrainte");
-
-    $req7 = $pdo->prepare("SELECT logement_id, fermer, garder_animaux, arroser_plantes, discuter_voisine, menage, autre
-    	FROM services 
-    	WHERE
-    	id = :id_service");
-
-    $req8 = $pdo->prepare("SELECT logement_id, wifi, voiture, jardin_terrasse, piscine, equipement_sportif, acces_handicape, autre
-    	FROM options
-    	WHERE
-    	id = :id_option");
-    
-	$req1->bindValue(':id_logement', $id_logement);
-	$req1->execute();
-
-	$req2->bindValue(':id_quartier', $id_quartier);
-	$req2->execute();
-
-	$req3->bindValue(':id_activite', $id_activite);
-	$req3->execute();
-
-	$req4->bindValue(':id_transport', $id_transport);
-	$req4->execute();
-
-	$req5->bindValue(':id_environnement', $id_environnement);
-	$req5->execute();
-
-	$req6->bindValue(':id_contrainte', $id_contrainte);
-	$req6->execute();
-
-	$req7->bindValue(':id_service', $id_service);
-	$req7->execute();
-
-	$req8->bindValue(':id_option', $id_option);
-	$req8->execute();
-
-	if ($result = $req1->fetch()) {
-	
-		$req1->closeCursor();
-		return $result;
-	}
-
-	if ($result = $req2->fetch()) {
-	
-		$req2->closeCursor();
-		return $result;
-	}
-
-	if ($result = $req3->fetch()) {
-	
-		$req3->closeCursor();
-		return $result;
-	}
-
-	if ($result = $req4->fetch()) {
-	
-		$req4->closeCursor();
-		return $result;
-	}
-
-	if ($result = $req5->fetch()) {
-	
-		$req5->closeCursor();
-		return $result;
-	}
-
-	if ($result = $req6->fetch()) {
-	
-		$req6->closeCursor();
-		return $result;
-	}
-
-	if ($result = $req7->fetch()) {
-	
-		$req7->closeCursor();
-		return $result;
-	}
-
-	if ($result = $req8->fetch()) {
-	
-		$req8->closeCursor();
-		return $result;
-	}
-	return false;
-}
 
 function logement_recuperer ($id) {
     
     $pdo = DB::Connect();
 
     $requete = $pdo->prepare('
-        SELECT
-            l.id, utilisateur_id, nom, date_inscription, type_logement, rue, code_postal, ville, pays, superficie, nb_piece, nb_chambre, nb_salle_bain, note_totale, note_nombre, description,
+       SELECT
+            l.id, utilisateur_id, l.nom, l.date_inscription, type_logement, l.rue, l.code_postal, l.ville, l.pays, superficie, nb_piece, nb_chambre, nb_salle_bain, l.note_totale, l.note_nombre, l.description,
             s.id as service_id, fermer, garder_animaux, arroser_plantes, discuter_voisine, menage, s.autre as service_autre,
             c.id as contrainte_id, pas_fumer, pas_bruit, pas_enfant, pas_animaux, c.autre as contrainte_autre,
-            o.id as option_id, wifi, voiture, jardin_terrasse, piscine, equipement_sportif, acces_handicape, o.autre as option_autre
+            o.id as option_id, wifi, voiture, jardin_terrasse, piscine, equipement_sportif, acces_handicape, o.autre as option_autre,
+            pseudo, u.nom as utilisateur_nom, prenom, avatar
         FROM logements as l
         LEFT JOIN services as s ON l.id=s.logement_id
         LEFT JOIN contraintes as c ON l.id=c.logement_id
         LEFT JOIN options as o ON l.id=o.logement_id
+        LEFT JOIN utilisateurs as u ON u.id=l.utilisateur_id
         WHERE l.id=?
     ');
     $requete->execute([$id]);
@@ -322,11 +205,19 @@ function logements_recuperer_recherche($id) {
     return $requete->fetch();  
 }
 
-function logements_recuperer_liste($depart, $nombre, $id) {
+function logements_recuperer_liste($argument) {
+
+    if (is_numeric($argument)) {
+        $id = $argument;
+        $limit = false; 
+    } else {
+        $id = false;
+        $limit = ' ' . $argument[0] . ', ' . $argument[1];
+    }
 
 	$pdo = DB::Connect();
 
-    $requete = $pdo->prepare("SELECT logements.id, images.id as image_id, images.nom as image_nom, logements.nom, utilisateur_id, type_logement, ville, pays, nb_piece, note_totale FROM logements LEFT JOIN images ON images.logement_id=logements.id" . ($id ? ' WHERE utilisateur_id=?' : '') . " GROUP BY logements.id ASC LIMIT $depart, $nombre");
+    $requete = $pdo->prepare("SELECT logements.id, images.id as image_id, images.nom as image_nom, logements.nom, utilisateur_id, type_logement, ville, pays, nb_piece, note_totale FROM logements LEFT JOIN images ON images.logement_id=logements.id" . ($id ? ' WHERE utilisateur_id=?' : '') . " GROUP BY logements.id ASC" . $limit);
     $requete->execute([$id]);
     return $requete->fetchAll();
 }

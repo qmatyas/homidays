@@ -19,6 +19,12 @@
     </div>
 
     <div class="">
+        <h3>Propriétaire</h3>
+        <img src="<?= $logement['avatar']; ?>" alt="Image de <?= $logement['pseudo']; ?>">
+        <a href="index.php?module=membres&action=afficher&id=<?= $logement['utilisateur_id']; ?>"><?= $logement['prenom'] . ' ' . $logement['utilisateur_nom']; ?></a>
+    </div>
+
+    <div class="">
         <h3>Logement</h3>
         <p class="label_profil"><b>Superficie (en m²) :</b> <?= $logement['superficie']; ?></p>
         <p class="label_profil">Nombre de pièces</b> : <?= $logement['nb_piece']; ?></p>
