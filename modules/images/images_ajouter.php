@@ -1,8 +1,8 @@
 <?php
 
 
-if (!isset($_GET['id'])) {
-    header('Location: /');
+if (!isset($_GET['id']) || !utilisateur_est_connecte()) {
+    header('Location: index.php');
 } else {
     $logement_id = $_GET['id'];
     if (!isset($_FILES['photos']) || empty($_FILES['photos']['tmp_name'][0])) {
@@ -60,7 +60,8 @@ if (!isset($_GET['id'])) {
                 move_uploaded_file($fichiers['tmp_name'][$i], $fichier[$i]);
                 images_ajouter($logement_id, $fichier[$i]);
             }
-            include CHEMIN_VUE . 'images_succes.php';
+            setFlash('Vos images ont été ajoutées !');
+            header('Location: index.php?module=disponibilites&action=ajouter_disponibilites&id=' . $logement_id);
         }
     }
 }

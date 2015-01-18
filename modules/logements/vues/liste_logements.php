@@ -26,7 +26,7 @@
         <span><b>Nombre de pièces :</b> <?= $offre['nb_piece']; ?></span> 
         <span><b>Note :</b> <?= $offre['note_totale']; ?> /10</span> 
     <?php if (utilisateur_est_connecte()) : ?>
-        <a href="index.php?module=logements&action=afficher&id=<?= $offre['id']; ?>">Voir ses logements</a>
+        <a href="index.php?module=logements&action=afficher&id=<?= $offre['id']; ?>">Voir le logement</a>
     <?php endif; ?>
         </div>
     </div>

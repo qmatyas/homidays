@@ -109,6 +109,7 @@ if (!utilisateur_est_connecte()) {
 			die();
         }
         if (isset($logement['id'])) {
+        	setFlash('Votre logement a bien été enregistré.')
             header('Location: /GitHub/Homidays-V2/index.php?module=images&action=images_ajouter&id=' . $logement['id']);
         }
         else{

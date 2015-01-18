@@ -171,7 +171,12 @@ function logement_recuperer ($id) {
         WHERE l.id=?
     ');
     $requete->execute([$id]);
-    return $requete->fetch();
+    $result = $requete->fetch();
+
+    include CHEMIN_MODELE . 'disponibilites.php';
+    $result['disponibilites'] = disponibilites_recuperer($result['id']);
+
+    return $result;
 }
 
 function quartier_recuperer ($id){

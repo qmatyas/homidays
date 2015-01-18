@@ -35,6 +35,15 @@
     </div>
 
     <div class="">
+        <h3>Disponibilités</h3>
+        <ul>
+<?php foreach ($logement['disponibilites'] as $disponibilite) : ?>
+            <li>Du <?= (new DateTime($disponibilite['date_debut']))->format('d/m/Y'); ?> au <?= (new DateTime($disponibilite['date_fin']))->format('d/m/Y'); ?> <a href="index.php?module=disponibilites&action=reserver&id=<?= $disponibilite['id']; ?>">Réserver</a></li>
+<?php endforeach; ?>
+        </ul>
+    </div>
+
+    <div class="">
         <h3>Quartier</h3>
         <div>
             <h6 class="label_profil">Points forts</h6>

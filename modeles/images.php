@@ -10,7 +10,15 @@ function images_compter ($logement_id = null) {
 
 function images_ajouter ($logement_id, $nom) {
 
-	DB::Connect()->prepare('INSERT INTO images SET logement_id=?, nom=?')->execute([$logement_id, $nom]);
+	$pdo = DB::Connect();
+
+	include CHEMIN_MODELE.'logements.php';
+	$logement = logement_recuperer($logement_id);
+	if (!$logement)
+		return false;
+	if ($logement['utilisateur_id'] != $_SESSION['Utilisateur']['id'])
+		return false;
+	$pdo->prepare('INSERT INTO images SET logement_id=?, nom=?')->execute([$logement_id, $nom]);
 
 }
 
