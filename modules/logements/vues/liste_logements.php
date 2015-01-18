@@ -19,8 +19,8 @@
 <?php endif; ?>
 
 <?php foreach ($offres as $offre) :?>
-    <div class="">
-    <div><img src="<?= $offre['image_nom']; ?>" alt="Image de maison <?= $offre['id']; ?>"></div>
+    <div class="liste">
+    <div class="img_liste"><img src="<?= $offre['image_nom']; ?>" alt="Image de maison <?= $offre['id']; ?>"></div>
     <div>
         <span><?= $offre['nom']; ?></span> 
         <span><b>Type de logement :</b> <?= $offre['type_logement']; ?></span> 

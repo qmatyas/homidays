@@ -52,10 +52,10 @@
 		<p>
 			<label for="adresse">Adresse principale: </label>
 			<div class="bloc">
-				<input type="text" name="rue" id="rue" placeholder="Rue" size="30" maxlength="45" value="<?php if(isset($_POST['rue'])) echo $_POST['rue']; ?>"required />
+				<input type="text" name="rue" id="rue" placeholder="Rue" size="20" maxlength="45" value="<?php if(isset($_POST['rue'])) echo $_POST['rue']; ?>"required />
 				<span class="error_message"><?php if(isset($erreur['rue'])) echo $erreur['rue']; ?></span></br>
 				
-				<input type="text" class="etiquette_gauche" name="code_postal" id="code_postal" placeholder="Code Postal" size="10" maxlength="45" value="<?php if(isset($_POST['code_postal'])) echo $_POST['code_postal']; ?>" required/>
+				<input type="text" class="etiquette_gauche" name="code_postal" id="code_postal" placeholder="Code Postal" size="20" maxlength="45" value="<?php if(isset($_POST['code_postal'])) echo $_POST['code_postal']; ?>" required/>
 				<span class="error_message"><?php if(isset($erreur['code_postal'])) echo $erreur['code_postal']; ?></span></br>
 				
 				<input type="text" class="etiquette_gauche" name="ville" id="ville" placeholder="Ville" size="20" maxlength="45" value="<?php if(isset($_POST['ville'])) echo $_POST['ville']; ?>" required />
@@ -91,11 +91,9 @@
 		</p>
 		<p>
 			<label for="voyageurs">Nombre de voyageurs:</label>
-			<label>Adulte :</label>
-			<input type="number" min="0" size="10" name="nb_adulte" id="nb_adulte" value="<?php if(isset($_POST['nb_adulte'])) echo $_POST['nb_adulte']; ?>" required/>
+			Adulte <input type="number" min="0" size="10" name="nb_adulte" id="nb_adulte" value="<?php if(isset($_POST['nb_adulte'])) echo $_POST['nb_adulte']; ?>" required/>
 			<span class="error_message"><?php if(isset($erreur['nb_adulte'])) echo $erreur['nb_adulte']; ?></span>
-			<label>Enfant :</label> 
-			<input type="number" min="0" size="10" name="nb_enfant" id="nb_enfant" value="<?php if(isset($_POST['nb_enfant'])) echo $_POST['nb_enfant']; ?>" required/>
+			Enfant <input type="number" min="0" size="10" name="nb_enfant" id="nb_enfant" value="<?php if(isset($_POST['nb_enfant'])) echo $_POST['nb_enfant']; ?>" required/>
 			<span class="error_message"><?php if(isset($erreur['nb_enfant'])) echo $erreur['nb_enfant']; ?></span>
 		</p>
 		<p>

@@ -54,16 +54,16 @@
 		
 		<div id="bloc"> 
 		
-			<input type="text" name="rue" id="rue" placeholder="Rue" size="30" maxlength="45" value="<?= isset($_SESSION['Utilisateur']['rue']) ? $_SESSION['Utilisateur']['rue'] : ''; ?>"required />
+			<input type="text" name="rue" id="rue" placeholder="Rue" size="20" maxlength="45" value="<?= isset($_SESSION['Utilisateur']['rue']) ? $_SESSION['Utilisateur']['rue'] : ''; ?>"required />
 			<span class="error_message"> <?= isset($erreur['rue']) ? $erreur['rue'] : ''; ?> </span></br>
 			
-			<input type="text" name="code_postal" id="code_postal" placeholder="Code Postal" size="10" maxlength="45" value="<?= isset($_SESSION['Utilisateur']['code_postal']) ? $_SESSION['Utilisateur']['code_postal'] : ''; ?>" required/>
+			<input type="text" class="etiquette_gauche" name="code_postal" id="code_postal" placeholder="Code Postal" size="20" maxlength="45" value="<?= isset($_SESSION['Utilisateur']['code_postal']) ? $_SESSION['Utilisateur']['code_postal'] : ''; ?>" required/>
 			<span class="error_message"> <?= isset($erreur['code_postal']) ? $erreur['code_postal'] : ''; ?> </span></br>
 			
-			<input type="text" name="ville" id="ville" placeholder="Ville" size="20" maxlength="45" value="<?= isset($_SESSION['Utilisateur']['ville']) ? $_SESSION['Utilisateur']['ville'] : ''; ?>" required />
+			<input type="text" class="etiquette_gauche" name="ville" id="ville" placeholder="Ville" size="20" maxlength="45" value="<?= isset($_SESSION['Utilisateur']['ville']) ? $_SESSION['Utilisateur']['ville'] : ''; ?>" required />
 			<span class="error_message"> <?= isset($erreur['ville']) ? $erreur['ville'] : ''; ?> </span></br>
 			
-			<input type="text" name="pays" id="pays" placeholder="Pays" size="20" maxlength="45" value="<?= isset($_SESSION['Utilisateur']['pays']) ? $_SESSION['Utilisateur']['pays'] : ''; ?>" required/>
+			<input type="text" class="etiquette_gauche" name="pays" id="pays" placeholder="Pays" size="20" maxlength="45" value="<?= isset($_SESSION['Utilisateur']['pays']) ? $_SESSION['Utilisateur']['pays'] : ''; ?>" required/>
 			<span class="error_message"> <?= isset($erreur['pays']) ? $erreur['pays'] : ''; ?> </span>
 	
 		</div>

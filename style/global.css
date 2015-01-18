@@ -68,10 +68,19 @@ h2{
     color:#3784F0;
     text-align: center;
 }
+h3{
+    margin-top: 2em;
+    color: #260A66;
+}
+h4{
+
+}
 h2, h3, h4, h5, h6{
 
 	margin-bottom: 0.5em;
 }
+
+/*ESPACE MEMBRE*/
 
 .connexion{
 	float: left;
@@ -93,7 +102,14 @@ h2, h3, h4, h5, h6{
     text-decoration: none;
     color: #FFF;
 }
+.avatar{
+    margin: 0 0 1em 0.25em;
+    width:200px;
+    height:200px;
 
+}
+
+/*ACCUEIL*/
 .centre{
 	margin: 1em 1em 1em 23%;
 	padding: 1em;
@@ -159,6 +175,7 @@ h2, h3, h4, h5, h6{
     display:inline;
 }
 
+/*THEMES*/
 
 .themes{
     padding: 40px 0 40px 10px;
@@ -174,7 +191,6 @@ h2, h3, h4, h5, h6{
     width: 220px;
     text-align: center;
     list-style: none;
-
 }
 .themes a {
     display: block;
@@ -192,13 +208,82 @@ h2, h3, h4, h5, h6{
 }
 
 .etiquette_gauche {
-    margin-left: 18.75em ;
+    margin-left: 30em ;
+}
+  
+/*CARROUSSEL LOGEMENT*/
+
+#carrousel
+{
+    position:relative;
+    height: 23em;
+    width: 45em;
+    margin:auto;
+    border-radius:10px;
+    box-shadow: 5px 5px 15px #1c1a19;
+    position:relative;
+    margin-bottom: 5em;
+}
+.fleche_carrousel
+{
+    width:4em;
+}
+#carrousel2
+{
+    position:absolute;
+    top:0;
+    left:0;
+    width: 100%;
+}
+#precedent,#suivant
+{
+    display:inline-block;
+    border-radius: 5px;
+    width:30px;
+}
+.imgg
+{
+    width: 45em;
+    height: 23em;
+    border-radius: 10px;
+}
+.precedent{
+    position: absolute;
+    top:9em;
+    left:0;
+}
+.suivant{
+    position: absolute;
+    top:9em;
+    right:2.2em;
+}
+.precedent:hover,.suivant:hover
+{
+    opacity: 0.8;
 }
 
-    
+.info_logement
+{
+    margin: 5em 7em 4em 7em;
+}
+
+.label_profil
+{
+    margin: 1em 0 1em 0;
+}
+
+/*IMAGES_LISTE*/
+
+.img_liste{
+    margin: 0 0 1em 0.25em;
+    width:200px;
+    height:200px;
+}
+
+
 label{
 	float: left;
-	width: 250px;
+	width: 400px;
 	text-align: left;
 }
 input{
@@ -208,13 +293,25 @@ table, tr, td, th{
 	border-collapse: collapse;
 	border: 1px solid black;
 }
+fieldset{
+    padding: 1em;
+    margin-top: 1em;
+}
 .flottant_droite {
-
 	float: right;
+    margin: 1em 2em 0em 0em;
+    width: 300px;
+    height: 300px;
+    border:1px solid #DDD;
+    border-radius:5px;
+
 }
 span.label_profil {
-
 	font-weight: bold;
+}
+.label_profil{
+    text-decoration: none;
+    color: black;
 }
 .bas{
     clear: both;
