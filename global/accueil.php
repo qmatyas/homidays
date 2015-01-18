@@ -1,4 +1,5 @@
-<p>Hello</p>
+<h1>Bienvenue à la maison</h1>
+<h2>Échangez vos maisons gratuitement entre particuliers du monde entier !</h2>
 
 <h2>Recherche</h2>
 
