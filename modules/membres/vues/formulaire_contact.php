@@ -1,7 +1,7 @@
 <h2>Contactez-nous</h2>
 
 <p>Vous avez une question?</p>
-<p>La réponse est peut être dans notre <a class="aide" id="aide" href="#">Aide</a></p>
+<p>La réponse est peut être dans notre <a class="aide" id="aide" href=""index.php?module=contact_admin&amp;action=aide"">Aide</a></p>
 <p>Si vous ne trouvez pas ce que vous cherchez, merci de nous laisser un message dans le formulaire ci-dessous.</p>
     
 <?php
