@@ -116,11 +116,11 @@ h2, h3, h4, h5, h6
         overflow:hidden; 
         z-index:-999; 
         height:6.5em; 
-        width:76.56em;
+        width:97%;
 }
 #supersized img 
 { 
-        width:100%; 
+        width:1385px; 
         height:100%; 
         position:absolute; 
         display:none; 
