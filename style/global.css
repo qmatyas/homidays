@@ -57,9 +57,15 @@ h1{
     letter-spacing: 0.8em;
     line-height: 1;
 }
+.bienvenue{
+    font-family: "Oxygen";
+    margin-bottom: 1em;
+    color: #260A66;
+    letter-spacing: 0.4em;
+}
 h2{
     font-family:"Oxygen";
-    color:#1166ff;
+    color:#3784F0;
     text-align: center;
 }
 h2, h3, h4, h5, h6{
@@ -92,6 +98,16 @@ h2, h3, h4, h5, h6{
 	margin: 1em 1em 1em 23%;
 	padding: 1em;
 	background-color: #eeeeee;
+}
+.recherche{
+    margin: 4.5em 0em 3em 18em;
+}
+.barre_recherche{
+    width: 24em;
+    height: 1.8em;
+}
+.vali_recherche{
+    height: 2.25em;
 }
 #supersized{
     display:block;
@@ -175,7 +191,9 @@ h2, h3, h4, h5, h6{
     width: 100%;
 }
 
-
+.etiquette_gauche {
+    margin-left: 18.75em ;
+}
 
     
 label{
