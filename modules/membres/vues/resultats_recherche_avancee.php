@@ -1,12 +1,14 @@
 <section>
     <h2>Recherche</h2>
-    <form action="" method="get" class="recherche" >
-        <label for="id_animaux">Animaux :</label><input id="id_animaux" name="animaux" type="checkbox">
-        <label for="id_fumeur">Fumeur :</label><input id="id_fumeur" name="fumeur" type="checkbox">
+    <form action="" method="get" class="recherche">
+        <input type="hidden" name="module" value="membres">
+        <input type="hidden" name="action" value="recherche_avancee">
+        <label for="id_animaux">Animaux :</label><input id="id_animaux" name="animaux" type="checkbox"<?= isset($_GET['animaux']) && $_GET['animaux'] ==='on' ? ' checked' : ''; ?>>
+        <label for="id_fumeur">Fumeur :</label><input id="id_fumeur" name="fumeur" type="checkbox"<?= isset($_GET['fumeur']) && $_GET['fumeur'] === 'on' ? ' checked' : ''; ?>>
         <label for="voyageurs">Nombre de voyageurs:</label>
         <div id='align'>
-            Adulte <input type="number" min="0" size="10" name="nb_adulte" id="nb_adulte" >
-            Enfant <input type="number" min="0" size="10" name="nb_enfant" id="nb_enfant" >
+            Adulte <input type="number" min="0" size="10" name="nb_adulte" id="nb_adulte" value="<?= isset($_GET['nb_adulte']) ? $_GET['nb_adulte'] : ''; ?>">
+            Enfant <input type="number" min="0" size="10" name="nb_enfant" id="nb_enfant" value="<?= isset($_GET['nb_adulte']) ? $_GET['nb_enfant'] : ''; ?>">
         </div>    
         <input type="submit" value="Valider" class="Rechercher">
     </form>

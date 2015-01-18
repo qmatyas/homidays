@@ -168,15 +168,36 @@ function membres_recuperer_recherche($depart, $nombre) {
 
     $pdo = DB::Connect();
 
+    $data = [];
+    if (isset($_GET['animaux'], $_GET['fumeur'], $_GET['nb_adulte'], $_GET['nb_enfant'])) {
+        $sql = 'WHERE';
+        if (isset($_GET['animaux']) && $_GET['animaux'] === 'on') {
+            $sql .= " animaux=1 AND";
+        }
+        if (isset($_GET['fumeur']) && $_GET['fumeur'] === 'on')
+            $sql .= " fumeur=1 AND";
+        if (isset($_GET['nb_adulte'])) {
+            $sql .= " nb_adulte=? AND";
+            $data[] = $_GET['nb_adulte'];
+        }
+        if (isset($_GET['nb_enfant'])) {
+            $sql .= " nb_enfant=? AND";
+            $data[] = $_GET['nb_enfant'];
+        }
+        $sql = trim($sql, 'AND');
+    } else {
+        $sql = '';
+    }
+    // var_dump($sql);
+
     $requete = $pdo->prepare("SELECT id, pseudo, avatar, date_inscription, note_totale, nb_adulte, nb_enfant
         FROM utilisateurs"
-        . (isset($_GET['animaux']) ? " WHERE animaux = on " : ' ')
-        . (isset($_GET['fumeur']) ? " WHERE fumeur =  " : ' ')
-        . (isset($_GET['nb_adulte']) ? " WHERE nb_adulte  " : ' ')
-        . (isset($_GET['nb_enfant']) ? " WHERE nb_enfant " : ' ')
-        . "ORDER BY pseudo ASC 
+        . $sql
+        . " ORDER BY pseudo ASC 
         LIMIT $depart, $nombre");
-    $requete->execute(isset($_GET['pseudo']) ? ['%' . $_GET['pseudo'] . '%'] : null);
+    // var_dump($requete, $data);
+    // die();
+    $requete->execute($data);
     return $requete->fetchAll();
 }
 

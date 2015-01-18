@@ -1,6 +1,6 @@
 <h2>Recherche: </h2>
 
-<form action="index.php?module=logements&action=afficher.php" method="get" class="recherche" >
+<form action="" method="get" class="recherche" >
     			  
     <fieldset>
     <legend><b>Logement</b></legend>
