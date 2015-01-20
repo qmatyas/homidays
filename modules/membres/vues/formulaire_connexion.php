@@ -1,5 +1,6 @@
 <h2>Connexion au site</h2>
 
+<div class="form_connexion">
 <form action="" method="post">
 	<?= isset($erreur['form']) ? $erreur['form'] : ''; ?>
 	<p>		
@@ -14,4 +15,5 @@
 	<p/>
 	<input type="submit" value="Se connecter" onClick="criteres();">			
 </form>
+</div>
 <!-- <p><a href="#"> Mot de passe oublié ?</a></p> -->	

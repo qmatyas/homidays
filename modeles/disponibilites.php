@@ -87,11 +87,14 @@ function reservations_recuperer () {
 		SELECT
 			e.id, confirmee,
 			pseudo, u.id as utilisateur_id,
-			l.nom
+			l.nom, l.type_logement, l.ville, l.pays, l.nb_piece, l.note_totale,
+			i.nom as image_nom
 		FROM echanges as e
 		LEFT JOIN utilisateurs as u ON u.id=e.utilisateur_id
 		LEFT JOIN logements as l ON l.id=e.logement_id
-		WHERE victime_id=' . $_SESSION['Utilisateur']['id']);
+		LEFT JOIN images as i ON l.id=i.logement_id
+		WHERE victime_id=' . $_SESSION['Utilisateur']['id']
+		. ' GROUP BY e.id');
 	$requete->execute();
 	return $requete->fetchAll();
 

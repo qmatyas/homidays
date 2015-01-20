@@ -1,7 +1,7 @@
    </div>
    
     <div class="bas">
-        <ul>
+        <ul class="bas_centrer">
             <li><a class="liste_aide" href="index.php?module=contact_admin&amp;action=aide">Aide</a></li>
             <li><a class="liste_contactus" href="index.php?module=membres&amp;action=contact_admin">Contactez nous</a></li>
             <li class="liste_logos">

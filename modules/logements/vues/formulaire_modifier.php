@@ -1,64 +1,73 @@
 <h2>Modification de votre logement</h2>
-
 <form method="post" action="" id="form" name="form"> 
     <fieldset>
    	<legend><b>Adresse</b></legend>
-    	<p>
-		    <p>
-		    <label for="nom">Nom</label> : 
-		    <input type="text" name="nom" value="<?= isset($_SESSION['Utilisateur']['']) ? $_SESSION['']['nom'] : ''; ?>
-		    <span class="error_message"><?= isset($erreur['nom']) ? $erreur['nom'] : ''; ?></span>
-		    </p>
-
-		    <p>
-		    <label for="date_inscription">Enregistrée le:</label> : 
-		    <input type="date_inscription" name="date_inscription" value="<?= isset($_SESSION['']['']) ? $_SESSION['']['date_inscription'] : ''; ?>
-		    <span class="error_message"><?= isset($erreur['date_inscription']) ? $erreur['date_inscription'] : ''; ?></span>
-		    </p>
-
-		    <p>
-		    <label for="type_logement">Type</label> : 
-		    <input type="type_logement" name="type_logement" value="<?= isset($_SESSION['']['']) ? $_SESSION['']['type_logement'] : ''; ?>
-		    <span class="error_message"><?= isset($erreur['type_logement']) ? $erreur['type_logement'] : ''; ?></span>
-		    </p>
-
-		    <p>
+	    <p>		 
+		  	<label for="nom">Nom</label> : 
+		 	<input type="text" name="nom" value="<?= isset($_POST['Logement']['nom']) ? $_POST['Logement']['nom'] : ''; ?>" required/>
+			<span class="error_message"><?= isset($erreur['nom']) ? $erreur['nom'] : ''; ?></span>
+		</p>
+	    <p>
 		    <label for="rue">Rue</label> : 
-		    <input type="text" name="rue" value="<?= isset($_SESSION['']['']) ? $_SESSION['']['rue'] : '';?>
+		    <input type="text" name="rue" value="<?= isset($_POST['Logement']['rue']) ? $_POST['Logement']['rue'] : ''; ?>" required/>
 		    <span class="error_message"><?= isset($erreur['rue']) ? $erreur['rue'] : ''; ?></span>
-		    </p>
-
-		    <p>
+	    </p>
+	    <p>
 		    <label for="code_postal">Code postal</label> : 
-		    <input type="text" name="code_postal" value="<?= isset($_SESSION['']['']) ? $_SESSION['']['code_postal'] : '';?>
+		    <input type="text" name="code_postal" value="<?= isset($_POST['Logement']['code_postal']) ? $_POST['Logement']['code_postal'] : ''; ?>" required/>
 		    <span class="error_message"><?= isset($erreur['code_postal']) ? $erreur['code_postal'] : ''; ?></span>
-		    </p>
-
-		    <p>
+	    </p>
+	    <p>
 		    <label for="ville">Ville</label> : 
-		    <input type="text" name="ville" value="<?= isset($_SESSION['']['']) ? $_SESSION['']['ville'] : '';?>
+		    <input type="text" name="ville" value="<?= isset($_POST['Logement']['ville']) ? $_POST['Logement']['ville'] : ''; ?>" required/>
 		    <span class="error_message"><?= isset($erreur['ville']) ? $erreur['ville'] : ''; ?></span>
-		    </p>
-
-		    <p>
+	    </p>
+	    <p>
 		    <label for="pays">Pays</label> : 
-		    <input type="text" name="pays" value="<?= isset($_SESSION['']['']) ? $_SESSION['']['pays'] : '';?>
+		    <input type="text" name="pays" value="<?= isset($_POST['Logement']['pays']) ? $_POST['Logement']['pays'] : ''; ?>" required/>
 		    <span class="error_message"><?= isset($erreur['pays']) ? $erreur['pays'] : ''; ?></span>
-		    </p>
-
-   		 </p>
-    </fieldset>
+	    </p>
+	</fieldset>
 
 	<fieldset>
-   	<legend><b>Logement</b></legend>
-    	<p>
-		    <div><span class="label_profil">Superficie (en m²): </span> : <?= isset($_SESSION['']['']) ? $_SESSION['']['superficie'] : '';?></p></div>
-		    <div><span class="label_profil">Nombre de pièces</span> : <?= isset($_SESSION['']['']) ? $_SESSION['']['nb_piece'] : '';?></p></div>
-		    <div><span class="label_profil">Nombre de chambres</span> : <?= isset($_SESSION['']['']) ? $_SESSION['']['nb_chambre'] : '';?></p></div>
-		    <div><span class="label_profil">Nombre de salles de bain</span> : <?= isset($_SESSION['']['']) ? $_SESSION['']['nb_salle_bain'] : '';?></p></div>
-		    <div><span class="label_profil">Description</span> :<br>: <?= isset($_SESSION['']['']) ? $_SESSION['']['description'] : '';?></p></div>
-    	</p>
-    </fieldset>
+	<legend><b>Logement</b></legend>
+	<p>
+	    <label for="type_logement">Type</label> : 
+	    <input type="type_logement" name="type_logement" value="" required/>
+	    <span class="error_message"><?= isset($erreur['type_logement']) ? $erreur['type_logement'] : ''; ?></span>
+    </p>
+	<p>
+	    <label for="">Superficie (en m²): </label> :
+	    <input type="number" min="0" size="5" name="superficie" value="<?= isset($_POST['Logement']['superficie']) ? $_POST['Logement']['superficie'] : ''; ?>" required/>
+	    <span class="error_message"><?= isset($erreur['superficie']) ? $erreur['superficie'] : ''; ?></span>
+	</p>
+	<p>
+	<label for="organisation">Organisation du logement :</label></br>
+			<div id="bloc_log">
+				<p>
+				    <label for="">Nombre de pièces</label> :
+				    <input type="number" min="0" size="5" name="nb_piece" value="<?= isset($_POST['Logement']['description']) ? $_POST['Logement']['description'] : ''; ?>" required/>
+				    <span class="error_message"><?= isset($erreur['nb_piece']) ? $erreur['nb_piece'] : ''; ?></span>
+				</p>
+				<p>
+				    <label for="">Nombre de chambres</label> :
+				    <input type="number" min="0" size="5" name="nb_chambre" value="<?= isset($_POST['Logement']['description']) ? $_POST['Logement']['description'] : ''; ?>" required/>
+				    <span class="error_message"><?= isset($erreur['nb_chambre']) ? $erreur['nb_chambre'] : ''; ?></span>
+				</p>
+				<p>
+				    <label for="">Nombre de salles de bain</label> :
+				    <input type="number" min="0" size="5" name="nb_salle_bain" value="<?= isset($_POST['Logement']['description']) ? $_POST['Logement']['description'] : ''; ?>" required/>
+				    <span class="error_message"><?= isset($erreur['nb_salle_bain']) ? $erreur['nb_salle_bain'] : ''; ?></span>
+				</p>
+			</div>
+	</p>
+	<p>	
+	<label for="description">Description: </label><br>	
+		<textarea name="description" id="description" rows="10" cols="50" placeholder="Maison au bord de la mer, 3 etages ..."><?= isset($_POST['Logement']['description']) ? $_POST['Logement']['description'] : ''; ?></textarea> 
+		<span class="error_message"> <?= isset($erreur['description']) ? $erreur['description'] : ''; ?></span>
+	</p>
+
+	</fieldset>
 
 	<fieldset>
    	<legend><b>Quartier</b></legend>
@@ -126,9 +135,8 @@
 		    </div>
 		
 		</p>
-    </fieldset>
+    </fieldset> 
 
-</p>
 
 
    

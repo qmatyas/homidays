@@ -64,7 +64,7 @@
 		</p>
 		<p>
 			<label for="description">Description :</label><br/>	
-			<textarea></textarea>rea name="description" id="description" rows="10" cols="50" placeholder="Maison au bord de la mer, 3 etages ..." ><?php if(isset($_POST['description'])) echo $_POST['description']; ?></textarea>	   
+			<textarea name="description" id="description" rows="10" cols="50" placeholder="Maison au bord de la mer, 3 etages ..." ><?php if(isset($_POST['description'])) echo $_POST['description']; ?></textarea>	   
 			<span class="error_message"><?php if(isset($erreur['description'])) echo $erreur['description']; ?></span>
 		</p>
 		</fieldset>

@@ -30,7 +30,7 @@ else {
                                             $_SESSION['Utilisateur'] = $utilisateur;  
 
                                             // Affichage de la confirmation de la connexion
-                                            include CHEMIN_VUE.'connexion_ok.php';
+                                            include 'global/accueil.php';
                                         } else {
                                             $erreur['form'] = "Couple pseudo / mot de passe inexistant.";
                                             // On réaffiche le formulaire de connexion

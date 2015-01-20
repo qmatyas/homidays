@@ -9,7 +9,9 @@
                 </ul>
                 <?php else : ?>
                 <ul>
-                    <img class="avatar" src="<?= $_SESSION['Utilisateur']['avatar']; ?>" title="Avatar de <?= htmlspecialchars($_SESSION['Utilisateur']['avatar']); ?>">
+                    <div class="avatar">
+                        <img src="<?= $_SESSION['Utilisateur']['avatar']; ?>" title="Avatar de <?= htmlspecialchars($_SESSION['Utilisateur']['avatar']); ?>">
+                    </div>
                     <li><a href="<?= url('membres', 'afficher', ['id' => $_SESSION['Utilisateur']['id']]); ?>">Mon profil</a></li>
                     <li><a href="<?= url('logements', 'lister', ['id' => $_SESSION['Utilisateur']['id']]); ?>">Mes logements</a></li>
                     <li><a href="<?= url('disponibilites', 'afficher_reservations'); ?>">Mes réservations</a></li>

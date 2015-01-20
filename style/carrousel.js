@@ -1,7 +1,7 @@
             $(document).ready(function(){
 
-            var $carrousel = $('#carrousel'),
-                $img = $('#carrousel img'),
+            var $carrousel = $('.carrousel'),
+                $img = $('.carrousel img'),
                 indexImg = $img.length - 1,
                 i = 0,
                 $currentImg = $img.eq(i);
@@ -11,7 +11,7 @@
 
 
 
-            $('#suivant').click(function(){
+            $('.suivant').click(function(){
                 i++;
                 if( i > indexImg ){
                     i = 0;
@@ -21,7 +21,7 @@
                 $currentImg.css('display', 'block');
             });
 
-            $('#precedent').click(function(){
+            $('.precedent').click(function(){
                 i--;
                 if( i < 0 ){
                     i = indexImg;

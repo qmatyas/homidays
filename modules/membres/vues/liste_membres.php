@@ -7,17 +7,19 @@
 <?php if (LANG === 'en') : ?>
         <input type="hidden" name="lang" value="en">
 <?php endif; ?>
-        <input type="text" name="pseudo" class="pseudo" placeholder="Qui voulez-vous trouver ?" value="<?= (isset($_GET['pseudo']) ? $_GET['pseudo'] : ''); ?>">
-        <input type="submit" value="Rechercher">
+        <input class="barre_recherche" type="text" name="pseudo" class="pseudo" placeholder="Qui voulez-vous trouver ?" value="<?= (isset($_GET['pseudo']) ? $_GET['pseudo'] : ''); ?>">
+        <input class="valid_recherche" type="submit" value="Rechercher"><br/>
         <a href="<?= url('membres', 'recherche_avancee'); ?>" class="">Recherche avancée</a>
     </form>
+
     <h2>Résultats</h2>
     <p><?= count($membres) . ' sur ' . $nombre_membres; ?> membres</p>
+
 <?php foreach ($membres as $membre) : ?>
-    <div class="">
-        <div><img src="<?= $membre['avatar']; ?>" alt="Image de <?= $membre['pseudo']; ?>"></div>
-        <div>
-            <span><?= $membre['pseudo']; ?></span>
+    <div class="liste">
+        <div class="img_liste"><img class="image_resultat" src="<?= $membre['avatar']; ?>" alt="Image de <?= $membre['pseudo']; ?>"></div>
+        <div class="info_liste">
+            <span class="nom_log"><b><?= $membre['pseudo']; ?></b></span>
             <span><b>Membre depuis :</b> <?= (new DateTime($membre['date_inscription']))->format('d/m/Y'); ?></span>
             <span><b>Note :</b> <?= $membre['note_totale'] === null ? '-' : $membre['note_totale']; ?> / 10</span>
             <span><b>Nombre d'adultes :</b> <?= $membre['nb_adulte']; ?></span>

@@ -5,21 +5,24 @@
 	<title>Homidays</title>
 	<meta http-equiv="Content-Language" content="fr" />
 	<link rel="stylesheet" href="style/global.css" type="text/css" media="screen" />
-<!--        <link rel="shortcut icon" href="../Header/logo.png" type="image/x-icon"/>-->
+        <link rel="shortcut icon" href="images/site/logo_homidays.png" type="image/x-icon"/>
 </head>
 
 <body>
-    <h1>Homidays</h1>  
+    <h1 class="homidays">Homidays</h1>
         <nav>
-            <a id="pull">Menu</a>
             <ul>
-<!--		<li><a href="#"><img src="../Header/logo.png" alt="Homidays" title="Homidays" width="100" height="50" class="logo" id='logo'; /></a></li>-->
-		<li><a href="index.php">Accueil</a></li>
+		<li><a href=""><img src="images/site/logo_homidays.png" class="logo_homidays" /></a></li>            
+		<li><a href="<?= url(); ?>">Accueil</a></li>
 		<li><a href="<?= url('logements', 'lister'); ?>">Logements</a></li>
 		<li><a href="<?= url('membres', 'lister'); ?>">Membres</a></li>
-                <li><a href="forum/indexf.php">Forum</a></li>
+<?php if (LANG === 'en') : ?>
+        <li><a href="<?= url(isset($_GET['module']) ? $_GET['module'] : '', isset($_GET['action']) ? $_GET['action'] : '', ['lang' => 'fr']); ?>">FR</a></li>
+<?php else : ?>
+        <li><a href="<?= url(isset($_GET['module']) ? $_GET['module'] : '', isset($_GET['action']) ? $_GET['action'] : '', ['lang' => 'en']); ?>">EN</a></li>
+<?php endif; ?>
             </ul>
-	</nav>
+		</nav>
 
 <?php include 'global/espace_membre.php'; ?>
 	<div class="centre">

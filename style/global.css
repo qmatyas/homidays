@@ -1,23 +1,33 @@
+/*BODY*/
+
 *{
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
 }
 body{
+    background-color: #E9E9E7;
 	font-family: Helvetica;
 	line-height: 1.65;
 }
-input{ padding: 3px; }
-ul{ list-style: none; }
+input{ 
+    padding: 3px;
+    margin: 1em 0 1em 0;
+}
+ul{ 
+    list-style: none;
+}
+
+/*MENU*/
+
 nav{
     background-color: #000;
     border-bottom: 2px solid #5F5F5F;
     height: 50px;
     margin-bottom: 1.75em;
-
 }
 nav ul{
-    padding-left: 10em;
+    padding-left: 4em;
     margin: 0 auto;
     width: 950px;
 	height: 50px;
@@ -48,6 +58,18 @@ nav a#pull {
 	display: none;
 }
 
+.logo_homidays{
+    float:left;
+    position: absolute;
+    left: 2%;
+    top:14%;
+    height: 45px;
+    width: 130px;
+}
+
+
+/*TITRE*/
+
 h1{
 	padding: 0.5em;
     font-size: 300%;
@@ -57,27 +79,39 @@ h1{
     letter-spacing: 0.8em;
     line-height: 1;
 }
+.homidays{
+    padding-left:2.5em;
+}
 .bienvenue{
     font-family: "Oxygen";
     margin-bottom: 1em;
     color: #260A66;
-    letter-spacing: 0.4em;
+    letter-spacing: 0.2em;
 }
 h2{
     font-family:"Oxygen";
     color:#3784F0;
     text-align: center;
+    font-size: 32px;
 }
-h3{
-    margin-top: 2em;
+h3, .profil_note{
+    margin-top: 1em;
     color: #260A66;
+    font-weight: 700;
+    font-size: 1.17em;
 }
-h4{
-
+.h_themes{
+    margin-top:1em;
+    color:#fff;
 }
 h2, h3, h4, h5, h6{
 
 	margin-bottom: 0.5em;
+}
+
+/*ACCUEIL*/
+.accueil{
+    background-color: white;
 }
 
 /*ESPACE MEMBRE*/
@@ -85,7 +119,7 @@ h2, h3, h4, h5, h6{
 .connexion{
 	float: left;
 	width: 18%;
-	margin: 1em 1em 1em;
+	margin: 1em 2%;
 	padding: 1em;
 	background-color: #000;
 	border: 2px solid #000;
@@ -103,27 +137,44 @@ h2, h3, h4, h5, h6{
     color: #FFF;
 }
 .avatar{
-    margin: 0 0 1em 0.25em;
+    position: relative;
+    margin: 0 auto;
     width:200px;
     height:200px;
-
 }
+.avatar img{
+    min-width: 100%;
+    height: auto;
+}
+
+/*CONNEXION*/
+.form_connexion{
+    margin: 3em 1em 8.5em 2.1em;
+    padding: 2em;
+    background-color: white;
+}
+
 
 /*ACCUEIL*/
+
 .centre{
-	margin: 1em 1em 1em 23%;
-	padding: 1em;
-	background-color: #eeeeee;
+    float: left;
+    width: 74%;
+    margin: 2%;
+	background-color: #E9E9E7;
 }
 .recherche{
-    margin: 4.5em 0em 3em 18em;
+    margin: 4.5em 0em 3em 20em;
 }
-.barre_recherche{
-    width: 24em;
-    height: 1.8em;
+.barre_recherche
+{
+    width: 28em;
+    height: 2.3em
 }
-.vali_recherche{
+.valid_recherche{
     height: 2.25em;
+    width: 8em;
+
 }
 #supersized{
     display:block;
@@ -178,7 +229,7 @@ h2, h3, h4, h5, h6{
 /*THEMES*/
 
 .themes{
-    padding: 40px 0 40px 10px;
+    padding: 40px 0 40px 7.24em;
 }
 .themes:after{
     display: table;
@@ -197,7 +248,7 @@ h2, h3, h4, h5, h6{
     padding: 10px;
     color: #000;
     text-decoration: none;
-    background: none repeat scroll 0% 0% #5F5F5F;
+    background: none repeat scroll 0% 0% #000;
     box-shadow: 0px 1px 0px #5F5F5F;
     border: 1px solid #5F5F5F;
     border-radius: 3px;
@@ -211,6 +262,59 @@ h2, h3, h4, h5, h6{
     margin-left: 30em ;
 }
   
+/*MEMBRES*/
+
+.profil_avatar{
+    float: right;
+    margin: 1em 8em 0em 0em;    
+    width: 300px;
+    height: 300px;
+    border:1px solid #DDD;
+    border-radius:5px;
+}
+.profil_two{
+    float: left;
+}
+.profil_three{
+    float: right;
+    margin-right: 12.56em;
+}
+.profil_four{
+    background-color: white;
+}
+.profil_un{
+    background-color: white;
+}
+.profil_deux {
+    background-color: white;
+}
+.profil_un, .profil_deux, .profil_four{
+    position: relative;
+    padding: 3em;
+    margin-top: 50px;
+}
+.profil_un:after, .profil_deux:after, .profil_four:after{
+    display: table;
+    content: '';
+    clear: both;
+}
+.profil_container{
+    margin-bottom: 50px;
+    background-color: #fff;
+}
+.profil_container:after{
+    display: table;
+    content: '';
+    clear: left;
+}
+.profil_element{
+    padding: 20px;
+    width: 33.3333%;
+    float: left;
+}
+
+
+
 /*CARROUSSEL LOGEMENT*/
 
 #carrousel
@@ -235,7 +339,7 @@ h2, h3, h4, h5, h6{
     left:0;
     width: 100%;
 }
-#precedent,#suivant
+.precedent,.suivant
 {
     display:inline-block;
     border-radius: 5px;
@@ -273,13 +377,40 @@ h2, h3, h4, h5, h6{
 }
 
 /*IMAGES_LISTE*/
-
-.img_liste{
-    margin: 0 0 1em 0.25em;
-    width:200px;
-    height:200px;
+.centre:after, .liste:after{
+    display: table;
+    content:'';
+    clear: both;
 }
-
+.liste{
+    position: relative;
+    background-color: #fff;
+    margin-bottom: 50px;
+}
+.img_liste{
+    width: 400px; height: 250px;
+    float: left;
+    overflow: hidden;
+}
+.img_liste img{
+    wifdth: auto;
+    min-height: 100%;
+}
+.image_resultat
+{
+    height: 13em;
+    width: 23em;
+}
+.offre_logement{
+    clear:left;
+}
+.info_liste{
+    float: left;
+}
+.info_liste span
+{
+    display: block;
+}
 
 label{
 	float: left;
@@ -296,6 +427,7 @@ table, tr, td, th{
 fieldset{
     padding: 1em;
     margin-top: 1em;
+    background-color: white;
 }
 .flottant_droite {
 	float: right;
@@ -315,24 +447,23 @@ span.label_profil {
 }
 .bas{
     clear: both;
-    padding: 1em 1em 0em 1em;
     background-color: #000;
 }
-.bas ul{
-    display:inline;
+.bas_centrer{
+    width: 460px;
+    display:block;
+    margin: 0 auto;
+}
+.bas_centrer li{
+    text-align: center;
+    padding: 10px;
 }
 .liste_aide, .liste_contactus{
     color: white;
     text-decoration: none;
     text-align: center;
-    
 }
 .liste_logos{
-    padding-left: 24em;
-}
-.liste_aide{
-    padding-left: 37.5em;
-}
-.liste_contactus{
-    padding-left: 35em;
+    height: 110px;
+    padding: 0 !important;
 }

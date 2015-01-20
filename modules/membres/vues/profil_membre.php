@@ -1,9 +1,11 @@
-<h2><?= $membre['id'] == $_SESSION['Utilisateur']['id'] ? 'Mon profil' : 'Profil de ' . htmlspecialchars($membre['pseudo']); ?></h2>
+<h2><?= $_GET['id'] == $_SESSION['Utilisateur']['id'] ? 'Mon profil' : 'Profil de ' . htmlspecialchars($_SESSION['Utilisateur']['pseudo']); ?></h2>
 
-<section class="">
-	<img class="flottant_droite" src="<?= $membre['avatar']; ?>" title="Avatar de <?= htmlspecialchars($membre['pseudo']); ?>">
 
-	<div class="">
+<section class="profil_membre">
+
+<div class="profil_un">
+	<img class="profil_avatar" src="<?= $membre['avatar']; ?>" title="Avatar de <?= htmlspecialchars($membre['pseudo']); ?>">
+	<div class="profil_one">
 		<h3>Informations membre</h3>
 		<p class="label_profil"><b>Note :</b> <?= $membre['note_totale'] === null ? '-' : $membre['note_totale']; ?> /10</p>
 		<p class="label_profil"><b>Nom :</b> <?= $membre['nom']; ?></p>
@@ -15,7 +17,10 @@
 		<p class="label_profil"><b>Profession :</b> <?= $membre['profession']; ?></p>
 		<p class="label_profil"><b>Parle :</b> <?= $membre['langue']; ?></p>
 	</div>
-	<div class="">
+</div>
+
+<div class="profil_deux">
+	<div class="profil_two">
 		<h3>Coordonnées</h3>
 		<p class="label_profil"><b>Email :</b> <?= $membre['email']; ?></p>
 		<p class="label_profil"><b>Rue :</b> <?= $membre['rue']; ?></p>
@@ -23,7 +28,7 @@
 		<p class="label_profil"><b>Ville :</b> <?= $membre['ville']; ?></p>
 		<p class="label_profil"><b>Pays :</b> <?= $membre['pays']; ?></p>
 	</div>
-	<div class="">
+	<div class="profil_three">
 		<h3>Profil membre</h3>
 		<p class="label_profil"><b>Nombre d'adulte :</b> <?= $membre['nb_adulte']; ?></p>
 		<p class="label_profil"><b>Nombre d'enfant :</b> <?= $membre['nb_enfant']; ?></p>
@@ -31,7 +36,9 @@
 		<p class="label_profil"><b>Fumeur :</b> <?= $membre['fumeur'] ? 'Oui' : 'Non'; ?></p>
 		<p class="label_profil"><b>Animaux :</b> <?= $membre['animaux'] ? 'Oui' : 'Non'; ?></p>
 	</div>
-	<div>
+</div>
+
+	<div class="profil_four">
 		<h3><?= $membre['id'] == $_SESSION['Utilisateur']['id'] ? (count($logements) > 1 ? 'Mes' : 'Mon') : (count($logements) > 1 ? 'Ses' : 'Son'); ?> logement<?= count($logements) > 1 ? 's' : ''; ?></h3>
 <?php foreach ($logements as $logement) : ?>
 		<p><a class="label_profil" href="<?= url('logements', 'afficher', ['id' => $logement['id']]); ?>"><?= $logement['nom']; ?></a></p>

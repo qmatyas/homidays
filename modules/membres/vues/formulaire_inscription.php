@@ -112,6 +112,8 @@
 			<span class="error_message"><?php if(isset($erreur['interet'])) echo $erreur['interet']; ?></span>      
 		</p>
 		<input type="submit" value="S'inscrire">
+		<p>En cliquant ci-dessus, vous donnez votre accord pour nos <a href="index.php?module=membres&amp;action=conditions_utilisation">conditions d'utilisation</a>.</p>
+
 	</fieldset>
 	
 </form>

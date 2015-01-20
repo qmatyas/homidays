@@ -1,3 +1,4 @@
+<?php include CHEMIN_VUE.'../trads/liste_logements_' . LANG . '.php'; ?>
 <section>
 <?php if (!isset($_GET['id']) || $_GET['id'] != $_SESSION['Utilisateur']['id']) : ?>
     <h2>Recherche:</h2>
@@ -7,9 +8,9 @@
 <?php if (LANG === 'en') : ?>
         <input type="hidden" name="lang" value="en">
 <?php endif; ?>
-        <input type="text" name="ville" placeholder="Qui voulez-vous trouver ?" value="<?= (isset($_GET['ville']) ? $_GET['ville'] : ''); ?>">
-        <input type="submit" value="Rechercher">
-        <a href="<?= url('logements', 'recherche_avancee'); ?>">Recherche avancée</a>
+        <input class="barre_recherche" type="text" name="ville" placeholder="Dans quelle ville voulez-vous aller?" value="<?= (isset($_GET['ville']) ? $_GET['ville'] : ''); ?>">
+        <input class="valid_recherche" type="submit" value="Rechercher"><br/>
+        <a href="<?= url('logements', 'recherche_avancee'); ?>"><?= TXT_RECHA; ?></a>
     </form>
 
     <h2>Résultats:</h2>
@@ -20,16 +21,20 @@
 
 <?php foreach ($offres as $offre) :?>
     <div class="liste">
-    <div class="img_liste"><img src="<?= $offre['image_nom']; ?>" alt="Image de maison <?= $offre['id']; ?>"></div>
-    <div>
-        <span><?= $offre['nom']; ?></span> 
-        <span><b>Type de logement :</b> <?= $offre['type_logement']; ?></span> 
-        <span><b>Ville :</b> <?= $offre['ville']; ?></span> 
-        <span><b>Pays :</b> <?= $offre['pays']; ?></span> 
-        <span><b>Nombre de pièces :</b> <?= $offre['nb_piece']; ?></span> 
-        <span><b>Note :</b> <?= $offre['note_totale']; ?> /10</span> 
+        <div class="img_liste"><img class="image_resultat" src="<?= $offre['image_nom']; ?>" alt="Image de maison <?= $offre['id']; ?>"></div>
+        <div class="info_liste">
+            <h3><?= $offre['nom']; ?></h3> 
+            <span><b>Type de logement :</b> <?= $offre['type_logement']; ?></span> 
+            <span><b>Ville :</b> <?= $offre['ville']; ?></span> 
+            <span><b>Pays :</b> <?= $offre['pays']; ?></span> 
+            <span><b>Nombre de pièces :</b> <?= $offre['nb_piece']; ?></span> 
+            <span><b>Note :</b> <?= $offre['note_totale']; ?> /10</span> 
     <?php if (utilisateur_est_connecte()) : ?>
-        <a href="<?= url('logements', 'afficher', ['id' => $offre['id']]); ?>">Voir le logement</a>
+            <a href="<?= url('logements', 'afficher', ['id' => $offre['id']]); ?>">Voir le logement</a>
+    <?php endif; ?>
+    <?php if (!utilisateur_est_connecte()) : ?>
+            <p><i>Si vous voulez avoir plus d'informations sur ce logement, veuillez-vous inscrire.</i></p>
+            <a href="<?= url('membres', 'inscription', ['id' => $offre['id']]); ?>">S'inscrire</a>
     <?php endif; ?>
         </div>
     </div>

@@ -31,9 +31,8 @@ function url ($module = null, $action = null, $params = []) {
 	$url = '';
 	if (LANG === 'en')
 		$url = '&lang=en';
-	if (!$module)
-		return $url;
-	$url .= '&module=' . $module;
+	if ($module)
+		$url .= '&module=' . $module;
 	if ($action)
 		$url .= '&action=' . $action;
 	if (!empty($params))

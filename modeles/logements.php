@@ -185,14 +185,15 @@ function quartier_recuperer ($id){
 
     $requete = $pdo->prepare('
         SELECT
-            q.id, point_fort, restauration,
+            q.id, logement_id, point_fort, restauration,
             a.id as activite_id, musee, sport, parc_attraction, shopping, a.autre as activite_autre,
-            t.id as transport_id, metro, velib, bus, tramway, a.t as transport_autre,
+            t.id as transport_id, metro, velib, bus, tramway, t.autre as transport_autre,
             e.id as environnement_id, lac, foret, campagne, mer, ville, e.autre as environnement_autre
         FROM quartiers as q
         LEFT JOIN activites as a ON q.id=a.quartier_id
         LEFT JOIN transports as t ON q.id=t.quartier_id
         LEFT JOIN environnements as e ON q.id=e.quartier_id
+        LEFT JOIN logements as l ON l.id=q.logement_id
         WHERE q.id=?
     ');
     $requete->execute([$id]);
