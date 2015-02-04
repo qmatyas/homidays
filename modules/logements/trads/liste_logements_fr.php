@@ -1,5 +1,6 @@
 <?php
 define('TXT_RECH','Recherche');
+define('TXT_PLACEHOLDER','Dans quelle ville, voulez-vous aller ?');
 define('TXT_RECHA','Recherche avancée');
 define('TXT_RESULTATS','Résultats');
 define('TXT_OFFRES','offres');

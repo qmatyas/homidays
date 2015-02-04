@@ -200,16 +200,66 @@ function quartier_recuperer ($id){
     return $requete->fetch();
 }
 
-function logements_recuperer_recherche($id) {
+// function logements_recuperer_recherche($depart, $nombre) {
     
-    $pdo = DB::Connect();
+//     $pdo = DB::Connect();
 
-    $requete = $pdo->prepare('SELECT * FROM logements WHERE id = :id');
-    $requete->bindValue(':id', $id);
-    $requete->execute();
-    
-    return $requete->fetch();  
-}
+//     $data = [];
+//     if (isset($_GET['type_logement'], $_GET['superficie'], $_GET['nb_piece'], $_GET['nb_chambre'], $_GET['nb_salle_bain'], $_GET['musee'], $_GET['sport'], $_GET['parc_attraction'], $_GET['shopping'], $_GET['autre'], $_GET['metro'], $_GET['velib'], $_GET['bus'], $_GET['tramway'], $_GET['autre'], $_GET['lac'], $_GET['foret'], $_GET['campagne'], $_GET['mer'], $_GET['ville_env'], $_GET['autre'], $_GET['pas_fumer'], $_GET['pas_bruit'], $_GET['pas_enfant'], $_GET['pas_animaux'], $_GET['autre'], $_GET['fermer'], $_GET['garder_animaux'], $_GET['arroser_plantes'], $_GET['discuter_voisine'], $_GET['menage'], $_GET['autre'], $_GET['wifi'], $_GET['voiture'], $_GET['jardin_terrase'], $_GET['piscine'], $_GET['equipement_sportif'], $_GET['acces_handicape'], $_GET['autre'])){
+        
+//         $sql = 'WHERE';
+//         // if(isset($_GET['type_logement']) && $_GET['type_logement'] === 'on'){ $sql .= "type_logement=1 AND";}
+
+//         if(isset($_GET['superficie']){ $sql .= "superficie=? AND"; $data[] = $_GET['superficie'];}
+//         if(isset($_GET['nb_piece']){ $sql .= "nb_piece=? AND"; $data[] = $_GET['nb_piece'];}
+//         if(isset($_GET['nb_chambre']){ $sql .= "nb_chambre=? AND"; $data[] = $_GET['nb_chambre'];}
+//         if(isset($_GET['nb_salle_bain']){ $sql .= "nb_salle_bain=? AND"; $data[] = $_GET['nb_salle_bain'];}
+
+//         if(isset($_GET['musee']) && $_GET['musee'] === 'on'){ $sql .= "musee=1 AND";}
+//         if(isset($_GET['sport']) && $_GET['sport'] === 'on'){ $sql .= "sport=1 AND";}
+//         if(isset($_GET['parc_attraction']) && $_GET['parc_attraction'] === 'on'){ $sql .= "parc_attraction=1 AND";}
+//         if(isset($_GET['shopping']) && $_GET['shopping'] === 'on'){ $sql .= "shopping=1 AND";}
+//         if(isset($_GET['autre']) && $_GET['autre'] === 'on'){ $sql .= "autre=1 AND";}
+//         if(isset($_GET['metro']) && $_GET['metro'] === 'on'){ $sql .= "metro=1 AND";}
+//         if(isset($_GET['velib']) && $_GET['velib'] === 'on'){ $sql .= "velib=1 AND";}
+//         if(isset($_GET['bus']) && $_GET['bus'] === 'on'){ $sql .= "bus=1 AND";}
+//         if(isset($_GET['tramway']) && $_GET['tramway'] === 'on'){ $sql .= "tramway=1 AND";}
+//         if(isset($_GET['autre']) && $_GET['autre'] === 'on'){ $sql .= "autre=1 AND";}
+//         if(isset($_GET['lac']) && $_GET['lac'] === 'on'){ $sql .= "lac=1 AND";}
+//         if(isset($_GET['foret']) && $_GET['foret'] === 'on'){ $sql .= "foret=1 AND";}
+//         if(isset($_GET['campagne']) && $_GET['campagne'] === 'on'){ $sql .= "campagne=1 AND";}
+//         if(isset($_GET['mer']) && $_GET['mer'] === 'on'){ $sql .= "mer=1 AND";}
+//         if(isset($_GET['ville_env']) && $_GET['ville_env'] === 'on'){ $sql .= "ville_env=1 AND";}
+//         if(isset($_GET['fermer']) && $_GET['fermer'] === 'on'){ $sql .= "fermer=1 AND";}
+//         if(isset($_GET['garder_animaux']) && $_GET['garder_animaux'] === 'on'){ $sql .= "garder_animaux=1 AND";}
+//         if(isset($_GET['arroser_plantes']) && $_GET['arroser_plantes'] === 'on'){ $sql .= "arroser_plantes=1 AND";}
+//         if(isset($_GET['discuter_voisine']) && $_GET['discuter_voisine'] === 'on'){ $sql .= "discuter_voisine=1 AND";}
+//         if(isset($_GET['menage']) && $_GET['menage'] === 'on'){ $sql .= "menage=1 AND";}
+//         if(isset($_GET['autre']) && $_GET['autre'] === 'on'){ $sql .= "autre=1 AND";}
+//         if(isset($_GET['wifi']) && $_GET['wifi'] === 'on'){ $sql .= "wifi=1 AND";}
+//         if(isset($_GET['voiture']) && $_GET['voiture'] === 'on'){ $sql .= "voiture=1 AND";}
+//         if(isset($_GET['jardin_terrase']) && $_GET['jardin_terrase'] === 'on'){ $sql .= "jardin_terrase=1 AND";}
+//         if(isset($_GET['piscine']) && $_GET['piscine'] === 'on'){ $sql .= "piscine=1 AND";}
+//         if(isset($_GET['equipement_sportif']) && $_GET['equipement_sportif'] === 'on'){ $sql .= "equipement_sportif=1 AND";}
+//         if(isset($_GET['acces_handicape']) && $_GET['acces_handicape'] === 'on'){ $sql .= "autre=1 AND";}
+//         if(isset($_GET['autre']) && $_GET['autre'] === 'on'){ $sql .= "autre=1 AND";}
+//         $sql = trim($sql, 'AND');
+//     } else {
+//         $sql = '';
+//     }
+
+//     // var_dump($sql);
+
+//     $requete = $pdo->prepare("SELECT * 
+//         FROM logements"
+//         . $sql
+//         . "ORDER BY nom ASC
+//         LIMIT $depart, $nombre");
+//     // var_dump($requete, $data);
+//     // die();
+//     $requete->execute($data);
+//     return $requete->fetchAll();  
+// }
 
 function logements_recuperer_liste($params) {
 
@@ -227,8 +277,7 @@ function logements_recuperer_liste($params) {
     if (isset($_GET['ville']))
         $data[] = '%' . $_GET['ville'] . '%';
     $requete->execute($data);
-    return $requete->fetchAll();
-    
+    return $requete->fetchAll();   
 }
 
 function logements_compter($id) {
@@ -242,5 +291,4 @@ function logements_compter($id) {
         $data[] = '%' . $_GET['ville'] . '%';
     $requete->execute($data);
     return $requete->fetch(PDO::FETCH_NUM)[0];
-
 }

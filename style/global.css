@@ -62,7 +62,7 @@ nav a#pull {
     float:left;
     position: absolute;
     left: 2%;
-    top:14%;
+    top:6.1em;
     height: 45px;
     width: 130px;
 }
@@ -113,6 +113,29 @@ h2, h3, h4, h5, h6{
 .accueil{
     background-color: white;
 }
+.bouton
+{
+    color:#0000ff;
+    font-size:24px;
+    cursor:pointer;
+    text-decoration: none;
+}
+#divid
+{
+    border:1px solid #333333;
+    background:#eeeeee;
+    padding:10px;
+    color:#260A66;
+    text-align: center;
+    font-family:"Oxygen";
+    font-size: 20px;
+}
+#divid:hover
+{
+    border:1px solid #000000;
+    background:#cccccc;
+    color:#000000;
+}
 
 /*ESPACE MEMBRE*/
 
@@ -143,7 +166,7 @@ h2, h3, h4, h5, h6{
     height:200px;
 }
 .avatar img{
-    min-width: 100%;
+    min-width: 84%;
     height: auto;
 }
 
@@ -164,7 +187,7 @@ h2, h3, h4, h5, h6{
 	background-color: #E9E9E7;
 }
 .recherche{
-    margin: 4.5em 0em 3em 20em;
+    margin: 4.5em 0em 3em 12em;
 }
 .barre_recherche
 {
@@ -229,7 +252,7 @@ h2, h3, h4, h5, h6{
 /*THEMES*/
 
 .themes{
-    padding: 40px 0 40px 7.24em;
+    padding: 40px 0 40px 0.25em;
 }
 .themes:after{
     display: table;
@@ -239,7 +262,7 @@ h2, h3, h4, h5, h6{
 .themes div {
     float: left;
     padding: 0px 9px 0px 0px;
-    width: 220px;
+    width: 206px;
     text-align: center;
     list-style: none;
 }
@@ -404,9 +427,9 @@ h2, h3, h4, h5, h6{
 .offre_logement{
     clear:left;
 }
-.info_liste{
+/*.info_liste{
     float: left;
-}
+}*/
 .info_liste span
 {
     display: block;

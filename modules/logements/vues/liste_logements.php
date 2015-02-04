@@ -1,22 +1,22 @@
 <?php include CHEMIN_VUE.'../trads/liste_logements_' . LANG . '.php'; ?>
 <section>
 <?php if (!isset($_GET['id']) || $_GET['id'] != $_SESSION['Utilisateur']['id']) : ?>
-    <h2>Recherche:</h2>
+    <h2><?= TXT_RECH; ?> :</h2>
     <form action="" method="get" class="recherche">
         <input type="hidden" name="module" value="logements">
         <input type="hidden" name="action" value="lister">
 <?php if (LANG === 'en') : ?>
         <input type="hidden" name="lang" value="en">
 <?php endif; ?>
-        <input class="barre_recherche" type="text" name="ville" placeholder="Dans quelle ville voulez-vous aller?" value="<?= (isset($_GET['ville']) ? $_GET['ville'] : ''); ?>">
-        <input class="valid_recherche" type="submit" value="Rechercher"><br/>
+        <input class="barre_recherche" type="text" name="ville" placeholder="<?= TXT_PLACEHOLDER; ?>" value="<?= (isset($_GET['ville']) ? $_GET['ville'] : ''); ?>">
+        <input class="valid_recherche" type="submit" value="<?= TXT_RECH; ?>"><br/>
         <a href="<?= url('logements', 'recherche_avancee'); ?>"><?= TXT_RECHA; ?></a>
     </form>
 
-    <h2>Résultats:</h2>
-    <p><?= count($offres) . ' sur ' . $nombre_offres; ?> offres</p>
+    <h2><?= TXT_RESULTATS; ?> :</h2>
+    <p><?= count($offres) . ' sur ' . $nombre_offres; ?> <?= TXT_OFFRES; ?></p>
 <?php else : ?>
-    <h2>Mes Logements</h2>
+    <h2><?= TXT_MESLOGS; ?></h2>
 <?php endif; ?>
 
 <?php foreach ($offres as $offre) :?>

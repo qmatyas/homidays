@@ -46,17 +46,17 @@
 			<div id="bloc_log">
 				<p>
 				    <label for="">Nombre de pièces</label> :
-				    <input type="number" min="0" size="5" name="nb_piece" value="<?= isset($_POST['Logement']['description']) ? $_POST['Logement']['description'] : ''; ?>" required/>
+				    <input type="number" min="0" size="5" name="nb_piece" value="<?= isset($_POST['Logement']['nb_piece']) ? $_POST['Logement']['nb_piece'] : ''; ?>" required/>
 				    <span class="error_message"><?= isset($erreur['nb_piece']) ? $erreur['nb_piece'] : ''; ?></span>
 				</p>
 				<p>
 				    <label for="">Nombre de chambres</label> :
-				    <input type="number" min="0" size="5" name="nb_chambre" value="<?= isset($_POST['Logement']['description']) ? $_POST['Logement']['description'] : ''; ?>" required/>
+				    <input type="number" min="0" size="5" name="nb_chambre" value="<?= isset($_POST['Logement']['nb_chambre']) ? $_POST['Logement']['nb_chambre'] : ''; ?>" required/>
 				    <span class="error_message"><?= isset($erreur['nb_chambre']) ? $erreur['nb_chambre'] : ''; ?></span>
 				</p>
 				<p>
 				    <label for="">Nombre de salles de bain</label> :
-				    <input type="number" min="0" size="5" name="nb_salle_bain" value="<?= isset($_POST['Logement']['description']) ? $_POST['Logement']['description'] : ''; ?>" required/>
+				    <input type="number" min="0" size="5" name="nb_salle_bain" value="<?= isset($_POST['Logement']['nb_salle_bain']) ? $_POST['Logement']['nb_salle_bain'] : ''; ?>" required/>
 				    <span class="error_message"><?= isset($erreur['nb_salle_bain']) ? $erreur['nb_salle_bain'] : ''; ?></span>
 				</p>
 			</div>
@@ -75,7 +75,16 @@
 		    <div><span class="label_profil">Points forts: </span> :<br>: <?= isset($_SESSION['']['']) ? $_SESSION['']['points_forts'] : '';?></p></div>
 
 		    <div><span class="label_profil">Activité:</span> : 
-		    <?= isset($_SESSION['']['']) ? $_SESSION['']['musee'] ? 'Musée' : '' ;?>
+			<input id="id_musee" name="musee" type="checkbox"<?= isset($_POST['Utilisateur']['musee']) && $_POST['Utilisateur']['musee'] ? ' checked' : ''; ?>>
+			<span class="error_message"> <?= isset($erreur['animaux']) ? $erreur['animaux'] : ''; ?></span>
+			<input id="id_animaux" name="animaux" type="checkbox"<?= isset($_POST['Utilisateur']['animaux']) && $_POST['Utilisateur']['animaux'] ? ' checked' : ''; ?>>
+			<span class="error_message"> <?= isset($erreur['animaux']) ? $erreur['animaux'] : ''; ?> </span>
+			<input id="id_animaux" name="animaux" type="checkbox"<?= isset($_POST['Utilisateur']['animaux']) && $_POST['Utilisateur']['animaux'] ? ' checked' : ''; ?>>
+			<span class="error_message"> <?= isset($erreur['animaux']) ? $erreur['animaux'] : ''; ?> </span>
+			<input id="id_animaux" name="animaux" type="checkbox"<?= isset($_POST['Utilisateur']['animaux']) && $_POST['Utilisateur']['animaux'] ? ' checked' : ''; ?>>
+			<span class="error_message"> <?= isset($erreur['animaux']) ? $erreur['animaux'] : ''; ?> </span>
+			<input id="id_animaux" name="animaux" type="checkbox"<?= isset($_POST['Utilisateur']['animaux']) && $_POST['Utilisateur']['animaux'] ? ' checked' : ''; ?>>
+			<span class="error_message"> <?= isset($erreur['animaux']) ? $erreur['animaux'] : ''; ?> </span>
 		    <?= isset($_SESSION['']['']) ? $_SESSION['']['sport'] ? 'Sport' : '' ;?>
 		    <?= isset($_SESSION['']['']) ? $_SESSION['']['parc_attraction'] ? 'Parc d\'attraction' : '';?>
 		    <?= isset($_SESSION['']['']) ? $_SESSION['']['shopping'] ? 'Shopping' : '' ;?>
