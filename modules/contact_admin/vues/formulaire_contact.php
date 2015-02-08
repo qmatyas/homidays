@@ -4,18 +4,15 @@
 <form action="" method="post">
 	<p>		
 		<label for="nom"><b>Nom :</b></label>
-		<input type="text" name="nom" id="nom" value=""/>
-		<?= isset($erreur['nom']) ? $erreur['nom'] : ''; ?>
+		<input type="text" name="nom" id="nom" value="" required/></br>
 	</p>
 	<p>
 		<label for="email"><b>Adresse email :</b></label>
-		<input type="email" name="email" id="email" value=""/>
-		<?= isset($erreur['email']) ? $erreur['email'] : ''; ?>
+		<input type="email" name="email" id="email" value="" required/></br>
 	<p/>
 	<p>		
 		<label for="message"><b>Message :</b></label>
-		<textarea name="message" id="message"></textarea>
-		<?= isset($erreur['message']) ? $erreur['message'] : ''; ?>
+		<textarea name="message" id="message" required></textarea></br>
 	</p>
 	<input type="submit" value="Envoyer">			
 </form>
