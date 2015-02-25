@@ -14,6 +14,6 @@
 		<?= isset($erreur['pass']) ? $erreur['pass'] : ''; ?>
 	<p/>
 	<input type="submit" value="Se connecter" onClick="criteres();">
-	<p><a href="#"> Mot de passe oublié ?</a></p>				
+	<p><a href="<?= url('membres', 'recuperer_pass'); ?>"> Mot de passe oublié ?</a></p>				
 </form>
 </div>

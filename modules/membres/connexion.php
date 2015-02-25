@@ -13,10 +13,10 @@ else {
 		$erreur = array();
 		if (isset($_POST['pseudo']) && !empty($_POST['pseudo'])) {
 			if (isset($_POST['pass']) && !empty($_POST['pass'])) {	
-                            include_once CHEMIN_MODELE.'membres.php';
+                include_once CHEMIN_MODELE.'membres.php';
 				try{
-                                        // combinaison_connexion_valide() est définit dans ~/modeles/membres.php
-                                        $utilisateur = membre_connecter($_POST['pseudo']);
+                    // combinaison_connexion_valide() est définit dans ~/modeles/membres.php
+                    $utilisateur = membre_connecter($_POST['pseudo']);
 				}
 				catch (PDOException $e) {
 					echo "Echec de la connexion à la base de données.\nErreur : " . $e->getMessage();
@@ -25,17 +25,17 @@ else {
 				}
 				// Si les identifiants sont valides
 				if ($utilisateur) {
-                                        if (sha1($_POST['pass'] === $utilisateur['pass'])) {
-                                            // On enregistre les informations dans la session
-                                            $_SESSION['Utilisateur'] = $utilisateur;  
+                    if (sha1($_POST['pass']) === $utilisateur['pass']) {
+                        // On enregistre les informations dans la session
+                        $_SESSION['Utilisateur'] = $utilisateur;  
 
-                                            // Affichage de la confirmation de la connexion
-                                            include 'global/accueil.php';
-                                        } else {
-                                            $erreur['form'] = "Couple pseudo / mot de passe inexistant.";
-                                            // On réaffiche le formulaire de connexion
-                                            include CHEMIN_VUE.'formulaire_connexion.php';
-                                        }
+                        // Affichage de la confirmation de la connexion
+                        include 'global/accueil.php';
+                    } else {
+                        $erreur['form'] = "Couple pseudo / mot de passe inexistant.";
+                        // On réaffiche le formulaire de connexion
+                        include CHEMIN_VUE.'formulaire_connexion.php';
+                    }
 				} else {
 					$erreur['form'] = "Utilisateur inconnu.";
 					// On réaffiche le formulaire de connexion

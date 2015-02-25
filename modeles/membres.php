@@ -63,9 +63,74 @@ function membre_connecter($pseudo) {
 		AND hash_validation=''
                 LIMIT 1");
         
-        $requete->execute([$pseudo]);
-        return $requete->fetch();	
+    $requete->execute([$pseudo]);
+    return $requete->fetch();	
 }
+
+//MOT DE PASSE OUBLIE
+
+function membre_email($email){
+
+    $pdo = DB::Connect();
+
+    $requete = $pdo->prepare('SELECT * FROM utilisateurs 
+        WHERE email = ?');
+            
+    $requete->execute([$email]);
+    return $requete->fetch();
+}
+
+function membre_modifier_passoubli($email , $pass) {
+
+    $pdo = DB::Connect();
+
+    $requete = $pdo->prepare("UPDATE utilisateurs SET
+        pass = :pass
+        WHERE
+        email = :email");
+
+    $requete->bindValue(':email', $email);
+    $requete->bindValue(':pass', $pass);
+
+    $requete->execute();
+
+    return $requete->rowCount();
+}
+
+function creation_pass ($longueur = 8){
+    // initialiser la variable $pass
+    $pass = "";
+
+    // Définir tout les caractères possibles dans le mot de passe, 
+    $possible = "2346789bcdfghjkmnpqrtvwxyzBCDFGHJKLMNPQRTVWXYZ";
+
+    // obtenir le nombre de caractères dans la chaîne précédente, cette valeur sera utilisé plus tard
+    $longueurMax = strlen($possible);
+
+    if ($longueur > $longueurMax) {
+        $longueur = $longueurMax;
+    }
+
+    // initialiser le compteur
+    $i = 0;
+
+    // ajouter un caractère aléatoire à $pass jusqu'à ce que $longueur soit atteint
+    while ($i < $longueur) {
+        // prendre un caractère aléatoire
+        $caractere = substr($possible, mt_rand(0, $longueurMax-1), 1);
+
+        // vérifier si le caractère est déjà utilisé dans $pass
+        if (!strstr($pass, $caractere)) {
+            // Si non, ajouter le caractère à $pass et augmenter le compteur
+            $pass .= $caractere;
+            $i++;
+        }
+    }
+
+    // retourner le résultat final
+    return $pass;
+}
+
 
 //MODIFIER
 
